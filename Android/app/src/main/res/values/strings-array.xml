@@ -1,0 +1,41 @@
+<resources>
+    <string-array name="henan">
+        <item>安阳</item>
+        <item>鹤壁</item>
+        <item>焦作</item>
+        <item>济源</item>
+        <item>开封</item>
+        <item>洛阳</item>
+        <item>漯河</item>
+        <item>南阳</item>
+        <item>濮阳</item>
+        <item>平顶山</item>
+        <item>三门峡</item>
+        <item>商丘</item>
+        <item>新乡</item>
+        <item>许昌</item>
+        <item>信阳</item>
+        <item>周口</item>
+        <item>驻马店</item>
+    </string-array>
+
+    <integer-array name="henan_code">
+        <item>121</item>
+        <item>122</item>
+        <item>123</item>
+        <item>124</item>
+        <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>129</item>
+        <item>130</item>
+        <item>131</item>
+        <item>134</item>
+        <item>135</item>
+        <item>136</item>
+        <item>137</item>
+        <item>138</item>
+        <item>139</item>
+    </integer-array>
+</resources>

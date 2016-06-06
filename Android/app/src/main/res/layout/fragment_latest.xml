@@ -1,0 +1,420 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/ptr_classic_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        cube_ptr:ptr_duration_to_close="200"
+        cube_ptr:ptr_duration_to_close_header="200"
+        cube_ptr:ptr_keep_header_when_refresh="true"
+        cube_ptr:ptr_pull_to_fresh="false"
+        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+        cube_ptr:ptr_resistance="1.7">
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/summary_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <HorizontalScrollView
+                        android:id="@+id/aqi_table_scroller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/aqi_table"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <RelativeLayout
+                        android:id="@+id/aqi_basic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/aqi_table_scroller"
+                        android:layout_marginBottom="24dp"
+                        android:paddingLeft="24dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="48dp"
+                            android:src="@drawable/aqi_show_big" />
+
+                        <TextView
+                            android:id="@+id/aqi_basic_concentration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:text="浓度：-/-"
+                            android:textColor="@color/global_primary_text_color_white" />
+
+                        <TextView
+                            android:id="@+id/aqi_basic_pollutant"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/aqi_basic_concentration"
+                            android:layout_alignParentLeft="true"
+                            android:text="首要污染物：--"
+                            android:textColor="@color/global_primary_text_color_white" />
+
+                        <TextView
+                            android:id="@+id/aqi_basic_aqi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/aqi_basic_pollutant"
+                            android:layout_alignParentLeft="true"
+                            android:text="--"
+                            android:textColor="@color/global_primary_text_color_white"
+                            android:textSize="72sp" />
+
+                        <LinearLayout
+                            android:id="@+id/aqi_basic_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/aqi_basic_aqi"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/aqi_basic_level_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/aqi_level_icon_1" />
+
+                            <TextView
+                                android:id="@+id/aqi_basic_level_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:text="轻度污染"
+                                android:textColor="@color/global_primary_text_color_white"
+                                android:textSize="24sp" />
+
+                            <ImageView
+                                android:id="@+id/aqi_basic_level_details"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/latest_pollutant_arrow_right" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/aqi_basic_update_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/aqi_basic_level"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginBottom="24dp"
+                            android:text="--"
+                            android:textColor="@color/global_primary_text_color_white" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="24dp"
+                    android:text="详细"
+                    android:textColor="@color/global_primary_text_color_white"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:gravity="left|bottom">
+
+                        <RelativeLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_gravity="left|bottom">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/latest_detail_aqi_circle" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical">
+
+                                <TextView android:id="@+id/aqi_details_big_aqi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="102"
+                                    android:textColor="#ffff00"
+                                    android:textSize="42sp" />
+
+                                <View
+                                    android:id="@+id/aqi_details_big_divider"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:background="#aacccccc" />
+
+                                <TextView android:id="@+id/aqi_details_big_pollutant"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/global_primary_text_color_white"
+                                    android:text="首要污染物:PM2.5" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/aqi_details_items_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"></LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:drawableLeft="@drawable/aqi_details_health_icon"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:text="对健康的影响："
+                    android:textColor="@color/global_primary_text_color_white"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#66ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="可以进行正常的户外活动，但某些污染物可能对极少数异常敏感人群健康有较弱影响。"
+                    android:textColor="@color/global_primary_text_color_white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:drawableLeft="@drawable/aqi_details_suggest_icon"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:text="建议措施："
+                    android:textColor="@color/global_primary_text_color_white"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#66ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="极少数异常敏感人群应减少户外活动"
+                    android:textColor="@color/global_primary_text_color_white"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="#22000000"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="最近24小时指数"
+                        android:textColor="@color/global_primary_text_color_white"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:background="#66ffffff" />
+
+                    <com.flyco.tablayout.SegmentTabLayout
+                        android:id="@+id/linechart_aqi_tab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="10dp"
+                        tl:tl_indicator_color="#66ffffff"
+                        tl:tl_indicator_corner_radius="8dp"
+                        tl:tl_tab_padding="12dp"
+                        tl:tl_textSelectColor="#ffffff"
+                        tl:tl_textUnselectColor="#eee" />
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <com.db.chart.view.YLineChartView
+                            android:id="@+id/linechart_concentration_y"
+                            android:layout_width="800dp"
+                            android:layout_height="200dp"
+                            android:layout_marginLeft="12dp"
+                            android:paddingBottom="11dp"
+                            />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none"
+                            android:layout_marginLeft="35dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <com.db.chart.view.LineChartView
+                                    android:id="@+id/linechart_concentration"
+                                    android:layout_width="800dp"
+                                    android:layout_height="200dp" />
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+                    </FrameLayout>
+
+
+                    <com.flyco.tablayout.SegmentTabLayout
+                        android:id="@+id/linechart_hour_type_tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="16dp"
+                        cube_ptr:tl_divider_width="0dp"
+                        tl:tl_bar_stroke_width="0dp"
+                        tl:tl_indicator_color="#66000000"
+                        tl:tl_indicator_corner_radius="0dp"
+                        tl:tl_tab_padding="4dp"
+                        tl:tl_textSelectColor="#ffffff"
+                        tl:tl_textUnselectColor="#eee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="#22000000"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="过去30天AQI变化"
+                        android:textColor="@color/global_primary_text_color_white"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:background="#66ffffff" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <com.db.chart.view.StackBarChartView
+                                android:id="@+id/stackbarchart_days_aqi"
+                                android:layout_width="1000dp"
+                                android:layout_height="200dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="12dp" />
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+</RelativeLayout>

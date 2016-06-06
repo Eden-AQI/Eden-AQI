@@ -1,0 +1,8 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowBackground">@color/global_content_bg_color</item>
+        <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
+    </style>
+</resources>

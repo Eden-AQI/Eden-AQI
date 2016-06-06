@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/header_height"
+        android:orientation="vertical">
+
+        <View style="@style/SettingGroupDividerStyle" />
+
+        <RelativeLayout
+            android:id="@+id/update_container"
+            style="@style/SettingItemStyle">
+
+            <ImageView
+                android:id="@+id/update_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/setting_item_update_icon" />
+
+            <TextView
+                android:id="@+id/update_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/update_icon"
+                android:text="检查更新"
+                android:textColor="@color/global_primary_text_color_white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right" />
+
+        </RelativeLayout>
+
+        <com.jayfeng.lesscode.core.other.SpaceDividerView style="@style/HorizontalDividerStyle" />
+
+        <RelativeLayout
+            android:id="@+id/about_container"
+            style="@style/SettingItemStyle">
+
+            <ImageView
+                android:id="@+id/about_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/setting_item_about_icon" />
+
+            <TextView
+                android:id="@+id/gift_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/about_icon"
+                android:text="关于我们"
+                android:textColor="@color/global_primary_text_color_white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right" />
+
+        </RelativeLayout>
+
+        <View style="@style/SettingGroupDividerStyle" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/include_header" />
+
+</RelativeLayout>

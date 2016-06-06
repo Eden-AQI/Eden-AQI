@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/fragments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/main_tab_height"
+        android:background="@drawable/main_bg"/>
+
+    <RadioGroup
+        android:id="@+id/tabs"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/main_tab_height"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_home_btn"
+            style="@style/MainTabItemStyle"
+            android:checked="true"
+            android:text="@string/main_tab_home_text" />
+
+        <RadioButton
+            android:id="@+id/tab_map_btn"
+            style="@style/MainTabItemStyle"
+            android:text="@string/main_tab_map_text" />
+
+        <RadioButton
+            android:id="@+id/tab_rank_btn"
+            style="@style/MainTabItemStyle"
+            android:text="@string/main_tab_rank_text" />
+
+        <RadioButton
+            android:id="@+id/tab_setting_btn"
+            style="@style/MainTabItemStyle"
+            android:text="@string/main_tab_setting_text" />
+
+    </RadioGroup>
+
+</RelativeLayout>

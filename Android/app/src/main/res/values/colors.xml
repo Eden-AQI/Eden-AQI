@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- main tab -->
+    <color name="main_tab_item_bg_normal_color">#040d12</color>
+    <color name="main_tab_item_bg_pressed_color">#040d12</color>
+    <color name="main_tab_item_text_normal_color">@color/global_primary_text_color_gray</color>
+    <color name="main_tab_item_text_pressed_color">@color/global_primary_text_color_white</color>
+
+    <!-- header view -->
+    <color name="header_bg_color">@color/global_primary_bg_color</color>
+</resources>
