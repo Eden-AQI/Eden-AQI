@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">上海空气质量</string>
+    <string name="app_name">郑州空气质量</string>
 
     <string name="title_activity_about">关于我们</string>
     <string name="title_activity_aqi_details">污染情况</string>

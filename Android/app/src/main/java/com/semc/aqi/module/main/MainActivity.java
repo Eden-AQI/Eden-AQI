@@ -1,13 +1,19 @@
 package com.semc.aqi.module.main;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.jayfeng.lesscode.core.DrawableLess;
+import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseActivity;
@@ -31,6 +37,13 @@ public class MainActivity extends BaseActivity implements RadioButton.OnCheckedC
     private RadioButton rankTabBtn;
     private RadioButton settingTabBtn;
 
+    private LocationClient mLocationClient;
+    private BDLocationListener mLocationListener = new CustomLocationListener();
+    private boolean mIsLocated = false;
+    private int mLocationRetry = 0;
+    private final static int LOCATION_MAX_RETRY = 8;
+    private Handler mStopBaiduLocationHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +53,11 @@ public class MainActivity extends BaseActivity implements RadioButton.OnCheckedC
         initFragment(savedInstanceState);
 
         initListener();
+
+        // 百度定位
+        mStopBaiduLocationHandler = new Handler();
+        initBaiduLocation();
+        confirmStopBaiduLocation();
     }
 
     private void init() {
@@ -137,6 +155,86 @@ public class MainActivity extends BaseActivity implements RadioButton.OnCheckedC
 
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mStopBaiduLocationHandler.removeCallbacksAndMessages(null);
+    }
+
+    /**
+     * ***************************************************************
+     * 百度定位
+     * ***************************************************************
+     */
+    private void initBaiduLocation() {
+        mLocationClient = new LocationClient(getApplicationContext());
+        mLocationClient.registerLocationListener(mLocationListener);
+        final LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        option.setCoorType("gcj02");// gcj02, bd09ll, bd09
+        option.setScanSpan(5000);
+        option.setIsNeedAddress(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mLocationClient.setLocOption(option);
+                mLocationClient.start();
+            }
+        }).start();
+
+    }
+
+    public class CustomLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if (location == null) {
+                return;
+            }
+            if (mIsLocated) {
+                return;
+            }
+            if (mLocationRetry >= LOCATION_MAX_RETRY) {
+                mLocationClient.stop();
+                return;
+            }
+
+            StringBuffer sb = new StringBuffer(256);
+            sb.append(location.getTime());
+            sb.append("\nerror code : ");
+            sb.append(location.getLocType());
+
+            sb.append("\ncity : ");
+            sb.append(location.getCity());
+            sb.append("\nlatitude : ");
+            sb.append(location.getLatitude());
+            sb.append("\nlontitude : ");
+            sb.append(location.getLongitude());
+
+            if (location.getLocType() == 161
+                    || location.getLocType() == 66) {
+                mLocationClient.stop();
+                mIsLocated = true;
+
+                ToastLess.$(MainActivity.this, location.getCity());
+
+            } else {
+                mLocationRetry++;
+            }
+
+        }
+    }
+
+    private void confirmStopBaiduLocation() {
+        mStopBaiduLocationHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mLocationClient != null && mLocationClient.isStarted()) {
+                    mLocationClient.stop();
+                }
+            }
+        }, 10000);
     }
 
 }
