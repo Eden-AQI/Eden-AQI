@@ -2,6 +2,7 @@ package com.semc.aqi;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.jayfeng.lesscode.core.$;
 import com.semc.aqi.config.Global;
 import com.semc.aqi.general.LiteOrmManager;
@@ -28,5 +29,6 @@ public class MyApp extends Application {
             LiteOrmManager.getLiteOrm(this).save(city);
         }
 
+        SDKInitializer.initialize(getApplicationContext());
     }
 }
