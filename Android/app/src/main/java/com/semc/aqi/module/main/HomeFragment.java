@@ -16,7 +16,6 @@ import com.semc.aqi.event.AddCityEvent;
 import com.semc.aqi.event.DeleteCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
-import com.semc.aqi.module.city.CityActivity;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.greenrobot.eventbus.EventBus;
@@ -115,8 +114,9 @@ public class HomeFragment extends BaseFragment {
         headerView.showLeftBackView(true, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CityActivity.class);
-                startActivity(intent);
+                // Intent intent = new Intent(getActivity(), CityActivity.class);
+                // startActivity(intent);
+                ((MainActivity)getActivity()).toggle();
             }
         });
         headerView.setLeftImage(R.drawable.latest_menu_add);
