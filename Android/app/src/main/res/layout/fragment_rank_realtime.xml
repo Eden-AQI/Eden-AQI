@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eee">
+
+    <RadioGroup
+        android:id="@+id/tabs"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/main_tab_height"
+        android:layout_alignParentTop="true"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_aqi_btn"
+            style="@style/RankTabItemStyle"
+            android:checked="true"
+            android:drawableTop="@drawable/rank_tab_aqi_icon" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="#ccc" />
+
+        <RadioButton
+            android:id="@+id/tab_pm25_btn"
+            style="@style/RankTabItemStyle"
+            android:drawableTop="@drawable/rank_tab_pm25_icon" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="#ccc" />
+
+        <RadioButton
+            android:id="@+id/tab_so2_btn"
+            style="@style/RankTabItemStyle"
+            android:drawableTop="@drawable/rank_tab_so2_icon" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="#ccc" />
+
+        <RadioButton
+            android:id="@+id/tab_no2_btn"
+            style="@style/RankTabItemStyle"
+            android:drawableTop="@drawable/rank_tab_no2_icon" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="#ccc" />
+
+        <RadioButton
+            android:id="@+id/tab_o3_btn"
+            style="@style/RankTabItemStyle"
+            android:drawableTop="@drawable/rank_tab_o3_icon" />
+    </RadioGroup>
+
+    <View
+        android:id="@+id/tabs_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/tabs"
+        android:background="#ccc" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tabs_divider"
+        android:clipToPadding="false"
+        android:paddingTop="16dp" />
+</RelativeLayout>

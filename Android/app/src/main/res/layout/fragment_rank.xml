@@ -1,9 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/include_header" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/header_height" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#003c6b"
+        android:layout_height="@dimen/header_height">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingBottom="6dp"
+            android:paddingTop="15dp"
+            tl:tl_indicator_gravity="BOTTOM"
+            tl:tl_indicator_width_equal_title="true"
+            tl:tl_tab_padding="12dp"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="#fff"
+            tl:tl_textUnselectColor="#fff"
+            tl:tl_textsize="16sp" />
+    </RelativeLayout>
 </RelativeLayout>

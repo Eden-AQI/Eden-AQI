@@ -1,20 +1,36 @@
 package com.semc.aqi.module.main;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.ArrayMap;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.SegmentTabLayout;
+import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.listener.CustomTabEntity;
+import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
 
-public class RankFragment extends BaseFragment<RankContract.Presenter> implements RankContract.View {
+import java.util.ArrayList;
+import java.util.List;
+
+public class RankFragment extends BaseFragment {
+
+    private SlidingTabLayout tabLayout;
+    private ViewPager viewPager;
+    private FragmentPagerAdapter fragmentPagerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setPresenter(new RankPresenter(this));
     }
 
     @Override
@@ -23,14 +39,28 @@ public class RankFragment extends BaseFragment<RankContract.Presenter> implement
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_rank, container, false);
 
-        initHeader(rootView);
+        tabLayout = ViewLess.$(rootView, R.id.tabs);
+        viewPager = ViewLess.$(rootView, R.id.viewpager);
+
         return rootView;
     }
 
-    private void initHeader(View rootView) {
-        initHeaderView(rootView, R.string.main_tab_rank_text, false);
-        headerView.alphaShadowDivider(0);
-        headerView.setBgColor(android.R.color.transparent);
-        headerView.setTitleColor(getResources().getColor(R.color.global_primary_text_color_white));
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        fragmentPagerAdapter = AdapterLess.$pager(getChildFragmentManager(), 4, new AdapterLess.FullFragmentPagerCallBack() {
+            @Override
+            public Fragment getItem(int position) {
+                return new RankRealTimeFragment();
+            }
+
+            @Override
+            public String getPageTitle(int position) {
+                return getResources().getStringArray(R.array.rank_titles)[position];
+            }
+        });
+        viewPager.setAdapter(fragmentPagerAdapter);
+        tabLayout.setViewPager(viewPager);
     }
 }

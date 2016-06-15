@@ -38,4 +38,11 @@
         <item>138</item>
         <item>139</item>
     </integer-array>
+
+    <string-array name="rank_titles">
+        <item>实时</item>
+        <item>日报</item>
+        <item>月报</item>
+        <item>年报</item>
+    </string-array>
 </resources>

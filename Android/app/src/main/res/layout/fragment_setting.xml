@@ -76,6 +76,40 @@
 
         </RelativeLayout>
 
+        <com.jayfeng.lesscode.core.other.SpaceDividerView style="@style/HorizontalDividerStyle" />
+
+        <RelativeLayout
+            android:id="@+id/aqi_ref_container"
+            style="@style/SettingItemStyle">
+
+            <ImageView
+                android:id="@+id/aqi_ref__icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/setting_item_aqi_ref_icon" />
+
+            <TextView
+                android:id="@+id/aqi_ref__title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/aqi_ref__icon"
+                android:text="空气质量等级参考"
+                android:textColor="@color/global_primary_text_color_white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right" />
+
+        </RelativeLayout>
+
         <View style="@style/SettingGroupDividerStyle" />
     </LinearLayout>
 
