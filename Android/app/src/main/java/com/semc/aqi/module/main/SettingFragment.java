@@ -14,12 +14,15 @@ import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
 import com.semc.aqi.model.AppUpdate;
+import com.semc.aqi.model.RealTime;
 import com.semc.aqi.module.about.AboutActivity;
+import com.semc.aqi.module.image.AqiRefActivity;
 
 public class SettingFragment extends BaseFragment<SettingContract.Presenter> implements SettingContract.View {
 
     private RelativeLayout updateContainer;
     private RelativeLayout aboutContainer;
+    private RelativeLayout aqiRefContainer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class SettingFragment extends BaseFragment<SettingContract.Presenter> imp
 
         updateContainer = ViewLess.$(rootView, R.id.update_container);
         aboutContainer = ViewLess.$(rootView, R.id.about_container);
+        aqiRefContainer = ViewLess.$(rootView, R.id.aqi_ref_container);
 
         return rootView;
     }
@@ -52,11 +56,17 @@ public class SettingFragment extends BaseFragment<SettingContract.Presenter> imp
                 presenter.checkUpdate();
             }
         });
-
         aboutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
+            }
+        });
+        aqiRefContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AqiRefActivity.class);
                 startActivity(intent);
             }
         });
