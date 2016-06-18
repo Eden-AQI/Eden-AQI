@@ -24,7 +24,7 @@ public class LatestPresenter implements LatestContract.Presenter {
     @Override
     public void requestData() {
 
-        WeatherRepository.getInstance().getRealTime("21", false)
+        WeatherRepository.getInstance().getRealTime("0", false)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RealTime>() {
@@ -54,7 +54,7 @@ public class LatestPresenter implements LatestContract.Presenter {
                         show24HourData(LatestContract.HOUR_TYPE_PM2P5, true);
 
                         // show days
-                        showDaysData();
+                        // showDaysData();
                     }
                 });
     }

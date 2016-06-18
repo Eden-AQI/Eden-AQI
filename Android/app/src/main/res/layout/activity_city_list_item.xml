@@ -3,7 +3,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/app_list_item">
+    android:background="@drawable/app_list_item_white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,8 +15,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:layout_margin="16dp"
-                    android:textColor="#424242" />
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="32dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/global_primary_text_color" />
         </LinearLayout>
 
 </RelativeLayout>

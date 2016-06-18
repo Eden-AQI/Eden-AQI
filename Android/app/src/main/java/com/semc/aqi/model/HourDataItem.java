@@ -1,23 +1,23 @@
 package com.semc.aqi.model;
 
 public class HourDataItem {
-    private int Time;
-    private int Value;
+    private String Time;
+    private float Value;
     private int Aqi;
 
-    public int getTime() {
+    public String getTime() {
         return Time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         Time = time;
     }
 
-    public int getValue() {
+    public float getValue() {
         return Value;
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         Value = value;
     }
 

@@ -7,6 +7,6 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface WeatherService {
-    @GET("Data/Realtime")
-    Observable<RealTime> getRealTime(@Query("cityId") String cityId);
+    @GET("GetRealtime")
+    Observable<RealTime> getRealTime(@Query("siteId") String siteId);
 }

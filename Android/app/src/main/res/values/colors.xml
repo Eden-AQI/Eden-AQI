@@ -7,7 +7,7 @@
     <color name="main_tab_item_text_pressed_color">@color/global_primary_text_color_white</color>
 
     <!-- header view -->
-    <color name="header_bg_color">@color/global_primary_bg_color</color>
+    <color name="header_bg_color">#003c6b</color>
 
     <color name="left_add_bg_color_normal">#30afff</color>
     <color name="left_add_bg_color_pressed">#cc30afff</color>

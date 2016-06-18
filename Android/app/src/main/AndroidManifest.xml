@@ -59,26 +59,31 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="hLyVYIgCXVSuWGSSawnSz1bIDG2egfZl" />
 
-        <activity android:name=".module.start.StartActivity">
+        <activity
+            android:name=".module.start.StartActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.main.MainActivity" />
+        <activity
+            android:name=".module.main.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.about.AboutActivity"
-            android:label="@string/title_activity_about" />
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.aqi.DetailsActivity"
-            android:label="@string/title_activity_aqi_details" />
-        <activity
-            android:name=".module.city.CityActivity"
-            android:label="@string/title_activity_city" />
+            android:label="@string/title_activity_aqi_details"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.city.AddCityActivity"
-            android:label="@string/title_activity_city_add" />
+            android:label="@string/title_activity_city_add"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"
@@ -167,6 +172,7 @@
 
         <activity
             android:name=".module.image.AqiRefActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent" />
     </application>
 

@@ -28,13 +28,13 @@ public class WeatherRepository {
         return instance;
     }
 
-    public Observable<RealTime> getRealTime(String cityId, boolean forceRefresh) {
+    public Observable<RealTime> getRealTime(String siteId, boolean forceRefresh) {
 
         final long expireTime = 600000;
-        final String cacheKey = "realtime_" + cityId;
+        final String cacheKey = "realtime_" + siteId;
 
         WeatherService weatherService = RetrofitManager.getRxRetrofit().create(WeatherService.class);
-        Observable<RealTime> fromNetwork = weatherService.getRealTime(cityId);
+        Observable<RealTime> fromNetwork = weatherService.getRealTime(siteId);
 
         return RxRetrofitCache.load(cacheKey, expireTime, fromNetwork, forceRefresh, new TypeToken<RealTime>() {
         }.getType());

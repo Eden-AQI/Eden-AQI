@@ -3,13 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eeeeee"
     tools:context=".module.city.AddCityActivity">
+
+    <android.support.v4.widget.Space
+        android:id="@+id/header_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/header_height" />
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_divider"
+        android:focusable="false"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:textSize="14sp"
+        android:background="@drawable/add_city_search_bg"
+        android:gravity="center"
+        android:hint="搜索" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/header_height" />
+        android:layout_below="@id/search"
+        android:background="#f5f5f5" />
 
     <include
         android:id="@+id/header"

@@ -27,7 +27,10 @@ public class MyApp extends Application {
         LiteOrmManager.getLiteOrm(this);
 
         if (LiteOrmManager.getLiteOrm(this).queryCount(City.class) == 0) {
-            City city = new City("上海", 21);
+            City city = new City();
+            city.setName("郑州市");
+            city.setId(0);
+            city.setGroup("Z");
             LiteOrmManager.getLiteOrm(this).save(city);
         }
 

@@ -43,6 +43,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class MainActivity extends SlidingFragmentActivity implements RadioButton.OnCheckedChangeListener {
 
     private static final String TAG_HOME = "home";
@@ -101,6 +103,8 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
         mStopBaiduLocationHandler = new Handler();
         initBaiduLocation();
         confirmStopBaiduLocation();
+
+//        JPushInterface.getRegistrationID(this);
     }
 
     private void init() {
@@ -165,7 +169,7 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
 
-                                        WhereBuilder whereBuilder = new WhereBuilder(City.class, "code = ?", new String[]{list.get(position).getCode() + ""});
+                                        WhereBuilder whereBuilder = new WhereBuilder(City.class, "code = ?", new String[]{list.get(position).getId() + ""});
                                         LiteOrmManager.getLiteOrm(MainActivity.this).delete(whereBuilder);
                                         list.remove(position);
 

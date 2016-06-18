@@ -10,6 +10,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class OkHttpClientManager {
 
@@ -30,7 +31,12 @@ public class OkHttpClientManager {
     }
 
     private static OkHttpClient createOkHttpClient() {
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(logInterceptor)
                 .addInterceptor(headerInterceptor)
                 .cache(getOkHttpCache())
                 .build();

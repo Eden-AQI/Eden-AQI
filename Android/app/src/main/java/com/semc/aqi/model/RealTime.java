@@ -1,11 +1,9 @@
 package com.semc.aqi.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class RealTime {
-    private String City;
+    private String Name;
     private String Background;
     private String UpdateTime;
     private int Aqi;
@@ -16,16 +14,15 @@ public class RealTime {
     private String Suggest;
     private List<ForecastItem> Forecast;
     private List<OtherParameterItem> OtherParameters;
-    @SerializedName("24Hour")
     private List<HourItem> Hours;
     private List<DaysItem> Days;
 
-    public String getCity() {
-        return City;
+    public String getName() {
+        return Name;
     }
 
-    public void setCity(String city) {
-        City = city;
+    public void setName(String name) {
+        Name = name;
     }
 
     public String getBackground() {

@@ -1,0 +1,977 @@
+[
+  {
+    "GroupName": "B",
+    "Items": [
+      {
+        "Id": 61,
+        "Name": "宝山环保局",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.4065,
+        "Longitude": 121.486,
+        "Grade": 1
+      },
+      {
+        "Id": 170,
+        "Name": "宝山钢研所",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.3726,
+        "Longitude": 121.478,
+        "Grade": 1
+      },
+      {
+        "Id": 172,
+        "Name": "宝山杨行",
+        "Aqi": 122,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.393253,
+        "Longitude": 121.4456,
+        "Grade": 3
+      },
+      {
+        "Id": 173,
+        "Name": "宝山呼玛",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.3449,
+        "Longitude": 121.448,
+        "Grade": 1
+      },
+      {
+        "Id": 174,
+        "Name": "宝山淞南",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.3431,
+        "Longitude": 121.484,
+        "Grade": 1
+      },
+      {
+        "Id": 244,
+        "Name": "宝庆路站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.1924,
+        "Longitude": 121.427,
+        "Grade": 1
+      },
+      {
+        "Id": 266,
+        "Name": "宝山罗店",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.41151,
+        "Longitude": 121.34085,
+        "Grade": 1
+      },
+      {
+        "Id": 267,
+        "Name": "宝山庙行",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "B",
+        "Latitude": 31.32259,
+        "Longitude": 121.4261,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "C",
+    "Items": [
+      {
+        "Id": 175,
+        "Name": "长宁仙霞",
+        "Aqi": 129,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.20593,
+        "Longitude": 121.39024,
+        "Grade": 3
+      },
+      {
+        "Id": 176,
+        "Name": "崇明城桥",
+        "Aqi": 90,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.6217,
+        "Longitude": 121.39697,
+        "Grade": 2
+      },
+      {
+        "Id": 233,
+        "Name": "长宁程桥",
+        "Aqi": 119,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.19392,
+        "Longitude": 121.36227,
+        "Grade": 3
+      },
+      {
+        "Id": 237,
+        "Name": "崇明现代农业园区",
+        "Aqi": 84,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.594432,
+        "Longitude": 121.80256,
+        "Grade": 2
+      },
+      {
+        "Id": 247,
+        "Name": "崇明绿华",
+        "Aqi": 108,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.76889,
+        "Longitude": 121.19555,
+        "Grade": 3
+      },
+      {
+        "Id": 249,
+        "Name": "崇明森林公园",
+        "Aqi": 112,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.68948,
+        "Longitude": 121.47901,
+        "Grade": 3
+      },
+      {
+        "Id": 251,
+        "Name": "崇明交通站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.508056,
+        "Longitude": 121.796667,
+        "Grade": 1
+      },
+      {
+        "Id": 259,
+        "Name": "长宁西郊宾馆",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.197891,
+        "Longitude": 121.387391,
+        "Grade": 1
+      },
+      {
+        "Id": 262,
+        "Name": "长宁华阳",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "C",
+        "Latitude": 31.22328,
+        "Longitude": 121.42469,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "F",
+    "Items": [
+      {
+        "Id": 76,
+        "Name": "奉贤南桥",
+        "Aqi": 105,
+        "BackgroundImageUrl": null,
+        "Group": "F",
+        "Latitude": 30.91101,
+        "Longitude": 121.45521,
+        "Grade": 3
+      },
+      {
+        "Id": 243,
+        "Name": "奉贤海湾",
+        "Aqi": 91,
+        "BackgroundImageUrl": null,
+        "Group": "F",
+        "Latitude": 30.85805,
+        "Longitude": 121.6762,
+        "Grade": 2
+      },
+      {
+        "Id": 264,
+        "Name": "奉贤南桥新城",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "F",
+        "Latitude": 30.92499,
+        "Longitude": 121.48908,
+        "Grade": 1
+      },
+      {
+        "Id": 265,
+        "Name": "奉贤奉浦",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "F",
+        "Latitude": 30.93385,
+        "Longitude": 121.45327,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "H",
+    "Items": [
+      {
+        "Id": 79,
+        "Name": "虹口嘉兴",
+        "Aqi": 91,
+        "BackgroundImageUrl": null,
+        "Group": "H",
+        "Latitude": 31.2666,
+        "Longitude": 121.50159,
+        "Grade": 2
+      },
+      {
+        "Id": 186,
+        "Name": "黄浦瑞金",
+        "Aqi": 106,
+        "BackgroundImageUrl": null,
+        "Group": "H",
+        "Latitude": 31.2187,
+        "Longitude": 121.4607,
+        "Grade": 3
+      },
+      {
+        "Id": 215,
+        "Name": "虹口凉城",
+        "Aqi": 120,
+        "BackgroundImageUrl": null,
+        "Group": "H",
+        "Latitude": 31.3008,
+        "Longitude": 121.46671,
+        "Grade": 3
+      },
+      {
+        "Id": 254,
+        "Name": "黄浦中山南路交通站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "H",
+        "Latitude": 31.210811,
+        "Longitude": 121.503822,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "J",
+    "Items": [
+      {
+        "Id": 180,
+        "Name": "嘉定监测站",
+        "Aqi": 102,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.3738,
+        "Longitude": 121.25,
+        "Grade": 3
+      },
+      {
+        "Id": 181,
+        "Name": "嘉定安亭",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.31222,
+        "Longitude": 121.2551,
+        "Grade": 1
+      },
+      {
+        "Id": 182,
+        "Name": "金山石化街道",
+        "Aqi": 80,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 30.7143,
+        "Longitude": 121.34,
+        "Grade": 2
+      },
+      {
+        "Id": 183,
+        "Name": "静安监测站",
+        "Aqi": 123,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.2261,
+        "Longitude": 121.425,
+        "Grade": 3
+      },
+      {
+        "Id": 184,
+        "Name": "静安七一中学",
+        "Aqi": 95,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.2325,
+        "Longitude": 121.4476,
+        "Grade": 2
+      },
+      {
+        "Id": 218,
+        "Name": "金山朱泾",
+        "Aqi": 107,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 30.89116,
+        "Longitude": 121.16031,
+        "Grade": 3
+      },
+      {
+        "Id": 238,
+        "Name": "嘉定天华学院",
+        "Aqi": 117,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.41167,
+        "Longitude": 121.19805,
+        "Grade": 3
+      },
+      {
+        "Id": 245,
+        "Name": "嘉定超级站(比对)",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.3127,
+        "Longitude": 121.151,
+        "Grade": 1
+      },
+      {
+        "Id": 248,
+        "Name": "金山新城",
+        "Aqi": 160,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 30.743093,
+        "Longitude": 121.338951,
+        "Grade": 4
+      },
+      {
+        "Id": 250,
+        "Name": "嘉定方泰",
+        "Aqi": 121,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.31222,
+        "Longitude": 121.2551,
+        "Grade": 3
+      },
+      {
+        "Id": 256,
+        "Name": "静安延安中路交通站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "J",
+        "Latitude": 31.221093,
+        "Longitude": 121.445537,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "L",
+    "Items": [
+      {
+        "Id": 185,
+        "Name": "卢湾师专附小",
+        "Aqi": 140,
+        "BackgroundImageUrl": null,
+        "Group": "L",
+        "Latitude": 31.2036,
+        "Longitude": 121.478,
+        "Grade": 3
+      },
+      {
+        "Id": 252,
+        "Name": "临港新城",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "L",
+        "Latitude": 31.0032,
+        "Longitude": 121.892,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "M",
+    "Items": [
+      {
+        "Id": 187,
+        "Name": "闵行莘庄",
+        "Aqi": 119,
+        "BackgroundImageUrl": null,
+        "Group": "M",
+        "Latitude": 31.1158,
+        "Longitude": 121.3663,
+        "Grade": 3
+      },
+      {
+        "Id": 188,
+        "Name": "闵行江川",
+        "Aqi": 141,
+        "BackgroundImageUrl": null,
+        "Group": "M",
+        "Latitude": 31.0065,
+        "Longitude": 121.4115,
+        "Grade": 3
+      },
+      {
+        "Id": 189,
+        "Name": "闵行吴泾",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "M",
+        "Latitude": 31.042,
+        "Longitude": 121.4601,
+        "Grade": 1
+      },
+      {
+        "Id": 190,
+        "Name": "闵行华漕",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "M",
+        "Latitude": 31.211,
+        "Longitude": 121.2889,
+        "Grade": 1
+      },
+      {
+        "Id": 231,
+        "Name": "闵行浦江",
+        "Aqi": 138,
+        "BackgroundImageUrl": null,
+        "Group": "M",
+        "Latitude": 31.0739,
+        "Longitude": 121.4996,
+        "Grade": 3
+      },
+      {
+        "Id": 241,
+        "Name": "闵行漕开发",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "M",
+        "Latitude": 31.09301,
+        "Longitude": 121.51752,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "P",
+    "Items": [
+      {
+        "Id": 88,
+        "Name": "浦东周浦",
+        "Aqi": 138,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.11433,
+        "Longitude": 121.58461,
+        "Grade": 3
+      },
+      {
+        "Id": 94,
+        "Name": "浦东杉达",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.2727,
+        "Longitude": 121.6529,
+        "Grade": 1
+      },
+      {
+        "Id": 95,
+        "Name": "浦东江镇",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.1823,
+        "Longitude": 121.7429,
+        "Grade": 1
+      },
+      {
+        "Id": 191,
+        "Name": "浦东滨海",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 30.92977,
+        "Longitude": 121.86344,
+        "Grade": 1
+      },
+      {
+        "Id": 193,
+        "Name": "浦东川沙",
+        "Aqi": 142,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.1907,
+        "Longitude": 121.703,
+        "Grade": 3
+      },
+      {
+        "Id": 194,
+        "Name": "浦东潍坊",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.2288,
+        "Longitude": 121.517,
+        "Grade": 1
+      },
+      {
+        "Id": 195,
+        "Name": "浦东张江",
+        "Aqi": 162,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.2071,
+        "Longitude": 121.577,
+        "Grade": 4
+      },
+      {
+        "Id": 196,
+        "Name": "浦东六里",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.1786,
+        "Longitude": 121.498,
+        "Grade": 1
+      },
+      {
+        "Id": 197,
+        "Name": "浦东金杨",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.2621,
+        "Longitude": 121.567,
+        "Grade": 1
+      },
+      {
+        "Id": 198,
+        "Name": "浦东高桥",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.3491,
+        "Longitude": 121.578,
+        "Grade": 1
+      },
+      {
+        "Id": 201,
+        "Name": "普陀监测站",
+        "Aqi": 153,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.23807,
+        "Longitude": 121.40122,
+        "Grade": 4
+      },
+      {
+        "Id": 202,
+        "Name": "普陀桃浦（已不用）",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.28524,
+        "Longitude": 121.34246,
+        "Grade": 1
+      },
+      {
+        "Id": 213,
+        "Name": "浦东张家浜",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.26164,
+        "Longitude": 121.73,
+        "Grade": 1
+      },
+      {
+        "Id": 217,
+        "Name": "浦东惠南",
+        "Aqi": 124,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.0507,
+        "Longitude": 121.7965,
+        "Grade": 3
+      },
+      {
+        "Id": 228,
+        "Name": "浦东监测站",
+        "Aqi": 109,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.22838,
+        "Longitude": 121.53301,
+        "Grade": 3
+      },
+      {
+        "Id": 229,
+        "Name": "浦东祝桥",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.1036,
+        "Longitude": 121.7616,
+        "Grade": 1
+      },
+      {
+        "Id": 258,
+        "Name": "浦东东方路交通站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.211693,
+        "Longitude": 121.527881,
+        "Grade": 1
+      },
+      {
+        "Id": 260,
+        "Name": "普陀桃浦",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "P",
+        "Latitude": 31.28524,
+        "Longitude": 121.34246,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "Q",
+    "Items": [
+      {
+        "Id": 203,
+        "Name": "*青浦淀山湖",
+        "Aqi": 136,
+        "BackgroundImageUrl": null,
+        "Group": "Q",
+        "Latitude": 31.0935,
+        "Longitude": 120.978,
+        "Grade": 3
+      },
+      {
+        "Id": 204,
+        "Name": "青浦夏阳",
+        "Aqi": 120,
+        "BackgroundImageUrl": null,
+        "Group": "Q",
+        "Latitude": 31.1561,
+        "Longitude": 121.1255,
+        "Grade": 3
+      },
+      {
+        "Id": 212,
+        "Name": "青浦水运场",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "Q",
+        "Latitude": 31.115213,
+        "Longitude": 121.005696,
+        "Grade": 1
+      },
+      {
+        "Id": 216,
+        "Name": "青浦工业园",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "Q",
+        "Latitude": 31.174771,
+        "Longitude": 121.095821,
+        "Grade": 1
+      },
+      {
+        "Id": 219,
+        "Name": "青浦朱家角",
+        "Aqi": 127,
+        "BackgroundImageUrl": null,
+        "Group": "Q",
+        "Latitude": 31.1173,
+        "Longitude": 121.0476,
+        "Grade": 3
+      },
+      {
+        "Id": 246,
+        "Name": "全市平均",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "Q",
+        "Latitude": 31,
+        "Longitude": 121,
+        "Grade": 1
+      },
+      {
+        "Id": 261,
+        "Name": "青浦盈浦",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "Q",
+        "Latitude": 31.14561,
+        "Longitude": 121.10375,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "R",
+    "Items": [
+      {
+        "Id": 179,
+        "Name": "人民广场",
+        "Aqi": 86,
+        "BackgroundImageUrl": null,
+        "Group": "R",
+        "Latitude": 31.2342,
+        "Longitude": 121.4688,
+        "Grade": 2
+      }
+    ]
+  },
+  {
+    "GroupName": "S",
+    "Items": [
+      {
+        "Id": 86,
+        "Name": "松江景德路",
+        "Aqi": 140,
+        "BackgroundImageUrl": null,
+        "Group": "S",
+        "Latitude": 31.01139,
+        "Longitude": 121.23226,
+        "Grade": 3
+      },
+      {
+        "Id": 87,
+        "Name": "松江图书馆",
+        "Aqi": 132,
+        "BackgroundImageUrl": null,
+        "Group": "S",
+        "Latitude": 31.03777,
+        "Longitude": 121.21861,
+        "Grade": 3
+      },
+      {
+        "Id": 225,
+        "Name": "世博园",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "S",
+        "Latitude": 31.18837,
+        "Longitude": 121.49421,
+        "Grade": 1
+      },
+      {
+        "Id": 239,
+        "Name": "松江中辰路",
+        "Aqi": 117,
+        "BackgroundImageUrl": null,
+        "Group": "S",
+        "Latitude": 31.05164,
+        "Longitude": 121.26646,
+        "Grade": 3
+      },
+      {
+        "Id": 240,
+        "Name": "松江移动车",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "S",
+        "Latitude": 31.01,
+        "Longitude": 121.23,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "W",
+    "Items": [
+      {
+        "Id": 234,
+        "Name": "吴泾氯碱",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "W",
+        "Latitude": 31.06755,
+        "Longitude": 121.45643,
+        "Grade": 1
+      },
+      {
+        "Id": 235,
+        "Name": "吴泾隆盛",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "W",
+        "Latitude": 31.10245,
+        "Longitude": 121.4453,
+        "Grade": 1
+      },
+      {
+        "Id": 236,
+        "Name": "吴泾税务所",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "W",
+        "Latitude": 31.042,
+        "Longitude": 121.46038,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "X",
+    "Items": [
+      {
+        "Id": 80,
+        "Name": "徐家汇",
+        "Aqi": 103,
+        "BackgroundImageUrl": null,
+        "Group": "X",
+        "Latitude": 31.19908,
+        "Longitude": 121.43739,
+        "Grade": 3
+      },
+      {
+        "Id": 207,
+        "Name": "徐汇上师大",
+        "Aqi": 130,
+        "BackgroundImageUrl": null,
+        "Group": "X",
+        "Latitude": 31.1654,
+        "Longitude": 121.412,
+        "Grade": 3
+      },
+      {
+        "Id": 224,
+        "Name": "徐汇路边站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "X",
+        "Latitude": 31.19135,
+        "Longitude": 121.427,
+        "Grade": 1
+      },
+      {
+        "Id": 226,
+        "Name": "徐汇南丹路",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "X",
+        "Latitude": 31.1934,
+        "Longitude": 121.427,
+        "Grade": 1
+      },
+      {
+        "Id": 227,
+        "Name": "徐汇华泾",
+        "Aqi": 142,
+        "BackgroundImageUrl": null,
+        "Group": "X",
+        "Latitude": 31.12295,
+        "Longitude": 121.45013,
+        "Grade": 3
+      },
+      {
+        "Id": 255,
+        "Name": "徐汇漕溪路交通站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "X",
+        "Latitude": 31.174464,
+        "Longitude": 121.435165,
+        "Grade": 1
+      }
+    ]
+  },
+  {
+    "GroupName": "Y",
+    "Items": [
+      {
+        "Id": 209,
+        "Name": "杨浦四漂",
+        "Aqi": 110,
+        "BackgroundImageUrl": null,
+        "Group": "Y",
+        "Latitude": 31.2659,
+        "Longitude": 121.536,
+        "Grade": 3
+      },
+      {
+        "Id": 210,
+        "Name": "杨浦监测站",
+        "Aqi": 103,
+        "BackgroundImageUrl": null,
+        "Group": "Y",
+        "Latitude": 31.2838,
+        "Longitude": 121.5376,
+        "Grade": 3
+      },
+      {
+        "Id": 253,
+        "Name": "杨浦新江湾城",
+        "Aqi": 99,
+        "BackgroundImageUrl": null,
+        "Group": "Y",
+        "Latitude": 31.32146,
+        "Longitude": 121.5034,
+        "Grade": 2
+      }
+    ]
+  },
+  {
+    "GroupName": "Z",
+    "Items": [
+      {
+        "Id": 211,
+        "Name": "闸北和田中学",
+        "Aqi": 127,
+        "BackgroundImageUrl": null,
+        "Group": "Z",
+        "Latitude": 31.2768,
+        "Longitude": 121.451,
+        "Grade": 3
+      },
+      {
+        "Id": 257,
+        "Name": "闸北共和新路交通站",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "Z",
+        "Latitude": 31.279416,
+        "Longitude": 121.452092,
+        "Grade": 1
+      },
+      {
+        "Id": 263,
+        "Name": "闸北市北高新",
+        "Aqi": 0,
+        "BackgroundImageUrl": null,
+        "Group": "Z",
+        "Latitude": 31.29736,
+        "Longitude": 121.20035,
+        "Grade": 1
+      }
+    ]
+  }
+]
