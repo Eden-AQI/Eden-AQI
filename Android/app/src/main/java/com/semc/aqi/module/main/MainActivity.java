@@ -25,6 +25,7 @@ import com.baidu.location.LocationClientOption;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.DrawableLess;
+import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.jayfeng.lesscode.core.other.DividerItemDecoration;
@@ -32,6 +33,8 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.litesuits.orm.db.assit.WhereBuilder;
 import com.semc.aqi.R;
+import com.semc.aqi.config.BizUtils;
+import com.semc.aqi.config.Global;
 import com.semc.aqi.event.AddCityEvent;
 import com.semc.aqi.event.DeleteCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
@@ -156,11 +159,21 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                     public void onBindViewHolder(final int position, AdapterLess.RecyclerViewHolder recyclerViewHolder, final City city) {
                         View container = recyclerViewHolder.$view(R.id.container);
                         TextView nameView = recyclerViewHolder.$view(R.id.name);
+                        TextView aqiView = recyclerViewHolder.$view(R.id.aqi);
                         nameView.setText(city.getName());
+                        aqiView.setText(city.getAqi() + "");
+
+                        int level = BizUtils.getGradleLevel(city.getAqi());
+                        aqiView.setBackgroundResource(ResourceLess.$id(MainActivity.this, "grade_level_bg_" + level, ResourceLess.TYPE.DRAWABLE));
 
                         container.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
                             public boolean onLongClick(View v) {
+
+                                if (position == 0) {
+                                    return false;
+                                }
+
                                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                                 builder.setMessage("你确定要删除这个城市吗？");
                                 builder.setTitle("提示");
@@ -169,7 +182,7 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
 
-                                        WhereBuilder whereBuilder = new WhereBuilder(City.class, "code = ?", new String[]{list.get(position).getId() + ""});
+                                        WhereBuilder whereBuilder = new WhereBuilder(City.class, "city_id = ?", new String[]{list.get(position).getId() + ""});
                                         LiteOrmManager.getLiteOrm(MainActivity.this).delete(whereBuilder);
                                         list.remove(position);
 

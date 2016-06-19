@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.FileLess;
-import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.jayfeng.lesscode.core.other.DividerItemDecoration;
@@ -130,7 +129,7 @@ public class AddCityActivity extends BaseActivity {
     private void initList() {
         showList = new ArrayList<>();
         try {
-            originList = new Gson().fromJson(FileLess.$read(getResources().getAssets().open("citylist.json")), CityGroupList.class);
+            originList = new Gson().fromJson(FileLess.$read(getResources().getAssets().open("city_list.json")), CityGroupList.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#eee">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -8,7 +9,8 @@
         android:layout_marginTop="@dimen/header_height"
         android:orientation="vertical">
 
-        <View style="@style/SettingGroupDividerStyle" />
+        <View style="@style/SettingGroupDividerStyle"
+            android:layout_marginTop="16dp"/>
 
         <RelativeLayout
             android:id="@+id/update_container"
@@ -21,7 +23,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/setting_item_update_icon" />
+                android:src="@drawable/setting_item_update_icon"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/update_title"
@@ -30,7 +33,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/update_icon"
                 android:text="检查更新"
-                android:textColor="@color/global_primary_text_color_white"
+                android:textColor="@color/global_primary_text_color"
                 android:textSize="16sp" />
 
             <ImageView
@@ -55,7 +58,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/setting_item_about_icon" />
+                android:src="@drawable/setting_item_about_icon"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/gift_title"
@@ -64,7 +68,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/about_icon"
                 android:text="关于我们"
-                android:textColor="@color/global_primary_text_color_white"
+                android:textColor="@color/global_primary_text_color"
                 android:textSize="16sp" />
 
             <ImageView
@@ -89,7 +93,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/setting_item_aqi_ref_icon" />
+                android:src="@drawable/setting_item_aqi_ref_icon"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/aqi_ref__title"
@@ -98,7 +103,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/aqi_ref__icon"
                 android:text="空气质量等级参考"
-                android:textColor="@color/global_primary_text_color_white"
+                android:textColor="@color/global_primary_text_color"
                 android:textSize="16sp" />
 
             <ImageView

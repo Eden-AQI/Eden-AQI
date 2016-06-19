@@ -83,6 +83,7 @@
         <activity
             android:name=".module.city.AddCityActivity"
             android:label="@string/title_activity_city_add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait" />
 
         <service

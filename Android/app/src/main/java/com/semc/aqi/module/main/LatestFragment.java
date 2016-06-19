@@ -24,16 +24,20 @@ import com.db.chart.view.YLineChartView;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jayfeng.lesscode.core.DisplayLess;
+import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
+import com.semc.aqi.config.BizUtils;
 import com.semc.aqi.model.ForecastItem;
 import com.semc.aqi.model.OtherParameterItem;
 import com.semc.aqi.model.RealTime;
 import com.semc.aqi.module.aqi.DetailsActivity;
 import com.semc.aqi.view.AqiDetailsItemView;
+import com.semc.aqi.view.GradeView;
 import com.semc.aqi.view.ListViewPullHeader;
+import com.semc.aqi.view.dialog.CommonDialog;
 
 import java.util.List;
 
@@ -51,6 +55,7 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
     private TextView aqiBasicAqiView;
     private ImageView aqiBasicLevelIconView;
+    private ImageView aqiBasicKtView;
     private TextView aqiBasicLevelTextView;
     private ImageView aqiBasicLevelDetailsView;
     private TextView aqiBasicPollutantView;
@@ -127,6 +132,7 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         // 基本信息
         aqiBasicAqiView = ViewLess.$(rootView, R.id.aqi_basic_aqi);
         aqiBasicLevelIconView = ViewLess.$(rootView, R.id.aqi_basic_level_icon);
+        aqiBasicKtView = ViewLess.$(rootView, R.id.aqi_basic_kt);
         aqiBasicLevelTextView = ViewLess.$(rootView, R.id.aqi_basic_level_text);
         aqiBasicLevelDetailsView = ViewLess.$(rootView, R.id.aqi_basic_level_details);
         aqiBasicPollutantView = ViewLess.$(rootView, R.id.aqi_basic_pollutant);
@@ -183,8 +189,12 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         aqiBasicLevelDetailsView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                startActivity(intent);
+                CommonDialog gradeDialog = new CommonDialog(getContext());
+                gradeDialog.setTitle("空气质量等级");
+                gradeDialog.setContentMode(CommonDialog.CONTENT_MODE_CUSTOM);
+                gradeDialog.setCustomView(new GradeView(getContext()));
+                gradeDialog.hideBottom();
+                gradeDialog.show();
             }
         });
         concentrationAqiTabLayout.setTabData(new String[]{"　浓度　", "实时指数"});
@@ -193,34 +203,6 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         concentrationAqiTabLayout.setOnTabSelectListener(mIsAqiTabSelectListener);
         concentrationHourTypeTabLayout.setOnTabSelectListener(mHourTypeTabSelectListener);
     }
-
-//    private void initHeader(View rootView) {
-//        initHeaderView(rootView, "上海空气质量", true);
-//        headerView.alphaShadowDivider(0);
-//        headerView.setBgColor(android.R.color.transparent);
-//        headerView.setTitleColor(getResources().getColor(R.color.global_primary_text_color_white));
-//        // menu: add and share
-//        headerView.showLeftBackView(true, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), CityActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        headerView.setLeftImage(R.drawable.latest_menu_add);
-//        headerView.showRightImageView(R.drawable.latest_menu_share, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent shareIntent = new Intent();
-//                shareIntent.setAction(Intent.ACTION_SEND);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, "欢迎使用上海空气质量，下载地址：http://www.baidu.com");
-//                shareIntent.setType("text/plain");
-//
-//                //设置分享列表的标题，并且每次都显示分享列表
-//                startActivity(Intent.createChooser(shareIntent, "分享到"));
-//            }
-//        });
-//    }
 
     private void autoSummaryContainerHeight() {
         int screenHeight = DisplayLess.$height(getActivity());
@@ -378,20 +360,11 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         ptrFrame.refreshComplete();
     }
 
-    private void showBasicLevelIcon(int level) {
-        int resource = R.drawable.aqi_level_icon_6;
-        if (level < 51) {
-            resource = R.drawable.aqi_level_icon_1;
-        } else if (level < 101) {
-            resource = R.drawable.aqi_level_icon_2;
-        } else if (level < 151) {
-            resource = R.drawable.aqi_level_icon_3;
-        } else if (level < 201) {
-            resource = R.drawable.aqi_level_icon_4;
-        } else if (level < 301) {
-            resource = R.drawable.aqi_level_icon_5;
-        }
-
-        aqiBasicLevelIconView.setImageResource(resource);
+    private void showBasicLevelIcon(int aqi) {
+        int level = BizUtils.getGradleLevel(aqi);
+        int levelIcon = ResourceLess.$id(getActivity(), "aqi_level_icon_" + level, ResourceLess.TYPE.DRAWABLE);
+        int ktIcon = ResourceLess.$id(getActivity(), "aqi_kt_level_" + level, ResourceLess.TYPE.DRAWABLE);
+        aqiBasicLevelIconView.setImageResource(levelIcon);
+        aqiBasicKtView.setImageResource(ktIcon);
     }
 }

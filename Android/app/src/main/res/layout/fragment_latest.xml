@@ -56,13 +56,12 @@
                         android:layout_marginBottom="24dp"
                         android:paddingLeft="24dp">
 
-                        <ImageView
+                        <ImageView android:id="@+id/aqi_basic_kt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="48dp"
-                            android:src="@drawable/aqi_show_big" />
+                            android:layout_marginRight="48dp" />
 
                         <TextView
                             android:id="@+id/aqi_basic_concentration"

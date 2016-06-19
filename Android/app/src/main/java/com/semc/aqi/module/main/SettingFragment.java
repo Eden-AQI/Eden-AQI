@@ -1,6 +1,5 @@
 package com.semc.aqi.module.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,9 +13,9 @@ import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
 import com.semc.aqi.model.AppUpdate;
-import com.semc.aqi.model.RealTime;
-import com.semc.aqi.module.about.AboutActivity;
-import com.semc.aqi.module.image.AqiRefActivity;
+import com.semc.aqi.view.AboutView;
+import com.semc.aqi.view.GradeView;
+import com.semc.aqi.view.dialog.CommonDialog;
 
 public class SettingFragment extends BaseFragment<SettingContract.Presenter> implements SettingContract.View {
 
@@ -59,23 +58,29 @@ public class SettingFragment extends BaseFragment<SettingContract.Presenter> imp
         aboutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AboutActivity.class);
-                startActivity(intent);
+                CommonDialog aboutDialog = new CommonDialog(getContext());
+                aboutDialog.setTitle(getString(R.string.title_activity_about));
+                aboutDialog.setContentMode(CommonDialog.CONTENT_MODE_CUSTOM);
+                aboutDialog.setCustomView(new AboutView(getContext()));
+                aboutDialog.hideBottom();
+                aboutDialog.show();
             }
         });
         aqiRefContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AqiRefActivity.class);
-                startActivity(intent);
+                CommonDialog gradeDialog = new CommonDialog(getContext());
+                gradeDialog.setTitle("空气质量等级");
+                gradeDialog.setContentMode(CommonDialog.CONTENT_MODE_CUSTOM);
+                gradeDialog.setCustomView(new GradeView(getContext()));
+                gradeDialog.hideBottom();
+                gradeDialog.show();
             }
         });
     }
 
     private void initHeader(View rootView) {
         initHeaderView(rootView, R.string.main_tab_setting_text, false);
-        headerView.alphaShadowDivider(0);
-        headerView.setBgColor(android.R.color.transparent);
         headerView.setTitleColor(getResources().getColor(R.color.global_primary_text_color_white));
     }
 

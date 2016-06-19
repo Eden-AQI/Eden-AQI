@@ -40,9 +40,30 @@
     <style name="SettingItemStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
-        <item name="android:background">@drawable/list_item</item>
+        <item name="android:background">@drawable/app_list_item_white</item>
         <item name="android:clickable">true</item>
         <item name="android:paddingLeft">26dp</item>
         <item name="android:paddingRight">16dp</item>
+    </style>
+
+    <style name="DialogTitleStyle">
+        <item name="android:background">@drawable/view_dialog_top_shape</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="DialogVerticalDividerStyle">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/global_item_divider_color</item>
+    </style>
+
+    <style name="DialogHorizontalDividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/global_item_divider_color</item>
     </style>
 </resources>

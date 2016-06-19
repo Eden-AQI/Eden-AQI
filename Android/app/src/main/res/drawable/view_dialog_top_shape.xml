@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- 填充的颜色 -->
+    <solid android:color="@color/view_dialog_title_bg" />
+
+    <corners
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp"
+        android:topLeftRadius="@dimen/view_dialog_corner_radius"
+        android:topRightRadius="@dimen/view_dialog_corner_radius" />
+</shape>

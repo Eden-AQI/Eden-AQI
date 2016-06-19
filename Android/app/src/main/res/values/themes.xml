@@ -5,8 +5,17 @@
         <item name="android:windowBackground">@color/global_content_bg_color</item>
         <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
     </style>
+
     <style name="AppTheme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="LoadingDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 </resources>

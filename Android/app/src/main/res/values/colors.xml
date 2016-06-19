@@ -12,4 +12,8 @@
     <color name="left_add_bg_color_normal">#30afff</color>
     <color name="left_add_bg_color_pressed">#cc30afff</color>
     <color name="left_add_bg_color_disabled">#aaa</color>
+
+    <color name="view_dialog_title_bg">@color/header_bg_color</color>
+    <color name="view_dialog_item_bg">#cc30afff</color>
+    <color name="view_dialog_item_bg_pressed">#ee30afff</color>
 </resources>
