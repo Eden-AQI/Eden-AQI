@@ -2,6 +2,7 @@ package com.semc.aqi.module.city;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.FileLess;
+import com.jayfeng.lesscode.core.KeyBoardLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.jayfeng.lesscode.core.other.DividerItemDecoration;
@@ -26,6 +28,7 @@ import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
 import com.semc.aqi.model.CityGroup;
 import com.semc.aqi.model.CityGroupList;
+import com.semc.aqi.view.dialog.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -96,14 +99,25 @@ public class AddCityActivity extends BaseActivity {
                                 @Override
                                 public void onClick(View v) {
                                     LiteOrm liteOrm = LiteOrmManager.getLiteOrm(AddCityActivity.this);
-                                    boolean already = false;
                                     QueryBuilder<City> queryBuilder = new QueryBuilder<City>(City.class)
-                                            .whereEquals("code", city.getId());
-                                    already = liteOrm.query(queryBuilder).size() > 0 ? true : false;
+                                            .whereEquals("city_id", city.getId());
+                                    boolean already = liteOrm.query(queryBuilder).size() > 0 ? true : false;
                                     if (!already) {
                                         liteOrm.save(city);
                                         EventBus.getDefault().post(new AddCityEvent());
-                                        finish();
+
+                                        final LoadingDialog loadingDialog = new LoadingDialog(AddCityActivity.this);
+                                        loadingDialog.setLoadingText("正在添加...");
+                                        loadingDialog.show();
+                                        KeyBoardLess.$hide(AddCityActivity.this, searchEditView);
+
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                loadingDialog.dismiss();
+                                                finish();
+                                            }
+                                        }, 300);
                                     } else {
                                         ToastLess.$(AddCityActivity.this, "已添加");
                                     }

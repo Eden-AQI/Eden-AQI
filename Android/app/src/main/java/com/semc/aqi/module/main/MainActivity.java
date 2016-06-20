@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -23,6 +24,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.DeviceLess;
 import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.DrawableLess;
 import com.jayfeng.lesscode.core.ResourceLess;
@@ -39,7 +41,9 @@ import com.semc.aqi.event.AddCityEvent;
 import com.semc.aqi.event.DeleteCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
+import com.semc.aqi.model.Device;
 import com.semc.aqi.module.city.AddCityActivity;
+import com.semc.aqi.repository.WeatherRepository;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -47,6 +51,9 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends SlidingFragmentActivity implements RadioButton.OnCheckedChangeListener {
 
@@ -107,7 +114,7 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
         initBaiduLocation();
         confirmStopBaiduLocation();
 
-//        JPushInterface.getRegistrationID(this);
+        heartbeat();
     }
 
     private void init() {
@@ -344,10 +351,12 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
 
                 ToastLess.$(MainActivity.this, location.getCity());
 
+                if (TextUtils.isEmpty(Global.getDeviceNumber())) {
+                    registerDevice(location.getLatitude(), location.getLongitude());
+                }
             } else {
                 mLocationRetry++;
             }
-
         }
     }
 
@@ -360,6 +369,89 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                 }
             }
         }, 10000);
+    }
+
+
+    /**
+     * 注册设备信息
+     *
+     * @param latitude
+     * @param longitude
+     */
+    private void registerDevice(double latitude, double longitude) {
+
+        String deviceNumber = DeviceLess.$mac();
+        if (!TextUtils.isEmpty(deviceNumber)) {
+            deviceNumber = deviceNumber.trim();
+        }
+
+        Device device = new Device();
+        device.setDeviceNumber(deviceNumber);
+        device.setDeviceType(DisplayLess.$tablet(this) ? Device.DEVICE_TYPE_TABLET : Device.DEVICE_TYPE_PHONE);
+        device.setPushId(JPushInterface.getRegistrationID(this));
+        device.setLatitude(latitude);
+        device.setLongitude(longitude);
+
+        WeatherRepository.getInstance().registerDevice(device)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                        String deviceNumber = DeviceLess.$mac();
+                        if (!TextUtils.isEmpty(deviceNumber)) {
+                            deviceNumber = deviceNumber.trim();
+                        }
+
+                        Global.setDeviceNumber(deviceNumber);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        ToastLess.$(MainActivity.this, e.toString());
+
+                        String deviceNumber = DeviceLess.$mac();
+                        if (!TextUtils.isEmpty(deviceNumber)) {
+                            deviceNumber = deviceNumber.trim();
+                        }
+
+                        Global.setDeviceNumber(deviceNumber);
+                    }
+
+                    @Override
+                    public void onNext(String string) {
+//                        ToastLess.$(MainActivity.this, "注册成功");
+                    }
+                });
+    }
+
+    private void heartbeat() {
+
+        String deviceNumber = Global.getDeviceNumber();
+        if (TextUtils.isEmpty(deviceNumber)) {
+            return;
+        }
+
+        WeatherRepository.getInstance().heartbeat(deviceNumber)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        ToastLess.$(MainActivity.this, e.toString());
+                    }
+
+                    @Override
+                    public void onNext(String string) {
+//                        ToastLess.$(MainActivity.this, "心跳成功");
+                    }
+                });
     }
 
     @Subscribe

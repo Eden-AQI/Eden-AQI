@@ -1,8 +1,7 @@
 package com.semc.aqi.module.main;
 
-import com.semc.aqi.model.AppUpdate;
-import com.semc.aqi.repository.config.RetrofitManager;
-import com.semc.aqi.repository.services.ConfigService;
+import com.semc.aqi.model.Update;
+import com.semc.aqi.repository.WeatherRepository;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -18,11 +17,10 @@ public class SettingPresenter implements SettingContract.Presenter {
 
     @Override
     public void checkUpdate() {
-        ConfigService service = RetrofitManager.getRxRetrofit("http://1.yy317.sinaapp.com/").create(ConfigService.class);
-        service.checkAppUpdate()
+        WeatherRepository.getInstance().checkUpdate()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<AppUpdate>() {
+                .subscribe(new Observer<Update>() {
                     @Override
                     public void onCompleted() {
 
@@ -34,8 +32,8 @@ public class SettingPresenter implements SettingContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(AppUpdate appUpdate) {
-                        mView.showCheckUpdateResult(appUpdate);
+                    public void onNext(Update update) {
+                        mView.showCheckUpdateResult(update);
                     }
                 });
     }
