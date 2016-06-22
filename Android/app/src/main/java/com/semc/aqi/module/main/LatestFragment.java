@@ -1,6 +1,5 @@
 package com.semc.aqi.module.main;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,7 +32,6 @@ import com.semc.aqi.config.BizUtils;
 import com.semc.aqi.model.ForecastItem;
 import com.semc.aqi.model.OtherParameterItem;
 import com.semc.aqi.model.RealTime;
-import com.semc.aqi.module.aqi.DetailsActivity;
 import com.semc.aqi.view.AqiDetailsItemView;
 import com.semc.aqi.view.GradeView;
 import com.semc.aqi.view.ListViewPullHeader;
@@ -66,6 +64,8 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
     private TextView aqiDetailBigAqiView;
 
     private LinearLayout aqiDetailsItemContainer;
+    private TextView aqiDetailsHeathDescView;
+    private TextView aqiDetailsSuggestDescView;
 
     private SegmentTabLayout concentrationAqiTabLayout;
     private SegmentTabLayout concentrationHourTypeTabLayout;
@@ -145,6 +145,9 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         aqiDetailBigAqiView = ViewLess.$(rootView, R.id.aqi_details_big_aqi);
         // 列表
         aqiDetailsItemContainer = ViewLess.$(rootView, R.id.aqi_details_items_container);
+        // 健康和建议
+        aqiDetailsHeathDescView = ViewLess.$(rootView, R.id.aqi_details_health_desc);
+        aqiDetailsSuggestDescView = ViewLess.$(rootView, R.id.aqi_details_suggest_desc);
 
         concentrationAqiTabLayout = ViewLess.$(rootView, R.id.linechart_aqi_tab);
         concentrationHourTypeTabLayout = ViewLess.$(rootView, R.id.linechart_hour_type_tab);
@@ -225,12 +228,14 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
             TextView dateView = ViewLess.$(linearLayout, R.id.aqi_table_date);
             TextView levelView = ViewLess.$(linearLayout, R.id.aqi_table_level);
             TextView valueView = ViewLess.$(linearLayout, R.id.aqi_table_value);
-            TextView degreeView = ViewLess.$(linearLayout, R.id.aqi_table_degree);
+            TextView primaryView = ViewLess.$(linearLayout, R.id.aqi_table_value_primary);
 
             dateView.setText(forecastItem.getTime());
-            levelView.setText(forecastItem.getAqiLevel());
+            levelView.setText(BizUtils.getGradleText(forecastItem.getAqi()));
+            levelView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + forecastItem.getAqiLevel(), ResourceLess.TYPE.DRAWABLE));
+//            levelView.setBackgroundColor(BizUtils.getGradleColor(forecastItem.getAqi()));
             valueView.setText(forecastItem.getAqi() + "");
-            degreeView.setText(forecastItem.getTemperature());
+            primaryView.setText(forecastItem.getPrimaryParameter());
 
             aqiTableContainer.addView(linearLayout);
 
@@ -265,6 +270,9 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
             aqiDetailsItemView.setText(item.getValue());
             aqiDetailsItemContainer.addView(aqiDetailsItemView);
         }
+
+        aqiDetailsHeathDescView.setText(realTime.getHealth());
+        aqiDetailsSuggestDescView.setText(realTime.getSuggest());
     }
 
     @Override
@@ -366,5 +374,6 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         int ktIcon = ResourceLess.$id(getActivity(), "aqi_kt_level_" + level, ResourceLess.TYPE.DRAWABLE);
         aqiBasicLevelIconView.setImageResource(levelIcon);
         aqiBasicKtView.setImageResource(ktIcon);
+        aqiBasicLevelTextView.setText(BizUtils.getGradleText(aqi));
     }
 }

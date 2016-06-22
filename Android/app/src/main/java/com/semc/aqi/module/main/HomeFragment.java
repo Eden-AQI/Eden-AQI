@@ -119,7 +119,7 @@ public class HomeFragment extends BaseFragment {
                 ((MainActivity)getActivity()).toggle();
             }
         });
-        headerView.setLeftImage(R.drawable.latest_menu_add);
+        headerView.setLeftImage(R.drawable.header_menu_slide);
         headerView.showRightImageView(R.drawable.latest_menu_share, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

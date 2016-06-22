@@ -11,30 +11,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="今天"
-        android:textColor="@color/global_primary_text_color_white" />
+        android:textColor="@color/global_primary_text_color_white"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/aqi_table_level"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="良"
-        android:textColor="@color/global_primary_text_color_white" />
+        android:layout_margin="4dp"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textColor="@color/global_primary_text_color_white"
+        android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/aqi_table_value"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="67AQI"
-        android:textColor="@color/global_primary_text_color_white" />
+        android:layout_gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/aqi_table_degree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="22-14C"
-        android:textColor="@color/global_primary_text_color_white" />
+        <TextView
+            android:id="@+id/aqi_table_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/global_primary_text_color_white"
+            android:textSize="15sp" />
+
+        <TextView android:id="@+id/aqi_table_value_primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="2dp"
+            android:textColor="#ddd"
+            android:textSize="10sp" />
+    </LinearLayout>
+
 </LinearLayout>

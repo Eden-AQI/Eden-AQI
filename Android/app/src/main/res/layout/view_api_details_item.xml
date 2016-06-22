@@ -4,11 +4,12 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:layout_marginTop="8dp"
-    android:padding="8dp">
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/details_item_title"
-        android:layout_width="64dp"
+        android:layout_width="56dp"
         android:layout_height="wrap_content"
         android:text="--"
         android:textColor="#eeeeee" />

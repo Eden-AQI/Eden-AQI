@@ -12,7 +12,7 @@ public class BizUtils {
 
         GradeInfo gradeInfo = Global.getGradeInfo();
         for (int i = 0; i < gradeInfo.size(); i++) {
-            if (num < gradeInfo.get(i).getAQIMax()) {
+            if (num <= gradeInfo.get(i).getAQIMax()) {
                 result = i + 1;
                 break;
             } else {
@@ -28,10 +28,26 @@ public class BizUtils {
         GradeInfo gradeInfo = Global.getGradeInfo();
         for (int i = 0; i < gradeInfo.size(); i++) {
             Grade grade = gradeInfo.get(i);
-            if (num < grade.getAQIMax()) {
+            if (num <= grade.getAQIMax()) {
                 result = Color.rgb(grade.getColorR(),
                         grade.getColorG(),
                         grade.getColorB());
+                break;
+            } else {
+                continue;
+            }
+        }
+        return result;
+    }
+
+    public static String getGradleText(int num) {
+        String result = "优";
+
+        GradeInfo gradeInfo = Global.getGradeInfo();
+        for (int i = 0; i < gradeInfo.size(); i++) {
+            Grade grade = gradeInfo.get(i);
+            if (num <= grade.getAQIMax()) {
+                result = grade.getAQIState().trim();
                 break;
             } else {
                 continue;

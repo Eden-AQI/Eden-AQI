@@ -56,12 +56,13 @@
                         android:layout_marginBottom="24dp"
                         android:paddingLeft="24dp">
 
-                        <ImageView android:id="@+id/aqi_basic_kt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <ImageView
+                            android:id="@+id/aqi_basic_kt"
+                            android:layout_width="180dp"
+                            android:layout_height="180dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="48dp" />
+                            android:scaleType="fitCenter" />
 
                         <TextView
                             android:id="@+id/aqi_basic_concentration"
@@ -112,7 +113,6 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="8dp"
-                                android:text="轻度污染"
                                 android:textColor="@color/global_primary_text_color_white"
                                 android:textSize="24sp" />
 
@@ -178,7 +178,8 @@
                                 android:layout_centerInParent="true"
                                 android:orientation="vertical">
 
-                                <TextView android:id="@+id/aqi_details_big_aqi"
+                                <TextView
+                                    android:id="@+id/aqi_details_big_aqi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
@@ -191,19 +192,20 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
                                     android:layout_gravity="center_horizontal"
+                                    android:layout_marginBottom="8dp"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginRight="16dp"
                                     android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="8dp"
                                     android:background="#aacccccc" />
 
-                                <TextView android:id="@+id/aqi_details_big_pollutant"
+                                <TextView
+                                    android:id="@+id/aqi_details_big_pollutant"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:textSize="11sp"
+                                    android:text="首要污染物:PM2.5"
                                     android:textColor="@color/global_primary_text_color_white"
-                                    android:text="首要污染物:PM2.5" />
+                                    android:textSize="11sp" />
 
                             </LinearLayout>
                         </RelativeLayout>
@@ -238,12 +240,11 @@
                     android:background="#66ffffff" />
 
                 <TextView
+                    android:id="@+id/aqi_details_health_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="12dp"
-                    android:text="可以进行正常的户外活动，但某些污染物可能对极少数异常敏感人群健康有较弱影响。"
                     android:textColor="@color/global_primary_text_color_white"
                     android:textSize="14sp" />
 
@@ -268,6 +269,7 @@
                     android:background="#66ffffff" />
 
                 <TextView
+                    android:id="@+id/aqi_details_suggest_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
@@ -325,14 +327,13 @@
                             android:layout_width="800dp"
                             android:layout_height="200dp"
                             android:layout_marginLeft="12dp"
-                            android:paddingBottom="11dp"
-                            />
+                            android:paddingBottom="11dp" />
 
                         <HorizontalScrollView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scrollbars="none"
-                            android:layout_marginLeft="35dp">
+                            android:layout_marginLeft="35dp"
+                            android:scrollbars="none">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"

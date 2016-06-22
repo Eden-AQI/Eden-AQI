@@ -54,7 +54,7 @@ public class LatestPresenter implements LatestContract.Presenter {
                         show24HourData(LatestContract.HOUR_TYPE_PM2P5, true);
 
                         // show days
-                        // showDaysData();
+                        showDaysData();
                     }
                 });
     }
