@@ -33,16 +33,21 @@ import com.jayfeng.lesscode.core.ViewLess;
 import com.jayfeng.lesscode.core.other.DividerItemDecoration;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.litesuits.orm.LiteOrm;
+import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.WhereBuilder;
 import com.semc.aqi.R;
 import com.semc.aqi.config.BizUtils;
 import com.semc.aqi.config.Global;
 import com.semc.aqi.event.AddCityEvent;
-import com.semc.aqi.event.CurrentCityEvent;
+import com.semc.aqi.event.CurrentCityEventFromLeft;
+import com.semc.aqi.event.CurrentCityEventFromMain;
 import com.semc.aqi.event.DeleteCityEvent;
 import com.semc.aqi.event.UpdateDbCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
+import com.semc.aqi.model.CityGroup;
+import com.semc.aqi.model.CityGroupList;
 import com.semc.aqi.model.Device;
 import com.semc.aqi.module.city.AddCityActivity;
 import com.semc.aqi.repository.WeatherRepository;
@@ -63,6 +68,8 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
     private static final String TAG_MAP = "map";
     private static final String TAG_RANK = "rank";
     private static final String TAG_SETTING = "setting";
+
+    public static CityGroupList cityGroupList;
 
     protected FragmentManager fragmentManager;
     protected Fragment currentFragment;
@@ -119,6 +126,7 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
         confirmStopBaiduLocation();
 
         heartbeat();
+        updateCityDataFromServer();
     }
 
     private void init() {
@@ -186,11 +194,8 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                         container.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
-                                selectedIndex = position;
-                                adapter.notifyDataSetChanged();
-
-                                EventBus.getDefault().post(new CurrentCityEvent(position));
+                                toggle();
+                                EventBus.getDefault().post(new CurrentCityEventFromLeft(position));
                             }
                         });
 
@@ -481,14 +486,59 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
         adapter.notifyDataSetChanged();
     }
 
+    private void updateCityDataFromServer() {
+        WeatherRepository.getInstance().getCityList()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.io())
+                .subscribe(new Observer<CityGroupList>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(CityGroupList cityGroups) {
+
+                        cityGroupList = cityGroups;
+
+                        for(CityGroup cityGroup : cityGroups) {
+                            List<City> cities = cityGroup.getItems();
+                            for (City city : cities) {
+                                LiteOrm liteOrm = LiteOrmManager.getLiteOrm(Global.getContext());
+                                QueryBuilder<City> queryBuilder = new QueryBuilder<>(City.class)
+                                        .whereEquals("city_id", city.getId());
+                                List<City> result = liteOrm.query(queryBuilder);
+                                if (result != null && result.size() > 0) {
+                                    City firstCity = result.get(0);
+                                    firstCity.setAqi(city.getAqi());
+                                    liteOrm.save(firstCity);
+                                }
+                            }
+                        }
+
+                        EventBus.getDefault().post(new UpdateDbCityEvent());
+                    }
+                });
+    }
+
     @Subscribe
     public void onEvent(AddCityEvent addCityEvent) {
         updateCityList();
     }
 
-
     @Subscribe
     public void onEvent(UpdateDbCityEvent updateDbCityEvent) {
         updateCityList();
+    }
+
+    @Subscribe
+    public void onEvent(CurrentCityEventFromMain currentCityEventFromMain) {
+        selectedIndex = currentCityEventFromMain.getIndex();
+        adapter.notifyDataSetChanged();
     }
 }

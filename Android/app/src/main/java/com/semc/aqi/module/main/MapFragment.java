@@ -22,6 +22,7 @@ import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
 import com.semc.aqi.config.BizUtils;
+import com.semc.aqi.config.Constant;
 import com.semc.aqi.model.City;
 import com.semc.aqi.model.CityGroup;
 import com.semc.aqi.model.CityGroupList;
@@ -42,11 +43,9 @@ public class MapFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         showList = new ArrayList<>();
-        try {
-            originList = new Gson().fromJson(FileLess.$read(getResources().getAssets().open("city_list.json")), CityGroupList.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        originList = MainActivity.cityGroupList;
+
         icon = BitmapDescriptorFactory.fromResource(R.drawable.main_tab_map_icon);
     }
 
@@ -112,7 +111,7 @@ public class MapFragment extends BaseFragment {
     }
 
     private void centerMap() {
-        LatLng center = new LatLng(showList.get(0).getLatitude(), showList.get(0).getLongitude());
+        LatLng center = new LatLng(Constant.ZZ_LAT, Constant.ZZ_LNG);
         MapStatus mapStatus = new MapStatus.Builder()
                 .target(center)
                 .zoom(12)

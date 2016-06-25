@@ -1,6 +1,7 @@
 package com.semc.aqi.repository;
 
 import com.google.gson.reflect.TypeToken;
+import com.semc.aqi.model.CityGroupList;
 import com.semc.aqi.model.Device;
 import com.semc.aqi.model.IpInfo;
 import com.semc.aqi.model.Ranking;
@@ -93,10 +94,26 @@ public class WeatherRepository {
         return result;
     }
 
-
+    /**
+     * rank data list
+     *
+     * @return
+     */
     public Observable<List<Ranking>> getRankingData() {
         WeatherService weatherService = RetrofitManager.getRxRetrofit().create(WeatherService.class);
         Observable<List<Ranking>> result = weatherService.getRankingData();
+
+        return result;
+    }
+
+    /**
+     * city data list
+     *
+     * @return
+     */
+    public Observable<CityGroupList> getCityList() {
+        WeatherService weatherService = RetrofitManager.getRxRetrofit().create(WeatherService.class);
+        Observable<CityGroupList> result = weatherService.getCityList();
 
         return result;
     }

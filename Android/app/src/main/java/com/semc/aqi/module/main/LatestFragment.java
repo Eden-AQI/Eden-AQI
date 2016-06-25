@@ -1,7 +1,12 @@
 package com.semc.aqi.module.main;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.db.chart.Tools;
@@ -23,18 +27,21 @@ import com.db.chart.view.YLineChartView;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jayfeng.lesscode.core.DisplayLess;
+import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
 import com.semc.aqi.config.BizUtils;
+import com.semc.aqi.general.FastBlur;
 import com.semc.aqi.model.ForecastItem;
 import com.semc.aqi.model.OtherParameterItem;
 import com.semc.aqi.model.RealTime;
 import com.semc.aqi.view.AqiDetailsItemView;
 import com.semc.aqi.view.GradeView;
 import com.semc.aqi.view.ListViewPullHeader;
+import com.semc.aqi.view.PositionScrollView;
 import com.semc.aqi.view.dialog.CommonDialog;
 
 import java.util.List;
@@ -51,9 +58,12 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
     private PtrClassicFrameLayout ptrFrame;
     protected ListViewPullHeader listViewPullHeader;
-    private ScrollView scrollView;
+    private PositionScrollView scrollView;
     private RelativeLayout summaryContainer;
     private LinearLayout aqiTableContainer;
+
+    private ImageView bgView;
+    private ImageView bgOverlayView;
 
     private TextView aqiBasicAqiView;
     private ImageView aqiBasicLevelIconView;
@@ -79,6 +89,9 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
     private int hourType = LatestContract.HOUR_TYPE_PM2P5;
     private boolean isAqi = true;
+
+    private BitmapDrawable bitmapDrawable;
+    private Bitmap bitmapBlur;
 
     private OnTabSelectListener mIsAqiTabSelectListener = new OnTabSelectListener() {
         @Override
@@ -135,6 +148,9 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         summaryContainer = ViewLess.$(rootView, R.id.summary_container);
         aqiTableContainer = ViewLess.$(rootView, R.id.aqi_table);
 
+        bgView = ViewLess.$(rootView, R.id.bg);
+        bgOverlayView = ViewLess.$(rootView, R.id.bg_overlay);
+
         // 基本信息
         aqiBasicAqiView = ViewLess.$(rootView, R.id.aqi_basic_aqi);
         aqiBasicLevelIconView = ViewLess.$(rootView, R.id.aqi_basic_level_icon);
@@ -186,6 +202,25 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
             }
         }, 100);
 
+        bitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.main_bg);
+        bgView.setImageDrawable(bitmapDrawable);
+        bgOverlayView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (bitmapBlur == null) {
+
+                    Bitmap bkg = bitmapDrawable.getBitmap();
+                    bitmapBlur = Bitmap.createBitmap(bkg.getWidth(), bkg.getHeight(), Bitmap.Config.RGB_565);
+                    Canvas canvas = new Canvas(bitmapBlur);
+                    canvas.drawBitmap(bkg, 0, 0, new Paint());
+
+                    bitmapBlur = FastBlur.doBlur(bitmapBlur, 20, true);
+                    bgOverlayView.setImageBitmap(bitmapBlur);
+                    bgOverlayView.setAlpha(0f);
+                }
+            }
+        }, 400);
+
         autoSummaryContainerHeight();
 
         return rootView;
@@ -211,6 +246,18 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
         concentrationAqiTabLayout.setOnTabSelectListener(mIsAqiTabSelectListener);
         concentrationHourTypeTabLayout.setOnTabSelectListener(mHourTypeTabSelectListener);
+
+        scrollView.setScrollViewListener(new PositionScrollView.ScrollViewListener() {
+            @Override
+            public void onScrollChanged(PositionScrollView scrollView, int x, int y, int oldx, int oldy) {
+
+                LogLess.$d("=================y:" + oldy);
+
+                if (y % 2 == 0) {
+                    bgOverlayView.setAlpha((float) y / 200);
+                }
+            }
+        });
     }
 
     private void autoSummaryContainerHeight() {
@@ -226,6 +273,8 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
     public void showAqiTable(List<ForecastItem> forecastItems) {
 
         int width = DisplayLess.$width(getActivity()) / 3;
+
+        aqiTableContainer.removeAllViews();
         for (int i = 0; i < forecastItems.size(); i++) {
             ForecastItem forecastItem = forecastItems.get(i);
             LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(getActivity())
@@ -340,10 +389,6 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
         BarSet stackBarSet = new BarSet(labels, values[0]);
         stackBarSet.setColor(Color.parseColor("#a1d949"));
-        daysAqiChart.addData(stackBarSet);
-
-        stackBarSet = new BarSet(labels, values[1]);
-        stackBarSet.setColor(Color.parseColor("#ff7a57"));
         daysAqiChart.addData(stackBarSet);
 
         daysAqiChart.setBarSpacing(Tools.fromDpToPx(15));

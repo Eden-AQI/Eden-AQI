@@ -28,6 +28,7 @@ import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
 import com.semc.aqi.model.CityGroup;
 import com.semc.aqi.model.CityGroupList;
+import com.semc.aqi.module.main.MainActivity;
 import com.semc.aqi.view.dialog.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -142,11 +143,7 @@ public class AddCityActivity extends BaseActivity {
 
     private void initList() {
         showList = new ArrayList<>();
-        try {
-            originList = new Gson().fromJson(FileLess.$read(getResources().getAssets().open("city_list.json")), CityGroupList.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        originList = MainActivity.cityGroupList;
     }
 
     private void filterList(String key, boolean update) {

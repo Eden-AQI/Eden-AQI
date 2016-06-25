@@ -97,7 +97,7 @@ public class LatestPresenter implements LatestContract.Presenter {
         HourDataItem hourDataItem;
         for (int i = 0; i < hourDataItemList.size(); i++) {
             hourDataItem = hourDataItemList.get(i);
-            x[i] = hourDataItem.getTime() + ":00";
+            x[i] = getHourByDate(hourDataItem.getTime());
             if (isAqi) {
                 y[i] = (float) hourDataItem.getAqi();
             } else {
@@ -128,14 +128,25 @@ public class LatestPresenter implements LatestContract.Presenter {
         DaysItem daysItem;
         for (int i = 0; i < daysItems.size(); i++) {
             daysItem = daysItems.get(i);
-            x[i] = daysItem.getDay() + "";
-            y[i] = daysItem.getAqi();
-            y1[i] = daysItem.getLevel();
+            x[i] = getDayByDate(daysItem.getDay());
+            y[i] = daysItem.getAqi() < 0 ? 0 : daysItem.getAqi();
+            y1[i] = 0;
         }
 
         float[][] yWrapper = new float[][]{y, y1};
 
         view.showDaysAqiChart(x, yWrapper);
+    }
+
+    private String getDayByDate(String date) {
+        String[] dateSpitArray = date.split("-");
+        return dateSpitArray[dateSpitArray.length - 1];
+    }
+
+    private String getHourByDate(String date) {
+        String result = date.split(" ")[1];
+
+        return result;
     }
 
     private void updateCityInDB(int cityId) {

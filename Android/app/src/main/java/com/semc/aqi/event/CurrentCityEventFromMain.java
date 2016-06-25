@@ -1,9 +1,9 @@
 package com.semc.aqi.event;
 
-public class CurrentCityEvent {
+public class CurrentCityEventFromMain {
     private int index;
 
-    public CurrentCityEvent(int index) {
+    public CurrentCityEventFromMain(int index) {
         this.index = index;
     }
 

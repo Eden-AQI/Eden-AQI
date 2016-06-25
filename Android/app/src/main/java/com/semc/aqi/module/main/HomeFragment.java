@@ -13,7 +13,8 @@ import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
 import com.semc.aqi.event.AddCityEvent;
-import com.semc.aqi.event.CurrentCityEvent;
+import com.semc.aqi.event.CurrentCityEventFromLeft;
+import com.semc.aqi.event.CurrentCityEventFromMain;
 import com.semc.aqi.event.DeleteCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
@@ -50,6 +51,24 @@ public class HomeFragment extends BaseFragment {
         indicator = ViewLess.$(rootView, R.id.indicator);
         viewPager = ViewLess.$(rootView, R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                CurrentCityEventFromMain currentCityEventFromMain = new CurrentCityEventFromMain(position);
+                EventBus.getDefault().post(currentCityEventFromMain);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         initData(false);
 
         return rootView;
@@ -160,8 +179,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Subscribe
-    public void onEvent(CurrentCityEvent currentCityEvent) {
-        int index = currentCityEvent.getIndex();
+    public void onEvent(CurrentCityEventFromLeft currentCityEventFromLeft) {
+        int index = currentCityEventFromLeft.getIndex();
         viewPager.setCurrentItem(index);
     }
 

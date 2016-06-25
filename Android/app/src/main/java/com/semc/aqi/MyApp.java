@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.jayfeng.lesscode.core.$;
+import com.semc.aqi.config.Constant;
 import com.semc.aqi.config.Global;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
@@ -31,6 +32,8 @@ public class MyApp extends Application {
             city.setName("郑州市");
             city.setId(0);
             city.setGroup("Z");
+            city.setLatitude(Constant.ZZ_LAT);
+            city.setLongitude(Constant.ZZ_LNG);
             LiteOrmManager.getLiteOrm(this).save(city);
         }
 
