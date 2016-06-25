@@ -38,7 +38,9 @@ import com.semc.aqi.R;
 import com.semc.aqi.config.BizUtils;
 import com.semc.aqi.config.Global;
 import com.semc.aqi.event.AddCityEvent;
+import com.semc.aqi.event.CurrentCityEvent;
 import com.semc.aqi.event.DeleteCityEvent;
+import com.semc.aqi.event.UpdateDbCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
 import com.semc.aqi.model.Device;
@@ -87,6 +89,8 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
     private DividerItemDecoration dividerItemDecoration;
     private ImageButton addCityView;
     private List<City> list;
+
+    private int selectedIndex = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -164,7 +168,7 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                 new AdapterLess.RecyclerCallBack<City>() {
                     @Override
                     public void onBindViewHolder(final int position, AdapterLess.RecyclerViewHolder recyclerViewHolder, final City city) {
-                        View container = recyclerViewHolder.$view(R.id.container);
+                        final View container = recyclerViewHolder.$view(R.id.container);
                         TextView nameView = recyclerViewHolder.$view(R.id.name);
                         TextView aqiView = recyclerViewHolder.$view(R.id.aqi);
                         nameView.setText(city.getName());
@@ -172,6 +176,23 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
 
                         int level = BizUtils.getGradleLevel(city.getAqi());
                         aqiView.setBackgroundResource(ResourceLess.$id(MainActivity.this, "grade_level_bg_" + level, ResourceLess.TYPE.DRAWABLE));
+
+                        if (selectedIndex == position) {
+                            container.setSelected(true);
+                        } else {
+                            container.setSelected(false);
+                        }
+
+                        container.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                selectedIndex = position;
+                                adapter.notifyDataSetChanged();
+
+                                EventBus.getDefault().post(new CurrentCityEvent(position));
+                            }
+                        });
 
                         container.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
@@ -454,10 +475,20 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                 });
     }
 
-    @Subscribe
-    public void onEvent(AddCityEvent addCityEvent) {
+    private void updateCityList() {
         list.clear();
         list.addAll(LiteOrmManager.getLiteOrm(this).query(City.class));
         adapter.notifyDataSetChanged();
+    }
+
+    @Subscribe
+    public void onEvent(AddCityEvent addCityEvent) {
+        updateCityList();
+    }
+
+
+    @Subscribe
+    public void onEvent(UpdateDbCityEvent updateDbCityEvent) {
+        updateCityList();
     }
 }

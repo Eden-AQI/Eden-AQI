@@ -7,7 +7,7 @@
     <string name="title_activity_city_add">选择城市</string>
     <string name="main_tab_home_text">实时</string>
     <string name="main_tab_map_text">地图</string>
-    <string name="main_tab_rank_text">排行</string>
+    <string name="main_tab_rank_text">列表</string>
     <string name="main_tab_setting_text">设置</string>
 
     <!-- pull refresh -->

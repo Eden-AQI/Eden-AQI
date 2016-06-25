@@ -1,15 +1,15 @@
 package com.semc.aqi.model;
 
 public class DaysItem {
-    private int Day;
+    private String Day;
     private int Aqi;
     private int Level;
 
-    public int getDay() {
+    public String getDay() {
         return Day;
     }
 
-    public void setDay(int day) {
+    public void setDay(String day) {
         Day = day;
     }
 

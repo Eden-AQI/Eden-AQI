@@ -1,5 +1,6 @@
 package com.semc.aqi.module.main;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,7 +20,13 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new LatestFragment();
+        Fragment fragment = new LatestFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(LatestFragment.KEY_CITY_ID, cityList.get(position).getId());
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     @Override

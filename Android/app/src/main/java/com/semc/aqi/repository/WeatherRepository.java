@@ -3,6 +3,7 @@ package com.semc.aqi.repository;
 import com.google.gson.reflect.TypeToken;
 import com.semc.aqi.model.Device;
 import com.semc.aqi.model.IpInfo;
+import com.semc.aqi.model.Ranking;
 import com.semc.aqi.model.RealTime;
 import com.semc.aqi.model.Update;
 import com.semc.aqi.repository.config.RetrofitManager;
@@ -10,7 +11,10 @@ import com.semc.aqi.repository.config.RxRetrofitCache;
 import com.semc.aqi.repository.json.Result;
 import com.semc.aqi.repository.services.WeatherService;
 
+import java.util.List;
+
 import retrofit2.http.Body;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -76,9 +80,23 @@ public class WeatherRepository {
         return result;
     }
 
+    /**
+     *  heart beat
+     *
+     * @param deviceNumber
+     * @return
+     */
     public Observable<String> heartbeat(@Query("deviceNumber") String deviceNumber) {
         WeatherService weatherService = RetrofitManager.getRxRetrofit().create(WeatherService.class);
         Observable<String> result = weatherService.heartbeat(deviceNumber);
+
+        return result;
+    }
+
+
+    public Observable<List<Ranking>> getRankingData() {
+        WeatherService weatherService = RetrofitManager.getRxRetrofit().create(WeatherService.class);
+        Observable<List<Ranking>> result = weatherService.getRankingData();
 
         return result;
     }

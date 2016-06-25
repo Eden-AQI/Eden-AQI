@@ -3,7 +3,7 @@ package com.semc.aqi.model;
 public class ForecastItem {
     private String Time;
     private String AqiLevel;
-    private int Aqi;
+    private String Aqi;
     private String PrimaryParameter;
     private String Weather;
     private String Temperature;
@@ -24,11 +24,11 @@ public class ForecastItem {
         AqiLevel = aqiLevel;
     }
 
-    public int getAqi() {
+    public String getAqi() {
         return Aqi;
     }
 
-    public void setAqi(int aqi) {
+    public void setAqi(String aqi) {
         Aqi = aqi;
     }
 

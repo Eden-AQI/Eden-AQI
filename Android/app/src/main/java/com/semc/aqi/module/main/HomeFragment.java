@@ -13,6 +13,7 @@ import com.jayfeng.lesscode.core.ViewLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseFragment;
 import com.semc.aqi.event.AddCityEvent;
+import com.semc.aqi.event.CurrentCityEvent;
 import com.semc.aqi.event.DeleteCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
@@ -156,6 +157,12 @@ public class HomeFragment extends BaseFragment {
         pagerAdapter.notifyDataSetChanged();
         indicator.setViewPager(viewPager);
         indicator.setCurrentItem(0);
+    }
+
+    @Subscribe
+    public void onEvent(CurrentCityEvent currentCityEvent) {
+        int index = currentCityEvent.getIndex();
+        viewPager.setCurrentItem(index);
     }
 
     @Override

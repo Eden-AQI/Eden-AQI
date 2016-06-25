@@ -1,10 +1,20 @@
 package com.semc.aqi.module.main;
 
+import com.litesuits.orm.LiteOrm;
+import com.litesuits.orm.db.assit.QueryBuilder;
+import com.semc.aqi.config.Global;
+import com.semc.aqi.event.AddCityEvent;
+import com.semc.aqi.event.UpdateDbCityEvent;
+import com.semc.aqi.general.LiteOrmManager;
+import com.semc.aqi.general.RxBus;
+import com.semc.aqi.model.City;
 import com.semc.aqi.model.DaysItem;
 import com.semc.aqi.model.HourDataItem;
 import com.semc.aqi.model.HourItem;
 import com.semc.aqi.model.RealTime;
 import com.semc.aqi.repository.WeatherRepository;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -22,9 +32,9 @@ public class LatestPresenter implements LatestContract.Presenter {
     }
 
     @Override
-    public void requestData() {
+    public void requestData(final int cityId) {
 
-        WeatherRepository.getInstance().getRealTime("0", false)
+        WeatherRepository.getInstance().getRealTime(cityId + "", false)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RealTime>() {
@@ -43,6 +53,9 @@ public class LatestPresenter implements LatestContract.Presenter {
                     public void onNext(RealTime realTime) {
 
                         LatestPresenter.this.realTime = realTime;
+
+                        // update city data in db
+                        updateCityInDB(cityId);
 
                         // show basic
                         view.showAqiBasicAndDetails(realTime);
@@ -123,5 +136,19 @@ public class LatestPresenter implements LatestContract.Presenter {
         float[][] yWrapper = new float[][]{y, y1};
 
         view.showDaysAqiChart(x, yWrapper);
+    }
+
+    private void updateCityInDB(int cityId) {
+        LiteOrm liteOrm = LiteOrmManager.getLiteOrm(Global.getContext());
+        QueryBuilder<City> queryBuilder = new QueryBuilder<>(City.class)
+                .whereEquals("city_id", cityId);
+        List<City> result = liteOrm.query(queryBuilder);
+        if (result != null && result.size() > 0) {
+            City firstCity = result.get(0);
+            firstCity.setAqi(realTime.getAqi());
+            liteOrm.save(firstCity);
+
+            EventBus.getDefault().post(new UpdateDbCityEvent());
+        }
     }
 }

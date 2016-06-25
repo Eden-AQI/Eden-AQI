@@ -45,6 +45,10 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class LatestFragment extends BaseFragment<LatestContract.Presenter> implements LatestContract.View {
 
+    public static final String KEY_CITY_ID = "key_city_id";
+
+    private int cityId = 0;
+
     private PtrClassicFrameLayout ptrFrame;
     protected ListViewPullHeader listViewPullHeader;
     private ScrollView scrollView;
@@ -112,6 +116,8 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        cityId = getArguments().getInt(KEY_CITY_ID, 0);
+
         setPresenter(new LatestPresenter(this));
     }
 
@@ -163,7 +169,7 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                presenter.requestData();
+                presenter.requestData(cityId);
             }
 
             @Override
@@ -231,9 +237,8 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
             TextView primaryView = ViewLess.$(linearLayout, R.id.aqi_table_value_primary);
 
             dateView.setText(forecastItem.getTime());
-            levelView.setText(BizUtils.getGradleText(forecastItem.getAqi()));
-            levelView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + forecastItem.getAqiLevel(), ResourceLess.TYPE.DRAWABLE));
-//            levelView.setBackgroundColor(BizUtils.getGradleColor(forecastItem.getAqi()));
+            levelView.setText(forecastItem.getAqiLevel());
+            levelView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + BizUtils.getGradleLevelByState(forecastItem.getAqiLevel()), ResourceLess.TYPE.DRAWABLE));
             valueView.setText(forecastItem.getAqi() + "");
             primaryView.setText(forecastItem.getPrimaryParameter());
 

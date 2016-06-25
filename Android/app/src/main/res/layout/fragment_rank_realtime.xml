@@ -3,65 +3,94 @@
     android:layout_height="match_parent"
     android:background="#eee">
 
-    <RadioGroup
+    <HorizontalScrollView
         android:id="@+id/tabs"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/main_tab_height"
-        android:layout_alignParentTop="true"
-        android:background="#fff"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <RadioButton
-            android:id="@+id/tab_aqi_btn"
-            style="@style/RankTabItemStyle"
-            android:checked="true"
-            android:drawableTop="@drawable/rank_tab_aqi_icon" />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_tab_height"
+            android:layout_alignParentTop="true"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:background="#ccc" />
+            <RadioButton
+                android:id="@+id/tab_aqi_btn"
+                style="@style/RankTabItemStyle"
+                android:checked="true"
+                android:drawableTop="@drawable/rank_tab_aqi_icon" />
 
-        <RadioButton
-            android:id="@+id/tab_pm25_btn"
-            style="@style/RankTabItemStyle"
-            android:drawableTop="@drawable/rank_tab_pm25_icon" />
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="#ccc" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:background="#ccc" />
+            <RadioButton
+                android:id="@+id/tab_pm25_btn"
+                style="@style/RankTabItemStyle"
+                android:drawableTop="@drawable/rank_tab_pm25_icon" />
 
-        <RadioButton
-            android:id="@+id/tab_so2_btn"
-            style="@style/RankTabItemStyle"
-            android:drawableTop="@drawable/rank_tab_so2_icon" />
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="#ccc" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:background="#ccc" />
+            <RadioButton
+                android:id="@+id/tab_pm10_btn"
+                style="@style/RankTabItemStyle"
+                android:drawableTop="@drawable/rank_tab_pm10_icon" />
 
-        <RadioButton
-            android:id="@+id/tab_no2_btn"
-            style="@style/RankTabItemStyle"
-            android:drawableTop="@drawable/rank_tab_no2_icon" />
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="#ccc" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:background="#ccc" />
+            <RadioButton
+                android:id="@+id/tab_so2_btn"
+                style="@style/RankTabItemStyle"
+                android:drawableTop="@drawable/rank_tab_so2_icon" />
 
-        <RadioButton
-            android:id="@+id/tab_o3_btn"
-            style="@style/RankTabItemStyle"
-            android:drawableTop="@drawable/rank_tab_o3_icon" />
-    </RadioGroup>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="#ccc" />
+
+            <RadioButton
+                android:id="@+id/tab_no2_btn"
+                style="@style/RankTabItemStyle"
+                android:drawableTop="@drawable/rank_tab_no2_icon" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="#ccc" />
+
+            <RadioButton
+                android:id="@+id/tab_o3_btn"
+                style="@style/RankTabItemStyle"
+                android:drawableTop="@drawable/rank_tab_o3_icon" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="#ccc" />
+
+            <RadioButton
+                android:id="@+id/tab_co_btn"
+                style="@style/RankTabItemStyle"
+                android:layout_marginRight="8dp"
+                android:drawableTop="@drawable/rank_tab_co_icon" />
+        </RadioGroup>
+    </HorizontalScrollView>
 
     <View
         android:id="@+id/tabs_divider"

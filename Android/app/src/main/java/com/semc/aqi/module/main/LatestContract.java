@@ -17,7 +17,7 @@ public class LatestContract {
     public static final int HOUR_TYPE_CO = 5;
 
     interface Presenter extends BasePresenter {
-        void requestData();
+        void requestData(int cityId);
         void show24HourData(int hourType, boolean isAqi);
         void showDaysData();
     }

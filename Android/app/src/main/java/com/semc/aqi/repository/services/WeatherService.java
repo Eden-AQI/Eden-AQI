@@ -1,8 +1,11 @@
 package com.semc.aqi.repository.services;
 
 import com.semc.aqi.model.Device;
+import com.semc.aqi.model.Ranking;
 import com.semc.aqi.model.RealTime;
 import com.semc.aqi.model.Update;
+
+import java.util.List;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -22,4 +25,7 @@ public interface WeatherService {
 
     @POST("Device/Heartbeat")
     Observable<String> heartbeat(@Query("deviceNumber") String deviceNumber);
+
+    @GET("Aqi/GetRankingData")
+    Observable<List<Ranking>> getRankingData();
 }
