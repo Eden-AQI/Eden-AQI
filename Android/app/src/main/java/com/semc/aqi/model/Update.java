@@ -5,6 +5,7 @@ public class Update {
     private String VersionName;
     private String Description;
     private String DownloadUrl;
+    private boolean Mandatory;
 
     public int getVersionCode() {
         return VersionCode;
@@ -36,5 +37,13 @@ public class Update {
 
     public void setDownloadUrl(String downloadUrl) {
         DownloadUrl = downloadUrl;
+    }
+
+    public boolean isMandatory() {
+        return Mandatory;
+    }
+
+    public void setMandatory(boolean mandatory) {
+        Mandatory = mandatory;
     }
 }

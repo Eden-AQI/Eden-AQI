@@ -23,18 +23,25 @@ import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseActivity;
+import com.semc.aqi.config.Global;
 import com.semc.aqi.event.AddCityEvent;
+import com.semc.aqi.event.UpdateDbCityEvent;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
 import com.semc.aqi.model.CityGroup;
 import com.semc.aqi.model.CityGroupList;
 import com.semc.aqi.module.main.MainActivity;
+import com.semc.aqi.repository.WeatherRepository;
 import com.semc.aqi.view.dialog.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class AddCityActivity extends BaseActivity {
 
@@ -143,7 +150,12 @@ public class AddCityActivity extends BaseActivity {
 
     private void initList() {
         showList = new ArrayList<>();
-        originList = MainActivity.cityGroupList;
+        if (MainActivity.cityGroupList != null) {
+            originList = MainActivity.cityGroupList;
+        } else {
+            originList = new ArrayList<>();
+            updateCityDataFromServer();
+        }
     }
 
     private void filterList(String key, boolean update) {
@@ -176,5 +188,50 @@ public class AddCityActivity extends BaseActivity {
         if (update) {
             adapter.notifyDataSetChanged();
         }
+    }
+
+    private void updateCityDataFromServer() {
+        WeatherRepository.getInstance().getCityList()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CityGroupList>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastLess.$(AddCityActivity.this, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(CityGroupList cityGroups) {
+
+                        MainActivity.cityGroupList = cityGroups;
+
+                        originList.clear();
+                        originList.addAll(cityGroups);
+                        filterList("", false);
+
+                        for(CityGroup cityGroup : cityGroups) {
+                            List<City> cities = cityGroup.getItems();
+                            for (City city : cities) {
+                                LiteOrm liteOrm = LiteOrmManager.getLiteOrm(Global.getContext());
+                                QueryBuilder<City> queryBuilder = new QueryBuilder<>(City.class)
+                                        .whereEquals("city_id", city.getId());
+                                List<City> result = liteOrm.query(queryBuilder);
+                                if (result != null && result.size() > 0) {
+                                    City firstCity = result.get(0);
+                                    firstCity.setAqi(city.getAqi());
+                                    liteOrm.save(firstCity);
+                                }
+                            }
+                        }
+
+                        adapter.notifyDataSetChanged();
+                        EventBus.getDefault().post(new UpdateDbCityEvent());
+                    }
+                });
     }
 }

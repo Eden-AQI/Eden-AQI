@@ -46,7 +46,7 @@ public class WeatherRepository {
      */
     public Observable<RealTime> getRealTime(String siteId, boolean forceRefresh) {
 
-        final long expireTime = 600000;
+        final long expireTime = 10000;
         final String cacheKey = "realtime_" + siteId;
 
         WeatherService weatherService = RetrofitManager.getRxRetrofit().create(WeatherService.class);

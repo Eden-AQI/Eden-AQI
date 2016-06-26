@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -29,6 +30,7 @@ import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.DrawableLess;
 import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.ToastLess;
+import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.jayfeng.lesscode.core.other.DividerItemDecoration;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -49,8 +51,11 @@ import com.semc.aqi.model.City;
 import com.semc.aqi.model.CityGroup;
 import com.semc.aqi.model.CityGroupList;
 import com.semc.aqi.model.Device;
+import com.semc.aqi.model.Update;
 import com.semc.aqi.module.city.AddCityActivity;
 import com.semc.aqi.repository.WeatherRepository;
+import com.semc.aqi.view.UpdateView;
+import com.semc.aqi.view.dialog.CommonDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -127,6 +132,7 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
 
         heartbeat();
         updateCityDataFromServer();
+        checkUpdate();
     }
 
     private void init() {
@@ -375,8 +381,6 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                 mLocationClient.stop();
                 mIsLocated = true;
 
-                ToastLess.$(MainActivity.this, location.getCity());
-
                 if (TextUtils.isEmpty(Global.getDeviceNumber())) {
                     registerDevice(location.getLatitude(), location.getLongitude());
                 }
@@ -506,7 +510,7 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
 
                         cityGroupList = cityGroups;
 
-                        for(CityGroup cityGroup : cityGroups) {
+                        for (CityGroup cityGroup : cityGroups) {
                             List<City> cities = cityGroup.getItems();
                             for (City city : cities) {
                                 LiteOrm liteOrm = LiteOrmManager.getLiteOrm(Global.getContext());
@@ -522,6 +526,82 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                         }
 
                         EventBus.getDefault().post(new UpdateDbCityEvent());
+                    }
+                });
+    }
+
+    private void checkUpdate() {
+
+        WeatherRepository.getInstance().checkUpdate()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Update>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastLess.$(MainActivity.this, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(final Update update) {
+
+                        boolean hasUpdate = UpdateLess.$hasUpdate(update.getVersionCode());
+
+
+                        if (hasUpdate) {
+
+                            final CommonDialog updateDialog = new CommonDialog(MainActivity.this);
+                            updateDialog.setTitle("发现新版本：" + update.getVersionName());
+                            updateDialog.setContentMode(CommonDialog.CONTENT_MODE_CUSTOM);
+
+                            final UpdateView updateView = new UpdateView(MainActivity.this);
+                            String log = update.getDescription();
+                            if (TextUtils.isEmpty(log)) {
+                                log = "修复大量bug";
+                            }
+                            updateView.setLog(log);
+                            updateView.setConfirmOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    UpdateLess.$download(MainActivity.this, update.getDownloadUrl());
+                                    if (update.isMandatory()) {
+                                        updateView.setConfirmText("正在更新...");
+                                    } else {
+                                        updateDialog.dismiss();
+                                    }
+                                }
+                            });
+                            updateView.setCancelOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    updateDialog.dismiss();
+                                }
+                            });
+                            if (update.isMandatory()) {
+                                updateView.hideCancelButton();
+                            }
+
+                            if (update.isMandatory()) {
+                                updateDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                                    @Override
+                                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent keyEvent) {
+                                        if (keyCode == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                                            MainActivity.this.onBackPressed();
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                                });
+                            }
+
+                            updateDialog.setCustomView(updateView);
+                            updateDialog.hideBottom();
+                            updateDialog.show();
+                        }
                     }
                 });
     }

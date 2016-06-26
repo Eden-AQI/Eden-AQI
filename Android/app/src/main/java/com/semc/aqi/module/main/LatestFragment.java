@@ -366,17 +366,17 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
                 .setStep((max - min) / 5)
                 .setAxisThickness(2)
                 .setLabelsColor(Color.parseColor("#ffffff"))
-                .setXAxis(true)
-                .setYLabels(AxisController.LabelPosition.NONE)
-                .setYAxis(false);
+                .setXAxis(true);
+//                .setYLabels(AxisController.LabelPosition.NONE)
+//                .setYAxis(false);
         concentrationYChart.setBorderSpacing(Tools.fromDpToPx(15))
                 .setAxisColor(Color.parseColor("#ffffff"))
                 .setAxisBorderValues(min, max)
                 .setStep((max - min) / 5)
                 .setAxisThickness(2)
                 .setLabelsColor(Color.parseColor("#ffffff"))
-                .setXLabels(AxisController.LabelPosition.NONE)
-                .setXAxis(false)
+//                .setXLabels(AxisController.LabelPosition.NONE)
+//                .setXAxis(false)
                 .setYAxis(true);
         concentrationChart.show();
         concentrationYChart.show();

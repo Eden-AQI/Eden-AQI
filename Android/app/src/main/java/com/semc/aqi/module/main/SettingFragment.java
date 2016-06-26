@@ -88,7 +88,7 @@ public class SettingFragment extends BaseFragment<SettingContract.Presenter> imp
 
     @Override
     public void showCheckUpdateResult(final Update update) {
-        boolean hasUpdate = UpdateLess.$hasUpdate(2);
+        boolean hasUpdate = UpdateLess.$hasUpdate(update.getVersionCode());
 
         if (!hasUpdate) {
             ToastLess.$(getActivity(), "已经是最新版本");

@@ -18,6 +18,8 @@ public class UpdateView extends LinearLayout {
     private Button confirmButton;
     private Button cancelButton;
 
+    protected View bottomDividerView;
+
     public UpdateView(Context context) {
         super(context);
         init(null, 0);
@@ -38,10 +40,18 @@ public class UpdateView extends LinearLayout {
         logView = ViewLess.$(this, R.id.log);
         confirmButton = ViewLess.$(this, R.id.confirm);
         cancelButton = ViewLess.$(this, R.id.cancel);
+
+        bottomDividerView = ViewLess.$(this, R.id.button_divider);
     }
 
     public void setLog(String text) {
         logView.setText(text);
+    }
+
+    public void setConfirmText(String text) {
+        if (confirmButton != null) {
+            confirmButton.setText(text);
+        }
     }
 
     public void setConfirmOnClickListener(View.OnClickListener confirmOnClickListener) {
@@ -54,5 +64,10 @@ public class UpdateView extends LinearLayout {
         if (cancelButton != null && cancelOnClickListener != null) {
             cancelButton.setOnClickListener(cancelOnClickListener);
         }
+    }
+
+    public void hideCancelButton() {
+        cancelButton.setVisibility(View.GONE);
+        bottomDividerView.setVisibility(View.GONE);
     }
 }
