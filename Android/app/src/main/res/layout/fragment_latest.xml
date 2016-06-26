@@ -262,6 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginTop="4dp"
                     android:textColor="@color/global_primary_text_color_white"
                     android:textSize="14sp" />
 
@@ -291,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
                     android:text="极少数异常敏感人群应减少户外活动"
                     android:textColor="@color/global_primary_text_color_white"
                     android:textSize="14sp" />
@@ -346,13 +347,13 @@
                             android:layout_marginLeft="12dp"
                             android:paddingBottom="11dp" />
 
-                        <HorizontalScrollView
+                        <HorizontalScrollView android:id="@+id/linechart_concentration_container"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="35dp"
+                            android:layout_marginLeft="28dp"
                             android:scrollbars="none">
 
-                            <LinearLayout
+                            <FrameLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
@@ -360,7 +361,7 @@
                                     android:id="@+id/linechart_concentration"
                                     android:layout_width="800dp"
                                     android:layout_height="200dp" />
-                            </LinearLayout>
+                            </FrameLayout>
                         </HorizontalScrollView>
 
                     </FrameLayout>

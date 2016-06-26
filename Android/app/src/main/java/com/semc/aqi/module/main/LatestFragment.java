@@ -11,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -83,6 +85,7 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
     private SegmentTabLayout concentrationAqiTabLayout;
     private SegmentTabLayout concentrationHourTypeTabLayout;
+    private HorizontalScrollView concentrationChartContainer;
     private LineChartView concentrationChart;
     private YLineChartView concentrationYChart;
     private StackBarChartView daysAqiChart;
@@ -173,6 +176,7 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
         concentrationAqiTabLayout = ViewLess.$(rootView, R.id.linechart_aqi_tab);
         concentrationHourTypeTabLayout = ViewLess.$(rootView, R.id.linechart_hour_type_tab);
+        concentrationChartContainer = ViewLess.$(rootView, R.id.linechart_concentration_container);
         concentrationChart = ViewLess.$(rootView, R.id.linechart_concentration);
         concentrationYChart = ViewLess.$(rootView, R.id.linechart_concentration_y);
         daysAqiChart = ViewLess.$(rootView, R.id.stackbarchart_days_aqi);
@@ -251,8 +255,6 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
             @Override
             public void onScrollChanged(PositionScrollView scrollView, int x, int y, int oldx, int oldy) {
 
-                LogLess.$d("=================y:" + oldy);
-
                 if (y % 2 == 0) {
                     bgOverlayView.setAlpha((float) y / 200);
                 }
@@ -286,8 +288,13 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
             TextView primaryView = ViewLess.$(linearLayout, R.id.aqi_table_value_primary);
 
             dateView.setText(forecastItem.getTime());
-            levelView.setText(forecastItem.getAqiLevel());
-            levelView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + BizUtils.getGradleLevelByState(forecastItem.getAqiLevel()), ResourceLess.TYPE.DRAWABLE));
+
+            String aqiLevel = forecastItem.getAqiLevel();
+            if (aqiLevel.contains("~")) {
+                aqiLevel = aqiLevel.split("~")[0];
+            }
+            levelView.setText(aqiLevel);
+            levelView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + BizUtils.getGradleLevelByState(aqiLevel), ResourceLess.TYPE.DRAWABLE));
             valueView.setText(forecastItem.getAqi() + "");
             primaryView.setText(forecastItem.getPrimaryParameter());
 
@@ -348,6 +355,14 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
         min = min - min % 10;
         max = max + 10 - max % 10;
 
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) concentrationChartContainer.getLayoutParams();
+        if (max < 100) {
+            layoutParams.setMargins(DisplayLess.$dp2px(29), 0, 0, 0);
+        } else {
+            layoutParams.setMargins(DisplayLess.$dp2px(34), 0, 0, 0);
+        }
+        concentrationChartContainer.setLayoutParams(layoutParams);
+
         LineSet dataset = new LineSet(labels, values[0]);
         dataset.setColor(Color.parseColor("#ffffff"))
                 .setDotsColor(Color.parseColor("#ffffff"))
@@ -366,17 +381,17 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
                 .setStep((max - min) / 5)
                 .setAxisThickness(2)
                 .setLabelsColor(Color.parseColor("#ffffff"))
-                .setXAxis(true);
-//                .setYLabels(AxisController.LabelPosition.NONE)
-//                .setYAxis(false);
+                .setXAxis(true)
+                .setYLabels(AxisController.LabelPosition.NONE)
+                .setYAxis(false);
         concentrationYChart.setBorderSpacing(Tools.fromDpToPx(15))
                 .setAxisColor(Color.parseColor("#ffffff"))
                 .setAxisBorderValues(min, max)
                 .setStep((max - min) / 5)
                 .setAxisThickness(2)
                 .setLabelsColor(Color.parseColor("#ffffff"))
-//                .setXLabels(AxisController.LabelPosition.NONE)
-//                .setXAxis(false)
+                .setXLabels(AxisController.LabelPosition.NONE)
+                .setXAxis(false)
                 .setYAxis(true);
         concentrationChart.show();
         concentrationYChart.show();

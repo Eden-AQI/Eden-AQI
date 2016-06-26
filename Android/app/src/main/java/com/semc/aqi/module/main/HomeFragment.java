@@ -25,6 +25,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+
 public class HomeFragment extends BaseFragment {
 
     private CirclePageIndicator indicator;
@@ -136,20 +139,38 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View v) {
                 // Intent intent = new Intent(getActivity(), CityActivity.class);
                 // startActivity(intent);
-                ((MainActivity)getActivity()).toggle();
+                ((MainActivity) getActivity()).toggle();
             }
         });
         headerView.setLeftImage(R.drawable.header_menu_slide);
         headerView.showRightImageView(R.drawable.latest_menu_share, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "欢迎使用上海空气质量，下载地址：http://www.baidu.com");
-                shareIntent.setType("text/plain");
+                ShareSDK.initSDK(getContext());
+                OnekeyShare oks = new OnekeyShare();
+                //关闭sso授权
+                oks.disableSSOWhenAuthorize();
 
-                //设置分享列表的标题，并且每次都显示分享列表
-                startActivity(Intent.createChooser(shareIntent, "分享到"));
+                // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+                //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+                // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+                oks.setTitle(getString(R.string.ssdk_oks_share));
+                // text是分享文本，所有平台都需要这个字段
+
+                City currentCity = cityList.get(viewPager.getCurrentItem());
+
+                oks.setText(getString(R.string.app_name) + "\n" + currentCity.getName() + " AQI:" + currentCity.getAqi());
+                // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+                //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+                oks.setImageUrl("http://ww3.sinaimg.cn/mw690/006tFG1fjw1f591e24b8yj3040040q2x.jpg");
+
+                // url仅在微信（包括好友和朋友圈）中使用
+                int stationCode = currentCity.getId();
+                oks.setUrl("http://aqi.wuhooooo.com/api/Share?stationCode=" + stationCode);
+
+
+                // 启动分享GUI
+                oks.show(getContext());
             }
         });
 
