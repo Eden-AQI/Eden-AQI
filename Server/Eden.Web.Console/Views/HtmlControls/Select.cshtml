@@ -1,0 +1,9 @@
+﻿@using Eden.Web.Console.Models
+@model CurdConditionModel
+<span @(string.IsNullOrEmpty(Model.NgController) ? null :Html.Raw("ng-controller=\"" + Model.NgController + "\"")) >
+    <span>@Model.Label</span>
+    <select class="curd-select" name="@Model.Name" ng-change="do()" ng-model="value" @(string.IsNullOrEmpty(Model.NgBind) ? null : @Html.Raw("ng-options=\"" + Model.NgBind + "\""))>
+        <option value="" selected>全部</option>
+    </select>
+
+</span>

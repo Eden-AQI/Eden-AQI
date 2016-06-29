@@ -1,0 +1,64 @@
+﻿@using Eden.Domain.Data;
+@model SiteData
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head>
+    <title>郑州市空气质量</title>
+    <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0px;
+            padding: 0px;
+            background: url("background2.jpg") no-repeat;
+            background-size:100%;
+            color: white;
+            font-size:2.4em;
+            font-family:"微软雅黑"
+        }
+
+        #cityName {
+            margin: 30px;
+            text-align: center;
+        }
+
+        #updateTime {
+            margin: 100px 20px 20px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="cityName">@Model.Name</h2>
+    <div id="updateTime">
+        @Model.UpdateTime
+        
+    </div>
+    <div style="margin:30px; height:320px">
+        <div style="float:left">
+            <div style="font-size:1.2em">@Model.Grade.GradeName</div>
+            <div style="font-size:4em">@Model.Aqi</div>
+            <div>首要污染物：@Model.PrimaryParameter</div>
+            <div>浓度：@Model.PrimaryValue</div>
+        </div>
+        <div style="float:right">
+            <img src="Imgs/@(Model.Grade.Grade).png" style="height:300px" />
+        </div>
+    </div>
+    <div style="margin:100px 30px;clear:both">
+        <div style="border-bottom:1px solid #FFF; padding:5px 0px">对健康的影响</div>
+        <div style="margin:5px;">@Model.Health</div>
+        
+    </div>
+    <div style="margin:100px 30px;clear:both">
+        <div style="border-bottom:1px solid #FFF; padding:5px 0px;margin-top:20px">建议措施</div>
+        <div style="margin:5px;">@Model.Suggest</div>
+    </div>
+</body>
+</html>

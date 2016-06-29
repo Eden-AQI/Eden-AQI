@@ -1,0 +1,29 @@
+﻿<div class="panel">
+    <div class="panel-body">
+        <input type="text" name="Id" ng-model="form.Id" style="display:none;" />
+        <div class="form-group">
+            <label>时间：</label><span>{{form.EventTimeString}}</span>
+        </div>
+        <div class="form-group">
+            <label>等级：</label><span>{{form.LogLevelString}}</span>
+        </div>
+        <div class="form-group">
+            <label>来源：</label><span>{{form.EventSourceString}}</span>
+        </div>
+        <div class="form-group">
+            <label>消息：</label><span>{{form.ShortMessage}}</span>
+        </div>
+        <div class="form-group">
+            <label>完整消息：</label><span>{{form.FullMessage}}</span>
+        </div>
+        <div class="form-group">
+            <label>地址：</label><span>{{form.IpAddress}}</span>
+        </div>
+        <div class="form-group">
+            <label>页面：</label><span>{{form.PageUrl}}</span>
+        </div>
+        <div class="form-group">
+            <label>引用页面：</label><span>{{form.ReferrerUrl}}</span>
+        </div>
+    </div>
+</div>

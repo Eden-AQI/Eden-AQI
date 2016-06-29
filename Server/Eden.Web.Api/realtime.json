@@ -1,0 +1,481 @@
+﻿{
+  "Name": "上海",
+  "Background": "http://",
+  "UpdateTime": "2016-05-19 10:10",
+  "Aqi": 100,
+  "AqiLevel": "良",
+  "PrimaryParameter": "PM2.5",
+  "PrimaryValue": "130ug/m3",
+  "Health": "可以正常进行户外活动，但某些污染物可能对极少数异常敏感人群健康有较弱影响。",
+  "Suggest": "极少数异常敏感人群应减少户外活动。",
+  "Forecast": [
+    {
+      "Time": "20日上午",
+      "AqiLevel": "良",
+      "Aqi": 88,
+      "PrimaryParameter": "O3",
+      "Weather": "晴",
+      "Temperature": "18~24℃"
+    },
+    {
+      "Time": "20日下午",
+      "AqiLevel": "中度污染",
+      "Aqi": 195,
+      "PrimaryParameter": "PM10",
+      "Weather": "晴",
+      "Temperature": "18~24℃"
+    },
+    {
+      "Time": "20日夜间",
+      "AqiLevel": "中度污染",
+      "Aqi": 120,
+      "PrimaryParameter": "PM2.5",
+      "Weather": "晴",
+      "Temperature": "18~24℃"
+    },
+    {
+      "Time": "21日上午",
+      "AqiLevel": "轻度污染",
+      "Aqi": 110,
+      "PrimaryParameter": "PM2.5",
+      "Weather": "晴",
+      "Temperature": "18~24℃"
+    },
+    {
+      "Time": "21日下午",
+      "AqiLevel": "良",
+      "Aqi": 89,
+      "PrimaryParameter": "PM2.5",
+      "Weather": "阴",
+      "Temperature": "18~24℃"
+    }
+  ],
+  "OtherParameters": [
+    {
+      "Name": "PM10",
+      "Value": "127ug/m3"
+    },
+    {
+      "Name": "NO2",
+      "Value": "100ug/m3"
+    },
+    {
+      "Name": "O3",
+      "Value": "95ug/m3"
+    },
+    {
+      "Name": "SO2",
+      "Value": "30ug/m3"
+    },
+    {
+      "Name": "CO",
+      "Value": "18ug/m3"
+    }
+  ],
+  "Hours": [
+    {
+      "Parameter": "PM2.5",
+      "Data": [
+        {
+          "Time": 0,
+          "Value": 58,
+          "Aqi": 88
+        },
+        {
+          "Time": 1,
+          "Value": 59,
+          "Aqi": 85
+        },
+        {
+          "Time": 2,
+          "Value": 75,
+          "Aqi": 87
+        },
+        {
+          "Time": 3,
+          "Value": 79,
+          "Aqi": 99
+        },
+        {
+          "Time": 4,
+          "Value": 58,
+          "Aqi": 78
+        },
+        {
+          "Time": 5,
+          "Value": 80,
+          "Aqi": 90
+        },
+        {
+          "Time": 6,
+          "Value": 89,
+          "Aqi": 154
+        },
+        {
+          "Time": 7,
+          "Value": 90,
+          "Aqi": 162
+        },
+        {
+          "Time": 8,
+          "Value": 100,
+          "Aqi": 175
+        },
+        {
+          "Time": 9,
+          "Value": 102,
+          "Aqi": 165
+        },
+        {
+          "Time": 10,
+          "Value": 85,
+          "Aqi": 174
+        },
+        {
+          "Time": 11,
+          "Value": 134,
+          "Aqi": 152
+        },
+        {
+          "Time": 12,
+          "Value": 150,
+          "Aqi": 178
+        },
+        {
+          "Time": 13,
+          "Value": 144,
+          "Aqi": 140
+        },
+        {
+          "Time": 14,
+          "Value": 150,
+          "Aqi": 155
+        },
+        {
+          "Time": 15,
+          "Value": 144,
+          "Aqi": 162
+        },
+        {
+          "Time": 16,
+          "Value": 150,
+          "Aqi": 178
+        },
+        {
+          "Time": 17,
+          "Value": 144,
+          "Aqi": 188
+        },
+        {
+          "Time": 18,
+          "Value": 160,
+          "Aqi": 190
+        },
+        {
+          "Time": 19,
+          "Value": 185,
+          "Aqi": 200
+        },
+        {
+          "Time": 20,
+          "Value": 150,
+          "Aqi": 220
+        },
+        {
+          "Time": 21,
+          "Value": 144,
+          "Aqi": 210
+        },
+        {
+          "Time": 22,
+          "Value": 189,
+          "Aqi": 216
+        },
+        {
+          "Time": 23,
+          "Value": 200,
+          "Aqi": 219
+        }
+      ]
+    },
+    {
+      "Parameter": "PM10",
+      "Data": [
+        {
+          "Time": 4,
+          "Value": 22,
+          "Aqi": 87
+        },
+        {
+          "Time": 5,
+          "Value": 45,
+          "Aqi": 74
+        },
+        {
+          "Time": 6,
+          "Value": 11,
+          "Aqi": 88
+        },
+        {
+          "Time": 7,
+          "Value": 66,
+          "Aqi": 92
+        },
+        {
+          "Time": 8,
+          "Value": 56,
+          "Aqi": 77
+        },
+        {
+          "Time": 9,
+          "Value": 87,
+          "Aqi": 89
+        },
+        {
+          "Time": 10,
+          "Value": 35,
+          "Aqi": 90
+        },
+        {
+          "Time": 11,
+          "Value": 88,
+          "Aqi": 122
+        },
+        {
+          "Time": 12,
+          "Value": 66,
+          "Aqi": 130
+        },
+        {
+          "Time": 13,
+          "Value": 35,
+          "Aqi": 174
+        },
+        {
+          "Time": 14,
+          "Value": 75,
+          "Aqi": 162
+        },
+        {
+          "Time": 15,
+          "Value": 35,
+          "Aqi": 174
+        },
+        {
+          "Time": 16,
+          "Value": 77,
+          "Aqi": 180
+        },
+        {
+          "Time": 17,
+          "Value": 65,
+          "Aqi": 144
+        },
+        {
+          "Time": 18,
+          "Value": 69,
+          "Aqi": 150
+        },
+        {
+          "Time": 19,
+          "Value": 90,
+          "Aqi": 185
+        },
+        {
+          "Time": 20,
+          "Value": 100,
+          "Aqi": 175
+        },
+        {
+          "Time": 21,
+          "Value": 120,
+          "Aqi": 174
+        },
+        {
+          "Time": 22,
+          "Value": 134,
+          "Aqi": 120
+        },
+        {
+          "Time": 23,
+          "Value": 167,
+          "Aqi": 100
+        }
+      ]
+    },
+    {
+      "Parameter": "NO2",
+      "Data": [ ]
+    },
+    {
+      "Parameter": "O3",
+      "Data": [ ],
+      "Value": [ ]
+    },
+    {
+      "Parameter": "SO2",
+      "Data": [ ]
+    },
+    {
+      "Parameter": "CO",
+      "Data": [ ]
+    }
+  ],
+  "Days": [
+    {
+      "Day": 1,
+      "Aqi": 85,
+      "Level": 1
+    },
+    {
+      "Day": 2,
+      "Aqi": 90,
+      "Level": 1
+    },
+    {
+      "Day": 3,
+      "Aqi": 95,
+      "Level": 1
+    },
+    {
+      "Day": 4,
+      "Aqi": 102,
+      "Level": 2
+    },
+    {
+      "Day": 5,
+      "Aqi": 110,
+      "Level": 2
+    },
+    {
+      "Day": 6,
+      "Aqi": 150,
+      "Level": 2
+    },
+    {
+      "Day": 7,
+      "Aqi": 123,
+      "Level": 2
+    },
+    {
+      "Day": 8,
+      "Aqi": 180,
+      "Level": 2
+    },
+    {
+      "Day": 9,
+      "Aqi": 90,
+      "Level": 1
+    },
+    {
+      "Day": 10,
+      "Aqi": 110,
+      "Level": 2
+    },
+    {
+      "Day": 11,
+      "Aqi": 189,
+      "Level": 2
+    },
+    {
+      "Day": 12,
+      "Aqi": 182,
+      "Level": 2
+    },
+    {
+      "Day": 13,
+      "Aqi": 190,
+      "Level": 2
+    },
+    {
+      "Day": 14,
+      "Aqi": 215,
+      "Level": 3
+    },
+    {
+      "Day": 15,
+      "Aqi": 208,
+      "Level": 3
+    },
+    {
+      "Day": 16,
+      "Aqi": 207,
+      "Level": 3
+    },
+    {
+      "Day": 17,
+      "Aqi": 258,
+      "Level": 3
+    },
+    {
+      "Day": 18,
+      "Aqi": 152,
+      "Level": 2
+    },
+    {
+      "Day": 19,
+      "Aqi": 104,
+      "Level": 2
+    },
+    {
+      "Day": 20,
+      "Aqi": 85,
+      "Level": 1
+    },
+    {
+      "Day": 21,
+      "Aqi": 90,
+      "Level": 1
+    },
+    {
+      "Day": 22,
+      "Aqi": 300,
+      "Level": 4
+    },
+    {
+      "Day": 23,
+      "Aqi": 314,
+      "Level": 4
+    },
+    {
+      "Day": 24,
+      "Aqi": 253,
+      "Level": 3
+    },
+    {
+      "Day": 25,
+      "Aqi": 189,
+      "Level": 2
+    },
+    {
+      "Day": 26,
+      "Aqi": 120,
+      "Level": 2
+    },
+    {
+      "Day": 27,
+      "Aqi": 101,
+      "Level": 2
+    },
+    {
+      "Day": 28,
+      "Aqi": 145,
+      "Level": 2
+    },
+    {
+      "Day": 29,
+      "Aqi": 130,
+      "Level": 2
+    },
+    {
+      "Day": 30,
+      "Aqi": 83,
+      "Level": 1
+    },
+    {
+      "Day": 31,
+      "Aqi": 98,
+      "Level": 1
+    }
+  ]
+}

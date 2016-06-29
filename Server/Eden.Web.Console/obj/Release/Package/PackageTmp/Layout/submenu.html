@@ -1,0 +1,12 @@
+﻿<div id="layout-column1" ng-controller="submenuCtrl">
+    <div class="sub-menu-title">
+        {{navigator.title}}
+    </div>
+    <ul class="sub-menu" id="submenus">
+        <li ng-repeat="nav in navigator.items" class="{{nav.class}}" ui-sref="{{nav.uisref}}" ng-click="onSubmenuClick(nav.label)">{{nav.label}}</li>
+    </ul>
+</div>
+
+<div id="layout-column3" data-ui-view="">
+
+</div>

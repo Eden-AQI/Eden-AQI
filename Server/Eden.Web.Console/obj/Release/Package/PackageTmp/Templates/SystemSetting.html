@@ -1,0 +1,31 @@
+﻿<div ng-controller="systemSetting">
+    <div class="curd-list">
+        <div class="curd-list-top" id="curd-list-top">
+            <div class="curd-list-title">
+                <i class="icon-heart"></i><span>&nbsp;&nbsp;系统参数</span>
+            </div>
+        </div>
+    </div>
+    <form id="system-form">
+        <div class="panel-body" style="width:400px">
+            <div class="form-group">
+                <label>API地址：</label>
+                <input type="text" class="form-control" name="MobileApiAddress" required ng-model="data.MobileApiAddress">
+            </div>
+            <div class="form-group">
+                <label>数据接口：</label>
+                <input type="text" class="form-control" name="DataApiAddress" required ng-model="data.DataApiAddress">
+            </div>
+            <div class="form-group">
+                <label>郑州市代码：</label>
+                <input type="text" class="form-control" name="CityCode" required ng-model="data.CityCode">
+            </div>
+            <div class="form-group" ng-controller="cacheCtrl">
+                <input type="button" value="清除缓存" ng-click="clear()" />
+            </div>
+            <div class="form-group">
+                <input type="button" value="保存" ng-click="save()" />
+            </div>
+        </div>
+    </form>
+</div>

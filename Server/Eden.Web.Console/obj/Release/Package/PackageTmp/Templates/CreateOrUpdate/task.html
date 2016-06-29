@@ -1,0 +1,28 @@
+﻿<div class="panel">
+    <div class="panel-body">
+        <input type="text" name="Id" ng-model="form.Id" style="display:none;" />
+        <div class="form-group">
+            <label>名称</label>
+            <input type="text" class="form-control" name="Name" required ng-model="form.Name">
+        </div>
+        <div class="form-group">
+            <label>运行周期（秒）</label>
+            <input type="number" class="form-control" name="Seconds" required ng-model="form.Seconds">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="EnabledString" ng-model="form.Enabled" id="enabled"><label for="enabled">启用</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="StopOnErrorString" ng-model="form.StopOnError" id="stopOnError"><label for="stopOnError">错误后停止</label>
+        </div>
+        <div class="form-group">
+            最后一次运行开始时间：{{form.LastStartTime}}
+        </div>
+        <div class="form-group">
+            最后一次运行结束时间：{{form.LastEndTime}}
+        </div>
+        <div class="form-group">
+            最后一次运行成功：{{form.LastSuccessTime}}
+        </div>
+    </div>
+</div>

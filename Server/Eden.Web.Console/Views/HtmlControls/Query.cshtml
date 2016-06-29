@@ -1,0 +1,8 @@
+﻿@using Eden.Web.Console.Models
+@model CurdConditionModel
+<div class="input-group curd-list-searchinput">
+    <input type="text" class="form-control" placeholder="@Model.PlaceHolder" name="@Model.Name">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="do()">搜索</button>
+    </span>
+</div>

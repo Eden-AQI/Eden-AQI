@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郑州市空气质量</title>
+    @Styles.Render("~/assets/css/bootstrap.min.css")
+    @Styles.Render("~/assets/css/font-awesome.min.css")
+    @Styles.Render("~/assets/css/bootstrap-dialog.min.css")
+    @Styles.Render("~/assets/css/bootstrap-datetimepicker.min.css")
+    @Styles.Render("~/assets/css/default.css")
+    @Styles.Render("~/assets/css/ngDialog.min.css")
+    @Styles.Render("~/assets/css/ngDialog-theme-default.min.css")
+    @Styles.Render("~/assets/css/ngDialog-theme-plain.min.css")
+
+</head>
+<body data-ng-app="edenConsole">
+
+    <!--内容区域-->
+    <div id="layout-content" data-ui-view="">
+
+    </div>
+    <div id="layout-top">
+        <div class="left logo">
+            <span>郑州市空气质量</span>
+        </div>
+        <div class="right top-toolbar">
+            <div class="left toolitem">
+                <button class="btn btn-default dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="icon-user"></i>admin
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li><a data-toggle="modal" data-target="#dialog_changePassword">修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()">注销</a>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                        }
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="dialog_changePassword" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form  id="form_changePassword" ng-controller="accountCtrl">
+                    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">修改密码</h4></div>
+                    <div class="modal-body panel-scroll" id="form-' + identity + '">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>旧密码：</label>
+                                    <input type="password" class="form-control" name="CurrentPassword" required ng-model="form.CurrentPassword">
+                                </div>
+                                <div class="form-group">
+                                    <label>新密码：</label>
+                                    <input type="password" class="form-control" name="Password" required ng-model="form.Password">
+                                </div>
+                                <div class="form-group">
+                                    <label>确认密码：</label>
+                                    <input type="password" class="form-control" name="ConfirmPassword" required ng-model="form.ConfirmPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" ng-click="changePwd()" ng-disabled="form.$invalid">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--导航-->
+    <ul class="navigator-absolute" id="layout-navigator" ng-controller="sysNavigatorCtrl">
+        <li ng-repeat="nav in navigator" ui-sref="{{nav.uisref}}" class="{{state.indexOf(nav.uisref)==0?'current':''}}">
+            <i class="{{nav.class}}"></i><span>{{nav.label}}</span>
+        </li>
+    </ul>
+
+    <div id="theMask">
+        <div id="mask"></div>
+        <div id="mask-label"><span>处理中...</span></div>
+    </div>
+    @Scripts.Render("~/assets/script/echarts.min.js")
+    @Scripts.Render("~/assets/script/angular.min.js")
+    @Scripts.Render("~/assets/script/angular-ui-router.min.js")
+    @Scripts.Render("~/assets/script/angular-file-upload.min.js")
+    @Scripts.Render("~/assets/script/ngDialog.min.js")
+    @Scripts.Render("~/assets/script/tools.js")
+    @Scripts.Render("~/assets/script/eden.app.js")
+    @Scripts.Render("~/assets/script/eden.directives.js")
+    @Scripts.Render("~/assets/script/eden.controllers.js")
+    @Scripts.Render("~/assets/script/jquery-1.11.3.min.js")
+    @Scripts.Render("~/assets/script/bootstrap.min.js")
+    @Scripts.Render("~/assets/script/bootstrap-dialog.min.js")
+    @Scripts.Render("~/assets/script/bootstrap-datetimepicker.min.js")
+    @Scripts.Render("~/assets/script/distui.autoHeight.js")
+    @Scripts.Render("~/assets/script/distui.extendstab.js")
+    @Scripts.Render("~/assets/script/ckeditor/ckeditor.js")
+
+    <script type="text/javascript">
+        //高度自适应
+        $('#column1-list-container').autoheight({ after: $('#column1-top') });
+        $('.col-spliter').autoheight({ after: $('#layout-top') });
+
+        //打开或关闭Column
+        function togglePanel(sender) {
+            var $sender = $(sender);
+            var column3 = $('#layout-column3');
+            if ($sender.hasClass("icon-chevron-left")) {
+                var newMarginleft = parseInt(column3.css("margin-left").replace('px', '')) - $sender.parent().parent().width();
+                $sender.removeClass("icon-chevron-left").addClass("icon-chevron-right").parent().next().hide().parent().addClass("col-hide");
+                column3.css("margin-left", newMarginleft + 'px');
+            }
+            else {
+                $sender.removeClass("icon-chevron-right").addClass("icon-chevron-left").parent().next().show().parent().removeClass("col-hide");
+                column3.css("margin-left", parseInt(column3.css("margin-left").replace('px', '')) + $sender.parent().parent().width() + 'px');
+            }
+        }
+
+        //打开弹出框
+        function showDialog() {
+            BootstrapDialog.alert('访问：<a target="_black" href="http://nakupanda.github.io/bootstrap3-dialog/">http://nakupanda.github.io/bootstrap3-dialog/</a> 获取弹出框信息');
+        }
+
+        function mask(visible) {
+            $('#theMask')[0].style.display = visible ? '' : 'none';
+        }
+
+        mask(false);
+
+        //window.onbeforeunload = function () {
+        //    return '您要离开吗？';
+        //}
+    </script>
+
+</body>
+</html>

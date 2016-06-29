@@ -1,0 +1,76 @@
+﻿@model Sxg.Web.Console.Models.CurdModel
+<div ng-controller="curd" sxg-curd-config autoload="true" search="@Model.SearchService" delete="@Model.DeleteService" identity="@Model.ClientId">
+    <div class="curd-list">
+        <div class="curd-list-top" id="curd-list-top">
+            <div class="curd-list-title">
+                <i class="icon-heart"></i><span>&nbsp;&nbsp;@Model.Title</span>
+            </div>
+            <div class="curd-list-tools">
+                @if (Model.CreationEnable)
+                {
+                    <a class="curd-list-toolitem" data-toggle="modal" data-target="#dialog_@Model.ClientId" ng-click="create()">添加</a>
+                }
+                @for (int i = 0; i < Model.ListTools.Count; i++)
+                {
+                    <a class="curd-list-toolitem" href="@Model.ListTools.ElementAt(i).Href" target="@Model.ListTools.ElementAt(i).Target">@Model.ListTools.ElementAt(i).Label</a>
+                }
+            </div>
+        </div>
+        <div class="curd-list-searchcontainer">
+            <form ng-controller="curd-conditions" id="conditions_@Model.ClientId" sxg-curd-config identity="@Model.ClientId">
+                <div class="curd-conditions">
+                    @foreach (var c in Model.Conditions)
+                    {
+                        <div class="curd-condition-item">
+                            @Html.Partial("~/Views/HtmlControls/" + c.Type + ".cshtml", c)
+                        </div>
+                    }
+                </div>
+                <div class="curd-list-tags">
+                    @for (int i = 0; i < Model.Tags.Count; i++)
+                    {
+                        <span class="@(i==0?" active":"")">@Model.Tags.ElementAt(i)</span>
+                    }
+                    <label>总：{{dataCount}}</label>&nbsp;&nbsp;转到：
+                    <select ng-change="pagechanged()" ng-model="pageIndex" ng-options="p for p in pages"></select>
+                </div>
+                
+            </form>
+        </div>
+
+        <div id="curd-list-table">
+            @Html.Partial(Model.ListItemPartialViewName)
+        </div>
+
+    </div>
+    @if (!string.IsNullOrEmpty(Model.CreateOrUpdateViewName))
+    {
+        <div id="dialog_@Model.ClientId" class="modal fade" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" ng-controller="curd-form" sxg-curd-config identity="@Model.ClientId" detail="@Model.DetailService" save="@Model.CreateOrUpdateService">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form ng-submit="save()" id="form_@Model.ClientId">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">添加/保存</h4>
+                        </div>
+                        <div class="modal-body panel-scroll">
+                            @foreach(var key in Model.DefaultFormData.Keys)
+                            {
+                                <input type="hidden" name="@key" value="@Model.DefaultFormData[key]" />
+                            }
+                            @Html.Partial(Model.CreateOrUpdateViewName)
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            @if (!string.IsNullOrEmpty(Model.CreateOrUpdateService))
+                            {
+                                <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">保存</button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

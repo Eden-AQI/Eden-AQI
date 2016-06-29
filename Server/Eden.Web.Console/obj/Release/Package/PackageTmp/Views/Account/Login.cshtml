@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = null;
+}
+@model Eden.Web.Console.Models.LoginViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>登录</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: white;
+            font-family: "微软雅黑";
+        }
+
+        .input-item {
+            margin: 10px auto 20px auto;
+            width:300px;
+            padding:0px 30px;
+            text-align: center;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 300px;
+            font-size: 18px;
+            color: #2d3e50;
+            font-family: "微软雅黑";
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            text-indent: 32px;
+        }
+
+
+        .un {
+            background: url(/assets/imgs/login-un.jpg) left center no-repeat;
+        }
+
+        .pwd {
+            background: url(/assets/imgs/login-pwd.jpg) left center no-repeat;
+        }
+
+        .btnSubmit {
+            background-color: #2d3e50;
+            color: white;
+            height: 40px;
+            width:320px;
+            border-radius:8px;
+        }
+
+        .login-errors {
+            margin: 30px;
+            color: red;
+        }
+
+        a {
+            color: #373672;
+            text-decoration:none;
+        }
+        
+        a:active {
+            color: #373672;
+            text-decoration:none;
+        }
+
+        .text-danger {
+            display: block;
+            color:red;
+            font-size:12px;
+            line-height:30px;
+            
+            text-align:left;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <table style="height:150px; width:100%" border="0">
+        <tr>
+            <td width="50%" valign="bottom" align="right">
+                <img src="~/assets/imgs/login-logo.jpg" style="" />
+
+            </td>
+            <td align="right" valign="middle">
+               
+            </td>
+        </tr>
+    </table>
+    <div style="height:500px; background:url(/assets/imgs/login-bg.jpg) no-repeat">
+        <div style="margin:30px 100px 30px 0px; float:right; height:440px; width:400px; border-radius:8px; border:1px solid #999; background-color:white;">
+            <br /><br />
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="input-item">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "un", autofocus = "autofocus", placeHolder = "邮箱" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-item">
+                    @Html.PasswordFor(m => m.Password, new { @class = "pwd", placeHolder = "密码" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-item" style="text-align:left">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+                <div class="input-item">
+                    <input type="submit" value="登录" class="btnSubmit" />
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "login-errors" })
+            }
+        </div>
+    </div>
+    <div style="text-align:center; line-height:50px; clear:both">
+        <a href="#">Android版本</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="#">IOS版本</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<div ng-controller="versionSetting">
+    <div class="curd-list">
+        <div class="curd-list-top" id="curd-list-top">
+            <div class="curd-list-title">
+                <i class="icon-heart"></i><span>&nbsp;&nbsp;版本设置</span>
+            </div>
+        </div>
+    </div>
+    <form id="version-form">
+        <div class="panel-body" style="width:400px">
+            <div class="form-group">
+                <label>版本名称：</label>
+                <input type="text" class="form-control" name="VersionName" required ng-model="data.VersionName">
+            </div>
+            <div class="form-group">
+                <label>版本号：</label>
+                <input type="text" class="form-control" name="VersionCode" required ng-model="data.VersionCode">
+            </div>
+            <div class="form-group">
+                <label>更新时间：</label>
+                <input type="text" class="form-control" name="UpdateTime" required ng-model="data.UpdateTime">
+            </div>
+            <div class="form-group">
+                <label>下载地址：</label>
+                <input type="text" class="form-control" name="DownloadUrl" required ng-model="data.DownloadUrl">
+            </div>
+            <div class="form-group">
+                <label>强制更新：</label>
+                <input type="checkbox" name="MandatoryStr" required ng-model="data.Mandatory">
+            </div>
+            <div class="form-group">
+                <label>描述：</label>
+                <textarea class="form-control" rows="6" name="Description" ng-model="data.Description"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="button" value="保存" ng-click="save()" />
+            </div>
+        </div>
+    </form>
+</div>

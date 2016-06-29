@@ -1,0 +1,189 @@
+﻿body {
+    margin: 0;
+    color: #3a3a3a;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    -webkit-touch-callout: none;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: roboto,\65B9\6B63\5170\4EAD\7EA4\9ED1\7B80\4F53,\5FAE\8F6F\96C5\9ED1,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 62.5%;
+    background-color: white;
+}
+
+.mobile_content {
+    width: 100%;
+    min-width: 24em;
+    overflow-x: hidden;
+    min-height: 100%;
+    max-width: 64em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.shop-detail {
+    border-top: solid 1px #dcdcdc;
+    margin: 10px;
+}
+
+p {
+    text-align: left;
+    font-size: 1.6em;
+    padding: 0px;
+    margin: 0px;
+    line-height: 1.8em;
+}
+
+    p img {
+        max-width: 100%;
+        text-align: center;
+        margin: 10px 0px;
+    }
+
+.shop-base {
+    text-align: left;
+    margin: 10px;
+}
+
+.shop-base-item {
+    padding: 5px 0px;
+    font-size: 1.4em;
+    color: #707070;
+    border-top: solid 1px #dcdcdc;
+}
+
+    .shop-base-item i {
+        display: block;
+        float: left;
+        width: 32px;
+        height: 32px;
+        margin: 0px;
+        background-repeat: no-repeat;
+        background-image: url(http://suixinguang.oss-cn-shanghai.aliyuncs.com/static/icons.png);
+    }
+
+    .shop-base-item span {
+        display: block;
+        margin-left: 40px;
+        line-height: 32px;
+    }
+
+.icon-phone {
+    background-position: -32px 0px;
+}
+
+.icon-address {
+    background-position: -64px 0px;
+}
+
+.icon-voice {
+    background-position: -96px 0px;
+}
+
+
+
+.voice {
+    margin: 10px;
+    border: 1px solid #e5e5e5;
+    height: 60px;
+    line-height: 50px;
+    padding: 5px;
+    background-color: #fcfcfc;
+}
+
+.voice-icon {
+    display: block;
+    float: left;
+    width: 32px;
+    height: 60px;
+    background: url('http://suixinguang.oss-cn-shanghai.aliyuncs.com/static/icons.png') no-repeat;
+}
+
+.voice-playing i {
+    background-position: 2px -28px;
+}
+
+.voice-stoped i {
+    background-position: -32px -29px;
+}
+
+.voice-info {
+    float: left;
+    margin-left: 30px;
+    line-height: 16px;
+    text-align: left;
+}
+
+.voice-title {
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.voice-sxg {
+    font-size: 12px;
+    color: #a6a6a6;
+}
+
+#videoContainer {
+    margin: 10px 10px 50px 10px;
+}
+
+#videomask {
+    position: absolute;
+    background-color: black;
+}
+
+#video-logo {
+    width: 120px;
+    height: 100%;
+    margin: auto auto;
+    background: white url(http://suixinguang.oss-cn-shanghai.aliyuncs.com/static/video.png) no-repeat center;
+    background-size: 100%;
+}
+#theVideo{
+    width:100%;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    background-color: #0071bc;
+}
+
+#footer-logo {
+    margin: auto;
+    height: 50px;
+    float: left;
+}
+
+#footer-link {
+    float: right;
+    display: block;
+    margin: 10px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 80px;
+    background-color: white;
+    border-radius: 6px;
+    color: #0071bc;
+}
+
+    #footer-link:link {
+        color: #0071bc;
+        text-decoration: none;
+    }
+
+    #footer-link:active {
+        color: #0071bc;
+        text-decoration: none;
+    }
