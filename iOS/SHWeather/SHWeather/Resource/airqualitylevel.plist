@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>优</key>
+	<dict>
+		<key>api</key>
+		<string>0~50</string>
+		<key>level</key>
+		<string>一级</string>
+		<key>levelColor</key>
+		<string>绿</string>
+		<key>reference</key>
+		<string>可正常活动</string>
+		<key>advice</key>
+		<string></string>
+	</dict>
+	<key>良</key>
+	<dict>
+		<key>api</key>
+		<string>51~100</string>
+		<key>level</key>
+		<string>二级</string>
+		<key>levelColor</key>
+		<string>黄</string>
+		<key>reference</key>
+		<string>可正常活动</string>
+		<key>advice</key>
+		<string></string>
+	</dict>
+	<key>轻度污染</key>
+	<dict>
+		<key>api</key>
+		<string>101~200</string>
+		<key>level</key>
+		<string>三级</string>
+		<key>levelColor</key>
+		<string>橙</string>
+		<key>reference</key>
+		<string>易感人群症状有，，轻度加剧，健康人群出现刺激症状</string>
+		<key>advice</key>
+		<string>心脏病和呼吸系统疾病患者应减少体力消耗和户外活动</string>
+	</dict>
+	<key>中度污染</key>
+	<dict>
+		<key>api</key>
+		<string>201~300</string>
+		<key>level</key>
+		<string>四级</string>
+		<key>levelColor</key>
+		<string>红</string>
+		<key>reference</key>
+		<string>心脏病和肺病患者症状显著加剧，运动耐受力降低，健康人群中普遍出现症状
+</string>
+		<key>advice</key>
+		<string>老年人和心脏病、肺病患者应停留在室内，并减少体力活动</string>
+	</dict>
+	<key>重污染</key>
+	<dict>
+		<key>api</key>
+		<string>&gt;300</string>
+		<key>level</key>
+		<string>五级</string>
+		<key>levelColor</key>
+		<string>紫</string>
+		<key>reference</key>
+		<string>健康人运动耐受力降低，有明显强烈症状，提前出现某些疾病</string>
+		<key>advice</key>
+		<string>老年人和病人应当留在室内，避免体力消耗，一般人群应避免户外活动</string>
+	</dict>
+</dict>
+</plist>

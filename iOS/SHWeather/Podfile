@@ -1,0 +1,9 @@
+source 'https://github.com/CocoaPods/Specs.git'
+target "SHWeather" do
+platform :ios, '7.0'
+pod 'AFNetworking', '~> 2.5'
+pod 'MJRefresh'
+pod 'Masonry'
+pod 'PPRevealSideViewController', '~> 1.2.1'
+pod 'BaiduMapKit'
+end

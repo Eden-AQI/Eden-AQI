@@ -1,0 +1,47 @@
+PODS:
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - BaiduMapKit (2.10.2)
+  - Masonry (1.0.0)
+  - MJRefresh (3.1.0)
+  - PPHelpMe (1.0.2)
+  - PPRevealSideViewController (1.2.3):
+    - PPHelpMe
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5)
+  - BaiduMapKit
+  - Masonry
+  - MJRefresh
+  - PPRevealSideViewController (~> 1.2.1)
+
+SPEC CHECKSUMS:
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  BaiduMapKit: b1706a062597c70ec62a0cca93212cba1d3017e1
+  Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  PPHelpMe: 243c40d2fad33ebdcc6b158c0db54893e0cc2d14
+  PPRevealSideViewController: e74d7b490738b39388f3ab9166f89dbe751560b4
+
+PODFILE CHECKSUM: ea820e5606fc97195afc23c7b24892299d28690b
+
+COCOAPODS: 1.0.0
