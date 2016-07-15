@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
+import android.support.annotation.MainThread;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -59,6 +61,7 @@ import com.semc.aqi.view.dialog.CommonDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -606,17 +609,17 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                 });
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(AddCityEvent addCityEvent) {
         updateCityList();
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UpdateDbCityEvent updateDbCityEvent) {
         updateCityList();
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(CurrentCityEventFromMain currentCityEventFromMain) {
         selectedIndex = currentCityEventFromMain.getIndex();
         adapter.notifyDataSetChanged();

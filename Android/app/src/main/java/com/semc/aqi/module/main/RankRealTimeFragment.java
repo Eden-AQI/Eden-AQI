@@ -147,7 +147,11 @@ public class RankRealTimeFragment extends BaseFragment implements View.OnClickLi
     @Subscribe
     public void onEvent(RankDataEvent rankDataEvent) {
         listData.clear();
-        listData.addAll(RankFragment.rankings.get(tabIndex).getItems().get(PARAMATER_TYPE_AQI).getData());
+        try {
+            listData.addAll(RankFragment.rankings.get(tabIndex).getItems().get(PARAMATER_TYPE_AQI).getData());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         adapter.notifyDataSetChanged();
     }

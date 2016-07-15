@@ -404,6 +404,7 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
         BarSet stackBarSet = new BarSet(labels, values[0]);
         stackBarSet.setColor(Color.parseColor("#a1d949"));
+        stackBarSet.setAlpha(0.7f);
         daysAqiChart.addData(stackBarSet);
 
         daysAqiChart.setBarSpacing(Tools.fromDpToPx(15));

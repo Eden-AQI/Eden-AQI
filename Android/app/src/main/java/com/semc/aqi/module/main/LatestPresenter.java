@@ -34,7 +34,7 @@ public class LatestPresenter implements LatestContract.Presenter {
     @Override
     public void requestData(final int cityId) {
 
-        WeatherRepository.getInstance().getRealTime(cityId + "", false)
+        WeatherRepository.getInstance().getRealTime(cityId + "", true)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RealTime>() {
