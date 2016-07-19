@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
-import android.support.annotation.MainThread;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -53,6 +51,7 @@ import com.semc.aqi.model.City;
 import com.semc.aqi.model.CityGroup;
 import com.semc.aqi.model.CityGroupList;
 import com.semc.aqi.model.Device;
+import com.semc.aqi.model.Notify;
 import com.semc.aqi.model.Update;
 import com.semc.aqi.module.city.AddCityActivity;
 import com.semc.aqi.repository.WeatherRepository;
@@ -64,8 +63,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
+import java.util.UUID;
 
 import cn.jpush.android.api.JPushInterface;
+import in.srain.cube.actionqueque.ActionQueue;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -107,6 +108,8 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
 
     private int selectedIndex = 0;
 
+    public ActionQueue mNotifyActionQueue = new ActionQueue();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +138,9 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
 
         heartbeat();
         updateCityDataFromServer();
+        // 通知列表
+        checkNotifyList();
+        // 检查更新
         checkUpdate();
     }
 
@@ -533,6 +539,53 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
                 });
     }
 
+    private void checkNotifyList() {
+        WeatherRepository.getInstance().getNotifyList()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Notify>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Notify> notifies) {
+                        if (notifies != null && notifies.size() > 0) {
+                            for (int i = 0; i < notifies.size(); i++) {
+                                final Notify notify = notifies.get(i);
+                                mNotifyActionQueue.add(new ActionQueue.Action<String>(UUID.randomUUID().toString()) {
+                                    @Override
+                                    public void onAction() {
+                                        CommonDialog notifyDialog = new CommonDialog(MainActivity.this);
+                                        if (notify.getLevel() == 1) {
+                                            notifyDialog.setTitle("通知");
+                                        } else if (notify.getLevel() == 2) {
+                                            notifyDialog.setTitle("重污染预警");
+                                            notifyDialog.setContentColor(Color.parseColor("#cd3333"));
+                                        }
+                                        notifyDialog.setContent(notify.getMessage());
+                                        notifyDialog.hideBottom();
+                                        notifyDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                            @Override
+                                            public void onCancel(DialogInterface dialog) {
+                                                mNotifyActionQueue.notifyActionDoneThenTryToPopNext();
+                                            }
+                                        });
+                                        notifyDialog.show();
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+    }
+
     private void checkUpdate() {
 
         WeatherRepository.getInstance().checkUpdate()
@@ -557,53 +610,62 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
 
                         if (hasUpdate) {
 
-                            final CommonDialog updateDialog = new CommonDialog(MainActivity.this);
-                            updateDialog.setTitle("发现新版本：" + update.getVersionName());
-                            updateDialog.setContentMode(CommonDialog.CONTENT_MODE_CUSTOM);
+                            mNotifyActionQueue.add(new ActionQueue.Action<String>(UUID.randomUUID().toString()) {
 
-                            final UpdateView updateView = new UpdateView(MainActivity.this);
-                            String log = update.getDescription();
-                            if (TextUtils.isEmpty(log)) {
-                                log = "修复大量bug";
-                            }
-                            updateView.setLog(log);
-                            updateView.setConfirmOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(View v) {
-                                    UpdateLess.$download(MainActivity.this, update.getDownloadUrl());
-                                    if (update.isMandatory()) {
-                                        updateView.setConfirmText("正在更新...");
-                                    } else {
-                                        updateDialog.dismiss();
+                                public void onAction() {
+
+                                    final CommonDialog updateDialog = new CommonDialog(MainActivity.this);
+                                    updateDialog.setTitle("发现新版本：" + update.getVersionName());
+                                    updateDialog.setContentMode(CommonDialog.CONTENT_MODE_CUSTOM);
+
+                                    final UpdateView updateView = new UpdateView(MainActivity.this);
+                                    String log = update.getDescription();
+                                    if (TextUtils.isEmpty(log)) {
+                                        log = "修复大量bug";
                                     }
-                                }
-                            });
-                            updateView.setCancelOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    updateDialog.dismiss();
-                                }
-                            });
-                            if (update.isMandatory()) {
-                                updateView.hideCancelButton();
-                            }
-
-                            if (update.isMandatory()) {
-                                updateDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-                                    @Override
-                                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent keyEvent) {
-                                        if (keyCode == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                                            MainActivity.this.onBackPressed();
-                                            return true;
+                                    updateView.setLog(log);
+                                    updateView.setConfirmOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            UpdateLess.$download(MainActivity.this, update.getDownloadUrl());
+                                            if (update.isMandatory()) {
+                                                updateView.setConfirmText("正在更新...");
+                                            } else {
+                                                updateDialog.dismiss();
+                                            }
+                                            mNotifyActionQueue.notifyActionDoneThenTryToPopNext();
                                         }
-                                        return false;
+                                    });
+                                    updateView.setCancelOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            updateDialog.dismiss();
+                                            mNotifyActionQueue.notifyActionDoneThenTryToPopNext();
+                                        }
+                                    });
+                                    if (update.isMandatory()) {
+                                        updateView.hideCancelButton();
                                     }
-                                });
-                            }
 
-                            updateDialog.setCustomView(updateView);
-                            updateDialog.hideBottom();
-                            updateDialog.show();
+                                    if (update.isMandatory()) {
+                                        updateDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                                            @Override
+                                            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent keyEvent) {
+                                                if (keyCode == KeyEvent.KEYCODE_BACK && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                                                    MainActivity.this.onBackPressed();
+                                                    return true;
+                                                }
+                                                return false;
+                                            }
+                                        });
+                                    }
+
+                                    updateDialog.setCustomView(updateView);
+                                    updateDialog.hideBottom();
+                                    updateDialog.show();
+                                }
+                            });
                         }
                     }
                 });

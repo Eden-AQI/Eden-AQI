@@ -108,6 +108,10 @@ public class CommonDialog extends BaseDialog {
         contentView.setText(content);
     }
 
+    public void setContentColor(int color) {
+        contentView.setTextColor(color);
+    }
+
     public void setConfirmText(String text) {
         if (confirmButton != null) {
             confirmButton.setText(text);
@@ -147,7 +151,6 @@ public class CommonDialog extends BaseDialog {
     public void hideBottom() {
         bottomContainer.setVisibility(View.GONE);
         bottomDividerView.setVisibility(View.GONE);
-        textContainer.setBackgroundResource(R.drawable.view_dialog_bottom_top);
     }
 
     public void hideCancelButton() {

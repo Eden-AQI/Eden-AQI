@@ -284,6 +284,9 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
             linearLayout.getLayoutParams().width = width;
             TextView dateView = ViewLess.$(linearLayout, R.id.aqi_table_date);
             TextView levelView = ViewLess.$(linearLayout, R.id.aqi_table_level);
+            View levelSplitView = ViewLess.$(linearLayout, R.id.aqi_table_level_split);
+            TextView levelLeftView = ViewLess.$(linearLayout, R.id.aqi_table_level_left);
+            TextView levelRightView = ViewLess.$(linearLayout, R.id.aqi_table_level_right);
             TextView valueView = ViewLess.$(linearLayout, R.id.aqi_table_value);
             TextView primaryView = ViewLess.$(linearLayout, R.id.aqi_table_value_primary);
 
@@ -291,10 +294,22 @@ public class LatestFragment extends BaseFragment<LatestContract.Presenter> imple
 
             String aqiLevel = forecastItem.getAqiLevel();
             if (aqiLevel.contains("~")) {
-                aqiLevel = aqiLevel.split("~")[0];
+                String aqiLeftLevel = aqiLevel.split("~")[0];
+                String aqiRightLevel = aqiLevel.split("~")[1];
+
+                levelLeftView.setText(aqiLeftLevel + "~");
+                levelLeftView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + BizUtils.getGradleLevelByState(aqiLeftLevel) + "_left", ResourceLess.TYPE.DRAWABLE));
+
+                levelRightView.setText(aqiRightLevel);
+                levelRightView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + BizUtils.getGradleLevelByState(aqiLevel) + "_right", ResourceLess.TYPE.DRAWABLE));
+
+                levelView.setVisibility(View.GONE);
+            } else {
+                levelView.setText(aqiLevel);
+                levelView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + BizUtils.getGradleLevelByState(aqiLevel), ResourceLess.TYPE.DRAWABLE));
+
+                levelSplitView.setVisibility(View.GONE);
             }
-            levelView.setText(aqiLevel);
-            levelView.setBackgroundResource(ResourceLess.$id(getContext(), "grade_level_bg_" + BizUtils.getGradleLevelByState(aqiLevel), ResourceLess.TYPE.DRAWABLE));
             valueView.setText(forecastItem.getAqi() + "");
             primaryView.setText(forecastItem.getPrimaryParameter());
 

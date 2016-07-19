@@ -2,6 +2,7 @@ package com.semc.aqi.repository.services;
 
 import com.semc.aqi.model.CityGroupList;
 import com.semc.aqi.model.Device;
+import com.semc.aqi.model.Notify;
 import com.semc.aqi.model.Ranking;
 import com.semc.aqi.model.RealTime;
 import com.semc.aqi.model.Update;
@@ -32,4 +33,7 @@ public interface WeatherService {
 
     @GET("Aqi/GetCityList")
     Observable<CityGroupList> getCityList();
+
+    @GET("Aqi/GetNotifyList")
+    Observable<List<Notify>> getNotifyList();
 }

@@ -20,7 +20,7 @@
             android:id="@+id/text_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/view_dialog_content_shape"
+            android:background="#ffffff"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="@drawable/view_dialog_content_shape"
+            android:background="#ffffff"
             android:orientation="vertical"
             android:visibility="gone">
 

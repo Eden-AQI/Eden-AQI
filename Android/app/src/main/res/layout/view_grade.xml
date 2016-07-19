@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/view_dialog_custom_bg">
+    android:background="#ffffff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2"
                 android:text="对健康影响情况 ：空气质量令人满意，基本无空气污染"
-                android:textColor="#ebebeb"
+                android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4"
                 android:text="建议采取的措施 ：各类人群可正常活动"
-                android:textColor="#ebebeb"
+                android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv21"
                 android:text="对健康影响情况 ：空气质量可接受，但某些污染物可能对极少数异常敏感人群健康有较弱影响"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv41"
                 android:text="建议采取的措施 ：极少数异常敏感人群应减少户外活动"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2a"
                 android:text="对健康影响情况 ：易感人群症状有轻度加剧，健康人群出现刺激症状"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
 
             <TextView
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4a"
                 android:text="建议采取的措施 ：儿童、老年人及心脏病、呼吸系统疾病患者应减少长时间、高强度的户外锻炼"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2v"
                 android:text="对健康影响情况 ：进一步加剧易感人群症状，可能对健康人群心脏、呼吸系统有影响"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
 
             <TextView
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4v"
                 android:text="建议采取的措施 ：儿童、老年人及心脏病、呼吸系统疾病患者避免长时间、高强度的户外锻炼，一般人群适量减少户外运动"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2c"
                 android:text="对健康影响情况 ：心脏病和肺病患者症状显著加剧，运动耐受力降低，健康人群普遍出现症状"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
 
             <TextView
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4c"
                 android:text="建议采取的措施 ：儿童、老年人及心脏病、肺病患者应停留在室内，停止户外运动，一般人群减少户外运动"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -250,7 +250,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2cs"
                 android:text="对健康影响情况 ：健康人群运动耐受力降低，有明显强烈症状，提前出现某些疾病"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
 
             <TextView
@@ -258,7 +258,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv4cs"
                 android:text="建议采取的措施 ：儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动"
-                android:textColor="#ebebeb"
+                 android:textColor="@color/global_primary_text_color"
                 android:textSize="14sp" />
         </RelativeLayout>
     </LinearLayout>

@@ -24,12 +24,44 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:gravity="center"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:textColor="@color/global_primary_text_color_white"
         android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/aqi_table_level_split"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+        <TextView
+            android:id="@+id/aqi_table_level_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingLeft="4dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/global_primary_text_color_white"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/aqi_table_level_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingRight="4dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/global_primary_text_color_white"
+            android:textSize="15sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

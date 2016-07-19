@@ -15,3 +15,46 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keepattributes *Annotation*
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
+
+-keep class com.semc.aqi.**{*;}
+-dontwarn com.semc.aqi.**
+
+-keep class com.litesuits.orm.**{*;}
+-dontwarn com.litesuits.orm.**
+
+-keep class org.apache.** {*;}
+-dontwarn  org.apache.**
+
+-keep class com.google.** {*;}
+-dontwarn  com.google.**
+
+-keep class com.baidu.** {*;}
+-dontwarn com.baidu.**
+
+-keep class cn.sharesdk.** {*;}
+-dontwarn cn.sharesdk.**
+
+-keep class org.greenrobot.eventbus.** {*;}
+-dontwarn org.greenrobot.eventbus.**
+
+-keep class vi.com.gdi.** {*;}
+-dontwarn vi.com.gdi.**
+
+-keep class okio.** {*;}
+-dontwarn  okio.**
+-keep class retrofit2.** {*;}
+-dontwarn  retrofit2.**
+-keep class rx.** {*;}
+-dontwarn  rx.**
+-keep class android.webkit.** {*;}
+-dontwarn  android.webkit.**
+
+-dontwarn  com.viewpagerindicator.**
+
+-keepclassmembers class * {
+    public void onEvent*(**);
+}

@@ -31,7 +31,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -76,5 +77,6 @@ dependencies {
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.6@aar'
     compile 'com.mcxiaoke.viewpagerindicator:library:2.4.1'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'in.srain.cube:action-queue:1.0.1'
     compile project(':slidingmenu')
 }
