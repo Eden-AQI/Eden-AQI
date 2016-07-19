@@ -9,8 +9,6 @@ import com.semc.aqi.config.Global;
 import com.semc.aqi.general.LiteOrmManager;
 import com.semc.aqi.model.City;
 
-import cn.jpush.android.api.JPushInterface;
-
 public class MyApp extends Application {
 
     @Override
@@ -38,8 +36,5 @@ public class MyApp extends Application {
         }
 
         SDKInitializer.initialize(getApplicationContext());
-
-        JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);
     }
 }

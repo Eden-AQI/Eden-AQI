@@ -4,7 +4,6 @@
     android:id="@+id/contentFrame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/start_bg"
     tools:context=".module.start.StartActivity">
 
     <TextView

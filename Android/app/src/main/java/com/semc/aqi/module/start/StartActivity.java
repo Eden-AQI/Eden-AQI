@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.jayfeng.lesscode.core.ActivityLess;
-import com.jayfeng.lesscode.core.ToastLess;
 import com.semc.aqi.R;
 import com.semc.aqi.base.BaseActivity;
-import com.semc.aqi.model.IpInfo;
 import com.semc.aqi.module.main.MainActivity;
-import com.semc.aqi.repository.json.Result;
 
 public class StartActivity extends BaseActivity<StartContract.Presenter> implements StartContract.View {
 
@@ -21,7 +18,7 @@ public class StartActivity extends BaseActivity<StartContract.Presenter> impleme
 
         setPresenter(new StartPresenter(this));
 
-        presenter.getIpInfo("103.6.11.33");
+        gotoMainActivity();
     }
 
 
@@ -31,15 +28,9 @@ public class StartActivity extends BaseActivity<StartContract.Presenter> impleme
     }
 
     @Override
-    public void gotoMainActivity(Result<IpInfo> ipInfoResult) {
+    public void gotoMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void showLoadError(Throwable e) {
-        ToastLess.$(this, e.toString());
         finish();
     }
 }

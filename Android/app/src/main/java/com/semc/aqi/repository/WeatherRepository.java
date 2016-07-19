@@ -3,20 +3,16 @@ package com.semc.aqi.repository;
 import com.google.gson.reflect.TypeToken;
 import com.semc.aqi.model.CityGroupList;
 import com.semc.aqi.model.Device;
-import com.semc.aqi.model.IpInfo;
 import com.semc.aqi.model.Notify;
 import com.semc.aqi.model.Ranking;
 import com.semc.aqi.model.RealTime;
 import com.semc.aqi.model.Update;
 import com.semc.aqi.repository.config.RetrofitManager;
 import com.semc.aqi.repository.config.RxRetrofitCache;
-import com.semc.aqi.repository.json.Result;
 import com.semc.aqi.repository.services.WeatherService;
 
 import java.util.List;
 
-import retrofit2.http.Body;
-import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 

@@ -65,7 +65,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 import java.util.UUID;
 
-import cn.jpush.android.api.JPushInterface;
 import in.srain.cube.actionqueque.ActionQueue;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -427,7 +426,6 @@ public class MainActivity extends SlidingFragmentActivity implements RadioButton
         Device device = new Device();
         device.setDeviceNumber(deviceNumber);
         device.setDeviceType(DisplayLess.$tablet(this) ? Device.DEVICE_TYPE_TABLET : Device.DEVICE_TYPE_PHONE);
-        device.setPushId(JPushInterface.getRegistrationID(this));
         device.setLatitude(latitude);
         device.setLongitude(longitude);
 

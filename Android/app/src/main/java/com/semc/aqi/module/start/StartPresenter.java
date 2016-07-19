@@ -7,9 +7,4 @@ public class StartPresenter implements StartContract.Presenter {
     public StartPresenter(StartContract.View view) {
         this.view = view;
     }
-
-    @Override
-    public void getIpInfo(final String ip) {
-        view.gotoMainActivity(null);
-    }
 }
