@@ -131,6 +131,27 @@ namespace Eden.Web.Api.Controllers
             return Ok(rs);
         }
 
+        /// <summary>
+        /// 获取通知列表
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetNotifyList")]
+        public IHttpActionResult GetNotifyList()
+        {
+            var service = EngineContext.Current.Resolve<INotifyService>();
+            var source = service.GetCurrentNotifyList();
+            List<NotifyViewModel> result = new List<NotifyViewModel>();
+            foreach (var n in source)
+            {
+                result.Add(new NotifyViewModel()
+                {
+                    Level = n.Level,
+                    Message = n.Message
+                });
+            }
+            return Ok(result);
+        }
+
         //[Route("Test")]
         //[HttpGet]
         //public IHttpActionResult Test()

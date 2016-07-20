@@ -26,6 +26,7 @@ using Eden.ServicesDefine.Metadata;
 using Eden.ServicesDefine.Customers;
 using Eden.Services.Customers;
 using Eden.Services.Configuration;
+using Eden.ServicesDefine.Push;
 
 namespace Eden.Web.Framework
 {
@@ -112,6 +113,10 @@ namespace Eden.Web.Framework
             builder.RegisterType<SiteService>().As<ISiteService>().InstancePerLifetimeScope();
 
             builder.RegisterType<DeviceService>().As<IDeviceService>().InstancePerLifetimeScope();
+
+            builder.RegisterType<JPush>().As<IPushService>().InstancePerLifetimeScope();
+
+            builder.RegisterType<NotifyService>().As<INotifyService>().InstancePerLifetimeScope();
         }
     }
 }

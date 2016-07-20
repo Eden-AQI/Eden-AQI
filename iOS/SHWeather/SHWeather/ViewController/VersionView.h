@@ -11,6 +11,7 @@
 @interface VersionView : UIView
 
 //- (UIView *)initWithFrame:(CGRect)frame andType:(NSString *)type andData:(NSDictionary *)data;
-+(VersionView *)createViewWithType:(NSString *)type;
++(VersionView *)createViewWithType:(NSString *)type andData:(NSDictionary *)dataDic;
+
 
 @end

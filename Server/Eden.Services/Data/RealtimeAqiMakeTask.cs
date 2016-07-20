@@ -25,7 +25,7 @@ namespace Eden.Services.Data
             string rs;
             using (var wc = new WebClient())
             {
-                rs = wc.DownloadString(appUrl + "/Notification/UpdateData?password=" + Sp.GetCurrentPassword());
+                rs = wc.DownloadString(appUrl + "/Notification/ClearCache?password=" + Sp.GetCurrentPassword());
             }
             if (rs != "ok")
                 throw new ApplicationException(rs);

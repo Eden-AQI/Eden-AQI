@@ -111,6 +111,7 @@
     [self.factorTableView reloadData];
     self.healthImpactlbl.text = model.health;
     self.suggestlbl.text = model.suggest;
+    [self drawChieflyView];
 }
 
 @end

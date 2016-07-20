@@ -164,13 +164,10 @@
         float grade = (float)value / (float)_yValueMax;
         
         if (index != 0) {
-            if (index == 28) {
-                NSLog(@"299999");
-            }
             CAShapeLayer *chartLine = [CAShapeLayer layer];
             chartLine.lineCap = kCALineCapRound;
             chartLine.lineJoin = kCALineJoinBevel;
-            chartLine.fillColor   = [[UIColor whiteColor] CGColor];
+            chartLine.fillColor   = [[UIColor colorWithRed:179.0/255 green:193.0/255 blue:211.0/255 alpha:0.7] CGColor];
             chartLine.lineWidth   = 3.0;
             chartLine.strokeEnd   = 0.0;
             [self.layer addSublayer:chartLine];
@@ -195,6 +192,14 @@
             capLine.path = capPath.CGPath;
 //            [capPath fill];
             
+            CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+            pathAnimation.duration = 1.0;
+            pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+            pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+            pathAnimation.autoreverses = NO;
+            [chartLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+            chartLine.strokeEnd = 1.0;
         }
         index += 1;
         if (index>=_yValues.count+1) {
@@ -208,15 +213,6 @@
 //    }else{
 //        _chartLine.strokeColor =[[UIColor greenColor]CGColor];
 //    }
-    
-    
-    //    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    //    pathAnimation.duration = 1.0;
-    //    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    //    pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-    //    pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-    //    pathAnimation.autoreverses = NO;
-    //    [_chartLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
     
 //    _chartLine.strokeEnd = 1.0;
     self.contentOffset = CGPointMake(XLabelWidth/2-2, 0);

@@ -25,9 +25,9 @@ namespace Eden.Web.Console.EntityWebServices
 
                 listModel.EnabledString = item.Enabled.ToString();
                 listModel.StopOnErrorString = item.StopOnError.ToString();
-                listModel.LastEndTime = item.LastEndUtc != null ? item.LastEndUtc.Value.ToString("yyyy-MM-dd HH:mm:ss") : "";
-                listModel.LastStartTime = item.LastStartUtc != null ? item.LastStartUtc.Value.ToString("yyyy-MM-dd HH:mm:ss") : "";
-                listModel.LastSuccessTime = item.LastSuccessUtc != null ? item.LastSuccessUtc.Value.ToString("yyyy-MM-dd HH:mm:ss") : "";
+                listModel.LastEndTime = item.LastEndUtc != null ? item.LastEndUtc.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss") : "";
+                listModel.LastStartTime = item.LastStartUtc != null ? item.LastStartUtc.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss") : "";
+                listModel.LastSuccessTime = item.LastSuccessUtc != null ? item.LastSuccessUtc.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss") : "";
                 result.Add(listModel);
             }
             var gridModel = new DataSourceResult<ScheduleTaskViewModel>(pageSize)

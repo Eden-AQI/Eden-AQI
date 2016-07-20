@@ -35,6 +35,7 @@ namespace Eden.Web.Console.Controllers
             _settingService.SaveSetting(entity, v => v.VersionCode, false);
             _settingService.SaveSetting(entity, v => v.VersionName, false);
             _settingService.SaveSetting(entity, v => v.UpdateTime, false);
+            _settingService.SaveSetting(entity, v => v.IosDownloadUrl, false);
             _settingService.SaveSetting(entity, v => v.Mandatory, false);
             _settingService.SaveSetting(entity, v => v.DownloadUrl, false);
             _settingService.SaveSetting(entity, v => v.Description, false);

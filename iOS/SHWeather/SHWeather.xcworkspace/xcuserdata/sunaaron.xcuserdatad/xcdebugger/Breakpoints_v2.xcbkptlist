@@ -20,7 +20,7 @@
                   moduleName = "SHWeather"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/insomnia/Desktop/weiboSDK/branches/v3.1.4/WeiboSDKSrc/WeiboSDK/WBQuickAuth.m"
-                  timestampString = "488955817.086183"
+                  timestampString = "490673244.77384"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "318"
@@ -89,6 +89,22 @@
             startingLineNumber = "168"
             endingLineNumber = "168"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SHWeather/ViewController/VersionView.m"
+            timestampString = "490673011.645853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -30,4 +30,5 @@
 + (UIColor *)getColorOrderLevel:(NSString *)levelString;
 + (UIColor *)getColorOrderAQIValue:(NSString *)aqiValue;
 + (NSDictionary *)getDescriptionOrderLevel:(NSString *)levelString;
++ (NSString *)getLevelNameOrderLevel:(NSString *)levelString;
 @end

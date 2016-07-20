@@ -42,5 +42,5 @@ namespace Eden.DataMapping
     public class NotifyMapping : EntityTypeConfiguration<Notify> { }
 
     public class SettingMapping : EntityTypeConfiguration<Setting> { }
-
+    public class RequestLogMapping : EntityTypeConfiguration<RequestLog> { }
 }

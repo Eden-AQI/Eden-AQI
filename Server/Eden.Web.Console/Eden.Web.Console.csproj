@@ -17,7 +17,7 @@
     <AssemblyName>Eden.Web.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -187,12 +187,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EntityWebServices\LogResetService.cs" />
     <Compile Include="EntityWebServices\PushRestService.cs" />
+    <Compile Include="EntityWebServices\RequestLogRestService.cs" />
     <Compile Include="EntityWebServices\SettingRestService.cs" />
     <Compile Include="EntityWebServices\TaskRestService.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalExceptionAttribute.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseViewModel.cs" />
@@ -653,6 +655,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Templates\CreateOrUpdate\config.html" />
+    <Content Include="Templates\CreateOrUpdate\requestlog.html" />
     <Content Include="Templates\CreateOrUpdate\log.html" />
     <Content Include="Templates\CreateOrUpdate\device.html" />
     <Content Include="Templates\CreateOrUpdate\push.html" />
@@ -738,7 +741,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50663</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/</IISUrl>
+          <IISUrl>http://localhost:50663/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

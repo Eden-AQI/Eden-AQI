@@ -13,12 +13,18 @@ namespace Eden.Domain.Customers
     {
         public int Level { get; set; }
 
+        [FullIndexKey]
         public string Message { get; set; }
 
+        [OrderBy(Desc = true)]
         public DateTime CreateTime { get; set; }
 
         public int CityId { get; set; }
 
         public int Platform { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public DateTime EndTime { get; set; }
     }
 }

@@ -15,6 +15,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wkb-uT-KRV">
+                        <rect key="frame" x="12" y="95.5" width="296" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="5d8-Oo-YsO"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hI-EU-IgF">
                         <rect key="frame" x="24" y="13" width="272" height="73"/>
                         <subviews>
@@ -46,6 +53,9 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Wkb-uT-KRV" secondAttribute="bottom" constant="3" id="CUX-QB-4RI"/>
+                    <constraint firstAttribute="trailing" secondItem="Wkb-uT-KRV" secondAttribute="trailing" constant="12" id="FoF-Sg-myK"/>
+                    <constraint firstItem="Wkb-uT-KRV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Klq-JE-PVY"/>
                     <constraint firstItem="0hI-EU-IgF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="Urd-we-phd"/>
                     <constraint firstItem="0hI-EU-IgF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VWs-93-QAi"/>
                     <constraint firstAttribute="trailingMargin" secondItem="0hI-EU-IgF" secondAttribute="trailing" constant="16" id="a2j-ch-G8i"/>

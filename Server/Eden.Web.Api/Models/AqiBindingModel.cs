@@ -48,4 +48,10 @@ namespace Eden.Web.Api.Models
         [Required]
         public string Id { get; set; }
     }
+
+    public class NotifyViewModel
+    {
+        public int Level { get; set; }
+        public string Message { get; set; }
+    }
 }

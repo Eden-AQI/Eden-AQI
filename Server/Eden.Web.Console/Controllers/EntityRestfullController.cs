@@ -13,7 +13,8 @@ namespace Eden.Web.Console.Controllers
             { "push",new PushRestService()},
             { "log",new LogResetService()},
             { "task",new TaskRestService()},
-            { "config",new SettingRestService()}
+            { "config",new SettingRestService() },
+            { "requestlog",new RequestLogRestService() }
         };
 
         [HttpGet]

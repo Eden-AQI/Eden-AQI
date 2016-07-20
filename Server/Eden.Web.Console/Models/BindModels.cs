@@ -42,17 +42,21 @@ namespace Eden.Web.Console.Models
 
         public string Message { get; set; }
 
-        public DateTime CreateTime { get; set; }
-
-        public int CityId { get; set; }
-
         public int Platform { get; set; }
-
-        public string Type { get; set; }
 
         public string PlatformName { get; set; }
 
+        public string Type { get; set; }
+
         public string CreateTimeString { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public DateTime EndTime { get; set; }
+
+        public string StartTimeString { get; set; }
+
+        public string EndTimeString { get; set; }
     }
 
     public class PushListModel : BaseViewModel
@@ -98,7 +102,7 @@ namespace Eden.Web.Console.Models
 
     public class ScheduleTaskViewModel : BaseViewModel
     {
-        
+
         public string Name { get; set; }
 
         public int Seconds { get; set; }
@@ -138,9 +142,23 @@ namespace Eden.Web.Console.Models
 
         public string DownloadUrl { get; set; }
 
+        public string IosDownloadUrl { get; set; }
+
         public bool Mandatory { get; set; }
 
         public string MandatoryStr { get; set; }
+
+    }
+
+    public class RequestLogViewModel : BaseViewModel
+    {
+        public string EventTimeString { get; set; }
+
+        public string IpAddress { get; set; }
+
+        public string RequestUrl { get; set; }
+
+        public string Detail { get; set; }
     }
 
     public class ReadonlyModel : BaseViewModel

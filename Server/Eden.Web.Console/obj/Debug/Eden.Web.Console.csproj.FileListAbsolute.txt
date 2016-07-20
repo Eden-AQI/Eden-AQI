@@ -227,3 +227,4 @@ D:\Projects\SEMC\src\Server\Eden.Web.Property\obj\Debug\Eden.Web.Console.csprojR
 D:\Projects\SEMC\src\Server\Eden.Web.Property\obj\Debug\Eden.Web.Console.dll
 D:\Projects\SEMC\src\Server\Eden.Web.Property\obj\Debug\Eden.Web.Console.pdb
 D:\Projects\SEMC\src\Server\Eden.Web.Property\bin\ChnCharInfo.dll
+D:\Projects\SEMC\src\Server\Eden.Web.Property\bin\cn.jpush.api.dll

@@ -67,6 +67,7 @@
     <Compile Include="Data\SiteData.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\RequestLog.cs" />
     <Compile Include="Media\MediaItem.cs" />
     <Compile Include="Media\PictureSpecification.cs" />
     <Compile Include="Data\AQIGrade.cs" />

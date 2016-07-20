@@ -8,6 +8,7 @@
 
 #import "VersionView.h"
 #import "LevelInfoCell.h"
+#import "TNBlockAlertController.h"
 
 @interface VersionView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -16,8 +17,12 @@
 @property (nonatomic, strong) NSDictionary *titleDic;
 
 @property (nonatomic, strong) NSDictionary *gradeInfoDic;
+@property (nonatomic, strong) NSDictionary *notificationDic;
+@property (nonatomic) BOOL notificationType;
+
 @property (nonatomic) BOOL islevelTable;
 
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *aboutView;
 @property (weak, nonatomic) IBOutlet UILabel *namelbl;
@@ -29,10 +34,12 @@
 
 @implementation VersionView
 
-+(VersionView *)createViewWithType:(NSString *)type
++(VersionView *)createViewWithType:(NSString *)type andData:(NSDictionary *)dataDic
 {
     NSArray *nibs=[[NSBundle mainBundle]loadNibNamed:@"VersionView" owner:nil options:nil];
     VersionView *theView=[nibs objectAtIndex:0];
+    theView.notificationType = NO;
+    theView.headerView.backgroundColor = [UIColor colorWithRed:0 green:60/255.0 blue:107/255.0 alpha:1.0];
     if ([type isEqualToString:@"version"]) {
         theView.titleLbl.text = @"版本信息";
         [theView aboutViewsAlpha:0];
@@ -45,12 +52,26 @@
         theView.namelbl.text = [NSString stringWithFormat:@"郑州空气质量 %.1f",currentVersion];
         theView.dataTable.alpha = 0;
         [theView aboutViewsAlpha:1.0];
-    }else{
+    }else if ([type isEqualToString:@"notiType"]){
+        theView.notificationType = YES;
+        theView.notificationDic = dataDic;
+        theView.keys = @[@"Message"];
+        if ([[dataDic objectForKey:@"Level"] intValue]==2) {
+            theView.titleLbl.text = @"重污染预警";
+        }else{
+            theView.titleLbl.text = @"通知";
+        }
+        [theView aboutViewsAlpha:0];
+        theView.dataTable.alpha = 1.0;
+//        theView.dataTable.backgroundColor = [UIColor clearColor];
+//        theView.dataTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        theView.aboutView.alpha = 1.0;
+        [theView performSelector:@selector(assembleData) withObject:nil afterDelay:0.5];
+    } else{
         theView.titleLbl.text = @"空气质量等级";
         theView.islevelTable = YES;
         theView.dataTable.alpha = 1.0;
         [theView aboutViewsAlpha:0];
-        theView.aboutView.alpha = 1.0;
         theView.dataTable.backgroundColor = [UIColor clearColor];
         theView.dataTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [theView assembleData];
@@ -112,16 +133,23 @@
         if (indexPath.row == 2) {
             NSString *str = [itemDic objectForKey:@"HealthEffect"];
             CGSize size = CGSizeMake(self.dataTable.bounds.size.width-24, 1000);
-            CGSize labelSize = [str boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:NULL].size;
+            CGSize labelSize = [str boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} context:NULL].size;
             return labelSize.height+20;
         }
         if (indexPath.row == 3) {
             NSString *str = [itemDic objectForKey:@"Method"];
             CGSize size = CGSizeMake(self.dataTable.bounds.size.width-24, 1000);
-            CGSize labelSize = [str boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:NULL].size;
+            CGSize labelSize = [str boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} context:NULL].size;
             return labelSize.height+20;
         }
         return 30;
+    }else if (self.notificationType){
+        if (indexPath.row == 0) {
+            NSString *str = [self.notificationDic objectForKey:@"Message"];
+            CGSize size = CGSizeMake(self.dataTable.bounds.size.width-24, 1000);
+            CGSize labelSize = [str boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} context:NULL].size;
+            return labelSize.height+40;
+        }
     }
     return 44;
 }
@@ -151,7 +179,8 @@
         if (indexPath.row<2) {
             levelCell.infolbl.textColor = [DefaultsHandler getColorOrderLevel:[NSString stringWithFormat:@"%ld",indexPath.section+1]];
         }else{
-            levelCell.infolbl.textColor = [UIColor whiteColor];
+            levelCell.infolbl.textColor = [UIColor lightGrayColor];
+            levelCell.infolbl.font = [UIFont systemFontOfSize:14];
         }
         NSString *infoString = nil;
         NSDictionary *itemDic = [self.gradeInfoDic objectForKey:[NSNumber numberWithInteger:indexPath.section+1]];
@@ -172,7 +201,24 @@
                 break;
         }
         levelCell.infolbl.text = infoString;
-    }else{
+    }else if (self.notificationType){
+        NSString *key = [self.keys objectAtIndex:indexPath.row];
+        NSString *levelString = [NSString stringWithFormat:@"%@",[self.notificationDic objectForKey:@"Level"]];
+//        UIColor *color = [DefaultsHandler getColorOrderLevel:levelString];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",[self.notificationDic objectForKey:key]];
+        //if (indexPath.row == 0) {
+        //    cell.textLabel.text = [DefaultsHandler getLevelNameOrderLevel:levelString];
+        //}
+        if (levelString.integerValue == 1) {
+            cell.textLabel.textColor = [UIColor blackColor];
+        }else{
+            cell.textLabel.textColor = [UIColor redColor];
+        }
+//        cell.contentView.backgroundColor = [UIColor clearColor];
+//        cell.textLabel.backgroundColor = [UIColor clearColor];
+//        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.numberOfLines = 0;
+    } else{
         NSString *key = [self.keys objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@:%@",[self.titleDic objectForKey:key],[self.infoDic objectForKey:key]];
         if ([key isEqualToString:@"DownloadUrl"]) {
@@ -184,7 +230,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.islevelTable) {
+    if (self.islevelTable || self.notificationType) {
         return;
     }
     
@@ -192,7 +238,11 @@
     NSLog(@"----%@",cell.textLabel.text);
     
     if (indexPath.row == 3) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"更新" message:@"立即更新" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        TNBlockAlertController *alert = [[TNBlockAlertController alloc]initWithTitle:@"更新" message:@"立即更新" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherActions:@[@"确定"] AlertStyle:OSPAlertView];
+        [alert setBlock:^{
+            NSString *urlString = [cell.textLabel.text substringWithRange:NSMakeRange(3, cell.textLabel.text.length-3)];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        } atButtonIndex:1];
         [alert show];
     }
 }
@@ -209,6 +259,7 @@
         
         self.dataTable.delegate = self;
         self.dataTable.dataSource = self;
+//        self.keys = @[@"VersionName",@"VersionCode",@"Description",@"DownloadUrl"];
         if([self checkIfHasNewVersion])
         {
             self.keys = @[@"VersionName",@"VersionCode",@"Description",@"DownloadUrl"];

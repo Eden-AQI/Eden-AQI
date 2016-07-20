@@ -11,6 +11,12 @@
 #import "ZQLineChartView.h"
 #import "NSDate+Common.h"
 
+@interface ZQLineChartView ()
+
+@property (nonatomic) NSInteger step;
+
+@end
+
 @implementation ZQLineChartView
 
 - (id)initWithFrame:(CGRect)frame type:(int)time_type yData:(NSArray *)yValues yDic:(NSDictionary *)yDic yMax:(float)yValueMax xLabels:(NSArray *)xLabels
@@ -58,13 +64,13 @@
 //        self.yPositionAry = self.xLabels;
     }
     self.contentSize=CGSizeMake(self.bounds.size.width*self.pageCount+XLabelWidth/2, 0);
-    NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:10];
-    for (int i=0;i<x_Total;i++)
+    //NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:10];
+    for (int i=0;i<self.xLabels.count;i++)
     {
         //4=44-80/2  20=60-80/2
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake((i+1)*(self.frame.size.width*self.pageCount/x_Total)-XLabelWidth/2, self.frame.size.height-30, XLabelWidth, 30)];
         label.textAlignment=NSTextAlignmentCenter;
-        label.font=[UIFont systemFontOfSize:14];
+        label.font=[UIFont systemFontOfSize:12];
         //24,31,365
         label.backgroundColor=[UIColor clearColor];
         label.textColor = [UIColor whiteColor];
@@ -78,11 +84,13 @@
             NSString *datelbl= [formatter stringFromDate:date2];
             label.text=datelbl;
         }
-        [muArray addObject:[NSString stringWithFormat:@"%d",i]];
+        
+        //[muArray addObject:[NSString stringWithFormat:@"%d",i]];
+    
         //[_xLabels objectAtIndex:_xLabels.count/5*i];
         [self addSubview:label];
     }
-    self.yPositionAry = muArray;
+    //self.yPositionAry = muArray;
 }
 
 - (id)initWithFrame:(CGRect)frame Color:(UIColor *)strokeColor type:(int)time_type standard:(NSDictionary *)standardValues ydata:(NSArray *)yValues yMax:(float)yValueMax xlabels:(NSArray *)xlabels yDic:(NSDictionary *)yDic startTime:(NSDate *)startTime yIndexAccor:(NSDictionary *)yIndexDic
@@ -248,6 +256,7 @@
 
     CGFloat firstValue = [[_yValues objectAtIndex:0] floatValue];
     int firstPosi=[[_yPositionAry objectAtIndex:0] intValue];
+    self.step = firstPosi - 0;
     //0<->firstPosi*self.frame.size.width/(float)_yValues.count
     float grade = (float)firstValue / (float)_yValueMax;
     
@@ -284,8 +293,12 @@
         // NSInteger *posiN=[_yValues indexOfObject:valueString];
         float value = [valueString floatValue];
         float grade = (float)value / (float)_yValueMax;
+        if (index == 4) {
+            NSLog(@"no no no");
+        }
         NSInteger shoot=[[_yPositionAry objectAtIndex:index] intValue];
         //xLabel_Width+xlabel_Padding=99
+        
         if (shoot != 0) {
             if (_time_type==year)
             {
@@ -296,8 +309,10 @@
             }
             else if (_time_type==day)
             {
-                [progressline addLineToPoint:CGPointMake(((shoot+1) *self.frame.size.width*self.pageCount/24),(1-grade)*(self.frame.size.height-30))];//shoot
-                
+                if (shoot - index == self.step) {
+                    [progressline addLineToPoint:CGPointMake(((shoot+1) *self.frame.size.width*self.pageCount/24),(1-grade)*(self.frame.size.height-30))];//shoot
+                }
+                self.step = shoot - index;
                 [progressline moveToPoint:CGPointMake(((shoot+1) *self.frame.size.width*self.pageCount/24),(1-grade)*(self.frame.size.height-30))];//shoot
                 if (self.showPoint) {
                     // 添加圆到path
@@ -322,7 +337,7 @@
             // [progressline stroke];
         }
         index += 1;
-        if (index>=_yValues.count) {
+        if (index>=_yPositionAry.count) {
             break;
         }
     }
@@ -335,13 +350,13 @@
     }
     
     
-//    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-//    pathAnimation.duration = 1.0;
-//    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//    pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-//    pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-//    pathAnimation.autoreverses = NO;
-//    [_chartLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    pathAnimation.duration = 1.0;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+    pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+    pathAnimation.autoreverses = NO;
+    [_chartLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
     
     _chartLine.strokeEnd = 1.0;
     

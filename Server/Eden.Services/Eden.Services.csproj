@@ -60,6 +60,9 @@
     <Reference Include="ChnCharInfo">
       <HintPath>..\libs\ChnCharInfo.dll</HintPath>
     </Reference>
+    <Reference Include="cn.jpush.api">
+      <HintPath>..\libs\cn.jpush.api.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -98,11 +101,13 @@
     <Compile Include="DatabaseService.cs" />
     <Compile Include="Data\RealtimeAqiMakeTask.cs" />
     <Compile Include="Data\RestAqiManager.cs" />
+    <Compile Include="JPush.cs" />
     <Compile Include="Metadata\AqiGradeService.cs" />
     <Compile Include="DefaultEngityService.cs" />
     <Compile Include="Logging\DefaultLogger.cs" />
     <Compile Include="Logging\LoggingExtensions.cs" />
     <Compile Include="Metadata\SiteService.cs" />
+    <Compile Include="NotifyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task\ScheduleTaskService.cs" />
     <Compile Include="Task\Task.cs" />

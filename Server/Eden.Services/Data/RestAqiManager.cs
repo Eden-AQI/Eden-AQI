@@ -189,7 +189,7 @@ namespace Eden.Services.Data
                 {
                     foreach (CityForecastData f in cityForecast)
                     {
-                        sd.Forecast.Add(new ForecastItem() { Aqi = f.Aqi_min + "-" + f.Aqi_max, AqiLevel = f.AqiLevel, PrimaryParameter = f.PrimaryPol, Time = f.DateTime.Day + "日" });
+                        sd.Forecast.Add(new ForecastItem() { Aqi = f.Aqi_min + "-" + f.Aqi_max, AqiLevel = f.AqiLevel, PrimaryParameter = f.PrimaryPol.ToUpper(), Time = f.DateTime.Day + "日" });
                     }
                 }
             }
@@ -218,7 +218,7 @@ namespace Eden.Services.Data
 
             PrimaryParameter pp = new PrimaryParameter();
             pp.Aqi = int.Parse(newestData.AQI);
-            pp.ParameterName = newestData.PrimaryPol;
+            pp.ParameterName = newestData.PrimaryPol.ToUpper();
             pp.Value = switchPpValue(newestData);
 
             siteData.Primary = pp;
@@ -290,6 +290,7 @@ namespace Eden.Services.Data
                 case "CO": val = d.CO; break;
                 case "O3": val = d.O3; break;
                 case "PM2.5": val = d.PM25; break;
+                case "PM25": val = d.PM25; break;
             }
             decimal dVal = 0;
             decimal.TryParse(val, out dVal);

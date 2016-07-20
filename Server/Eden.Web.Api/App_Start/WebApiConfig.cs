@@ -26,8 +26,9 @@ namespace Eden.Web.Api
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.Filters.Add(new GlobalExceptionFilter());
+            //config.Filters.Add(new GlobalExceptionFilter());
             config.Filters.Add(new GloabalErrorAttribute());
+            config.Filters.Add(new LogFilterAttribute());
         }
     }
 }

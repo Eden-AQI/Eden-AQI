@@ -1,4 +1,6 @@
 ﻿using Eden.Core.Infrastructure;
+using Eden.Domain.Configuration;
+using Eden.Services.Configuration;
 using Eden.ServicesDefine.Data;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,15 @@ namespace Eden.Web.Api.Controllers
                 data = new Domain.Data.SiteData();
             
             return View(data);
+        }
+
+
+        //GET
+        public ActionResult Downlaod()
+        {
+            ISettingService settingService = EngineContext.Current.Resolve<ISettingService>();
+            var vendorSettings = settingService.LoadSetting<VersionSetting>();
+            return View(vendorSettings);
         }
     }
 }

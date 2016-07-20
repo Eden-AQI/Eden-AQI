@@ -19,6 +19,8 @@ namespace Eden.Domain.Configuration
 
         public string DownloadUrl { get; set; }
 
+        public string IosDownloadUrl { get; set; }
+
         public bool Mandatory { get; set; }
     }
 }

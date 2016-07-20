@@ -1,15 +1,37 @@
 ﻿<div class="panel">
     <div class="panel-body">
         <input type="text" name="Id" ng-model="form.Id" style="display:none;" />
-
         <div class="form-group">
-            <label>类型：</label><span>{{form.Type}}</span>
+            <label>类型：</label>
+            <select name="Level">
+                <option value="1" ng-selected="form.Level==1">一般消息</option>
+                <option value="2" ng-selected="form.Level==2">重污染预警</option>
+                <!--<option value="3" ng-selected="form.Level==3">版本更新</option>-->
+            </select>
+        </div>
+        <!--<div class="form-group">
+            <label>标题</label>
+            <input type="text" class="form-control" name="Title" required/>
+        </div>-->
+        <!--<div class="form-group">
+            <label>推送给：</label>
+            <select name="Platform">
+                <option value="1">所有设备</option>
+                <option value="2">IOS设备</option>
+                <option value="3">Android设备</option>
+            </select>
+        </div>-->
+        <div class="form-group">
+            <label>开始时间：</label>
+            <input type="date" class="form-control" name="StartTime" required ng-model="form.StartTime"/>
         </div>
         <div class="form-group">
-            <label>推送给：</label><span>{{form.PlatformName}}</span>
+            <label>结束时间：</label>
+            <input type="date" class="form-control" name="EndTime" required ng-model="form.EndTime" />
         </div>
         <div class="form-group">
-            <label>消息：</label><span>{{form.Message}}</span>
+            <label>消息：</label>
+            <textarea class="form-control" name="Message" rows="3" ng-model="form.Message"></textarea>
         </div>
     </div>
 </div>

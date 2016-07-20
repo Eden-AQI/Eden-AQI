@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -10,7 +10,6 @@
             <connections>
                 <outlet property="addItem" destination="FNS-TZ-gYj" id="Soy-N7-Yyg"/>
                 <outlet property="bgImageView" destination="kja-vh-2Yf" id="yNe-S6-yiE"/>
-                <outlet property="customCollectionView" destination="bGu-3q-4Fd" id="q6E-zf-b7E"/>
                 <outlet property="headerView" destination="nx3-zx-pBk" id="m3k-YM-P9A"/>
                 <outlet property="pageControl" destination="2ma-Yd-Stn" id="8oy-pi-Q0f"/>
                 <outlet property="scrollContentView" destination="1L1-cN-Ybw" id="bvt-w7-hv1"/>
@@ -96,31 +95,7 @@
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1L1-cN-Ybw">
                     <rect key="frame" x="0.0" y="65" width="320" height="503"/>
-                    <subviews>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="10" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bGu-3q-4Fd">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="503"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YpH-Kr-Rlr">
-                                <size key="itemSize" width="320" height="300"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="eQp-i3-AGn"/>
-                                <outlet property="delegate" destination="-1" id="VsH-GV-cJy"/>
-                            </connections>
-                        </collectionView>
-                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="bGu-3q-4Fd" firstAttribute="leading" secondItem="1L1-cN-Ybw" secondAttribute="leading" id="2k7-HB-EiG"/>
-                        <constraint firstItem="bGu-3q-4Fd" firstAttribute="centerY" secondItem="1L1-cN-Ybw" secondAttribute="centerY" id="7ET-3w-6bu"/>
-                        <constraint firstAttribute="trailing" secondItem="bGu-3q-4Fd" secondAttribute="trailing" id="KKO-hI-byG"/>
-                        <constraint firstItem="bGu-3q-4Fd" firstAttribute="top" secondItem="1L1-cN-Ybw" secondAttribute="top" id="eBq-WM-ZkX"/>
-                        <constraint firstItem="bGu-3q-4Fd" firstAttribute="centerX" secondItem="1L1-cN-Ybw" secondAttribute="centerX" id="mhL-7J-WfZ"/>
-                        <constraint firstAttribute="bottom" secondItem="bGu-3q-4Fd" secondAttribute="bottom" id="r9I-4A-xtD"/>
-                    </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="O03-KK-Mtu"/>
                     </connections>

@@ -8,7 +8,9 @@ namespace Eden.Web.Api
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new HandleErrorAttribute());
+            //filters.Add(new LogFilterAttribute());
+            //filters.Add(new GloabalErrorAttribute());
         }
     }
 }

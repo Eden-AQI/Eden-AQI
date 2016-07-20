@@ -2,15 +2,16 @@
 eden.controller('sysNavigatorCtrl', function ($scope, $http, $state, $rootScope) {
     //此处通过后台服务加载
     $scope.navigator = [
-        { 'uisref': 'dashboard', 'label': '仪表盘', 'class': 'icon-dashboard icon-2x' },
+        //{ 'uisref': 'dashboard', 'label': '仪表盘', 'class': 'icon-dashboard icon-2x' },
         { 'uisref': 'device', 'label': '设备', 'class': 'icon-mobile-phone icon-2x' },
-        { 'uisref': 'push', 'label': '推送', 'class': 'icon-volume-up icon-2x' },
+        { 'uisref': 'push', 'label': '通知', 'class': 'icon-volume-up icon-2x' },
 
         {
             'uisref': 'system', 'label': '系统', 'class': 'icon-cog icon-2x', 'items': [
                 { 'uisref': 'system.version', 'label': '版本' },
                 { 'uisref': 'system.sys', 'label': '系统' },
                 { 'uisref': 'system.log', 'label': '日志' },
+                { 'uisref': 'system.requestlog', 'label': '访问日志' },
                 { 'uisref': 'system.task', 'label': '任务' },
                 { 'uisref': 'system.config', 'label': '所有配置' }
             ]
@@ -212,7 +213,17 @@ eden.controller('curd', function ($scope, $http, $element, $compile, ngDialog) {
         $scope.isNew = false;
         $scope.dataIdentity = id;
         $http.get($scope.entityService.url + '/Get?id=' + id + '&entity=' + $scope.entityName).success(function (response) {
-            $scope.form = response;
+            var d = {};
+            for (var p in response) {
+                var v = response[p];
+                if (v && v.indexOf && v.indexOf('/Date(') == 0) {
+                    d[p] = new Date(parseInt(v.substr(6)));
+                } else {
+                    d[p] = v;
+                }
+            }
+            $scope.form = d;
+            //$scope.form = response;
             $scope.$emit('form-loaded');
         }).error(function (a, b, c) {
             alert('error');

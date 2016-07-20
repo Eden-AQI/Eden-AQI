@@ -13,6 +13,7 @@
 		111162601CFB58EC00D5FA26 /* AQIDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1111625F1CFB58EC00D5FA26 /* AQIDetailModel.m */; };
 		111162631CFB590400D5FA26 /* HoursModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 111162621CFB590400D5FA26 /* HoursModel.m */; };
 		111162661CFB591A00D5FA26 /* AQIRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 111162651CFB591A00D5FA26 /* AQIRecordModel.m */; };
+		111B177D1D2EB18C00EC9944 /* TNBlockAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111B177C1D2EB18C00EC9944 /* TNBlockAlertController.m */; };
 		111CA0A81D1E818100F9F00B /* MyBMKPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CA0A71D1E818100F9F00B /* MyBMKPointAnnotation.m */; };
 		111CA0AF1D20555D00F9F00B /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 111CA0AE1D20555D00F9F00B /* appicon.png */; };
 		115D64021D0ED3370070367F /* RankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115D64001D0ED3370070367F /* RankTableViewCell.m */; };
@@ -179,6 +180,8 @@
 		111162621CFB590400D5FA26 /* HoursModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoursModel.m; sourceTree = "<group>"; };
 		111162641CFB591A00D5FA26 /* AQIRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQIRecordModel.h; sourceTree = "<group>"; };
 		111162651CFB591A00D5FA26 /* AQIRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AQIRecordModel.m; sourceTree = "<group>"; };
+		111B177B1D2EB18C00EC9944 /* TNBlockAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNBlockAlertController.h; sourceTree = "<group>"; };
+		111B177C1D2EB18C00EC9944 /* TNBlockAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNBlockAlertController.m; sourceTree = "<group>"; };
 		111CA0A61D1E818100F9F00B /* MyBMKPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBMKPointAnnotation.h; sourceTree = "<group>"; };
 		111CA0A71D1E818100F9F00B /* MyBMKPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBMKPointAnnotation.m; sourceTree = "<group>"; };
 		111CA0AE1D20555D00F9F00B /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 		11F866931CE7173E002E8139 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				111B177B1D2EB18C00EC9944 /* TNBlockAlertController.h */,
+				111B177C1D2EB18C00EC9944 /* TNBlockAlertController.m */,
 				115D64521D182E3C0070367F /* SvUDIDTools.h */,
 				115D64531D182E3C0070367F /* SvUDIDTools.m */,
 				115D645C1D184FB40070367F /* XMLDictionary.h */,
@@ -1172,6 +1177,7 @@
 				11686C321D0A85EB00D0B0A3 /* DefaultsHandler.m in Sources */,
 				11F8666C1CE7156C002E8139 /* main.m in Sources */,
 				11F8672A1CE8C8BB002E8139 /* HoursChartCollectionViewCell.m in Sources */,
+				111B177D1D2EB18C00EC9944 /* TNBlockAlertController.m in Sources */,
 				111162591CFB568000D5FA26 /* WeatherViewModel.m in Sources */,
 				11F8673E1CEA2D0E002E8139 /* AQIBarViewModel.m in Sources */,
 				11F8673B1CE8E9E4002E8139 /* NSDate+Common.m in Sources */,

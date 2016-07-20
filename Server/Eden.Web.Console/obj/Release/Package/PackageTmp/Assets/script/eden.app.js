@@ -2,13 +2,13 @@
 (function (win) {
     win.eden = eden = angular.module('edenConsole', ['ui.router', 'angularFileUpload', 'ngDialog']);
     eden.config(function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.when("", "/dashboard");
+        $urlRouterProvider.when("", "/device");
 
         //仪表盘
-        $stateProvider.state("dashboard", {
-            url: "/dashboard",
-            templateUrl: "/Templates/Dashboard.html"
-        });
+        //$stateProvider.state("dashboard", {
+        //    url: "/dashboard",
+        //    templateUrl: "/Templates/Dashboard.html"
+        //});
 
         //设备
         $stateProvider.state("device", {
@@ -25,7 +25,7 @@
         //推送
         $stateProvider.state("push", {
             url: "/push",
-            template: eden.templates.curd('push', '推送', false, true)
+            template: eden.templates.curd('push', '通知')
         });
 
 
@@ -49,6 +49,10 @@
         $stateProvider.state("system.log", {
             url: "/log",
             template: eden.templates.curd('log', '日志', true, true)
+        });
+        $stateProvider.state("system.requestlog", {
+            url: "/requestlog",
+            template: eden.templates.curd('requestlog', '访问日志', true, true)
         });
         $stateProvider.state("system.task", {
             url: "/task",
@@ -114,10 +118,10 @@
                 '<td><a href="" ng-click="update(item.Id)" data-toggle="modal" data-target="#dialog_{{identity}}">查看</a></td>' +
                 '</tr></table>',
         'push': '<table class="table table-hover"><tr>' +
-                '<th width="100px">类型</th><th width="100px">发送给</th><th width="200px">推送时间</th><th>消息</th><th width="100px">操作</th></tr>' +
+                '<th width="100px">类型</th><th width="100px">开始时间</th><th width="200px">结束时间</th><th>消息</th><th width="100px">操作</th></tr>' +
                 '<tr ng-repeat="item in list">' +
-                '<td>{{item.Type}}</td><td>{{item.PlatformName}}</td><td>{{item.CreateTimeString}}</td><td>{{item.Message}}</td>' +
-                '<td><a href="" ng-click="update(item.Id)" data-toggle="modal" data-target="#dialog_{{identity}}">查看</a></td>' +
+                '<td>{{item.Type}}</td><td>{{item.StartTimeString}}</td><td>{{item.EndTimeString}}</td><td>{{item.Message}}</td>' +
+                '<td><a href="" ng-click="update(item.Id)" data-toggle="modal" data-target="#dialog_{{identity}}">修改</a>&nbsp;&nbsp;<a href="" ng-click="delete(item.Id)">删除</a></td>' +
                 '</tr></table>',
         'config': '<table class="table table-hover"><tr>' +
                 '<th>名称</th><th width="200px">值</th><th width="100px">操作</th></tr>' +
@@ -136,6 +140,12 @@
                 '<tr ng-repeat="item in list">' +
                 '<td>{{item.Name}}</td><td>{{item.Seconds}}</td><td>{{item.EnabledString}}</td><td>{{item.StopOnErrorString}}</td><td>{{item.LastStartTime}}</td><td>{{item.LastEndTime}}</td><td>{{item.LastSuccessTime}}</td><td><a href="" ng-controller="scheduleTaskRunCtrl" ng-click="run(item.Id)">运行</a></td>' +
                 '<td><a href="" ng-click="update(item.Id)" data-toggle="modal" data-target="#dialog_{{identity}}">修改</a></td>' +
+                '</tr></table>',
+        'requestlog': '<table class="table table-hover"><tr>' +
+                '<th width="160px">时间</th><th width="140px">IP</th><th>Url</th><th width="100px">操作</th></tr>' +
+                '<tr ng-repeat="item in list">' +
+                '<td>{{item.EventTimeString}}</td><td>{{item.IpAddress}}</td><td>{{item.RequestUrl}}</td>' +
+                '<td><a href="" ng-click="update(item.Id)" data-toggle="modal" data-target="#dialog_{{identity}}">详情</a>&nbsp;&nbsp;<a href="" ng-click="delete(item.Id)">删除</a></td>' +
                 '</tr></table>'
 
     };

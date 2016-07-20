@@ -181,7 +181,7 @@ namespace Eden.Web.Console.EntityWebServices
             get; set;
         }
 
-        private void updateModel(M model, FormCollection form)
+        protected void updateModel(M model, FormCollection form)
         {
             Predicate<string> propertyFilter = propertyName => IsPropertyAllowed(propertyName, null, null);
             IModelBinder binder = Binders.GetBinder(typeof(M));

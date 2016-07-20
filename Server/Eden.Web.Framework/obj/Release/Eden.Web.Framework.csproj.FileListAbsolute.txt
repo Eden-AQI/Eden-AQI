@@ -89,3 +89,4 @@ D:\Projects\SEMC\src\Server\Eden.Web.Framework\bin\Release\zh-Hans\EntityFramewo
 D:\Projects\SEMC\src\Server\Eden.Web.Framework\obj\Release\Eden.Web.Framework.csprojResolveAssemblyReference.cache
 D:\Projects\SEMC\src\Server\Eden.Web.Framework\obj\Release\Eden.Web.Framework.dll
 D:\Projects\SEMC\src\Server\Eden.Web.Framework\obj\Release\Eden.Web.Framework.pdb
+D:\Projects\SEMC\src\Server\Eden.Web.Framework\bin\Release\cn.jpush.api.dll

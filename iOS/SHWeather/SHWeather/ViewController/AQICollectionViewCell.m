@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *dataContentView;
 
 @property (strong, nonatomic) NSLayoutConstraint *constraint;
+@property (strong, nonatomic) NSLayoutConstraint *topConstraint;
 
 @property (strong, nonatomic) AQIModel *model;
 
@@ -40,7 +41,6 @@
         }
         self = [arrayOfViews objectAtIndex:0];
         self.backgroundColor = [UIColor clearColor];
-        self.weatherContentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
 //        [self performSelector:@selector(initialScrollContentView) withObject:nil afterDelay:0.2];
     }
     return self;
@@ -53,7 +53,9 @@
     }
     for (int i=0; i<forecast.count; i++) {
         NSArray *data = [self forecastItemDataConvert:[forecast objectAtIndex:i]];
-        UIView *dayView = [[UIView alloc]initWithFrame:CGRectMake(i*self.weatherContentView.frame.size.width/3,0,self.weatherContentView.frame.size.width/3,self.weatherContentView.frame.size.height)];
+        UIView *dayView = [[UIView alloc]initWithFrame:CGRectMake(i*(self.weatherContentView.frame.size.width-forecast.count*1)/3.0+i*1,0,(self.weatherContentView.frame.size.width-forecast.count*1)/3.0,self.weatherContentView.frame.size.height)];
+        dayView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        dayView.layer.cornerRadius = 3.0;
         
         for (int j=0;j<4;j++) {
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, j*(dayView.bounds.size.height-10)/4, dayView.bounds.size.width, dayView.bounds.size.height/4)];
@@ -77,10 +79,12 @@
                 else{
                     label.frame = CGRectMake(20, (j+0.5)*(dayView.bounds.size.height-10)/4-21/2.0, (dayView.bounds.size.width-40)/2.0, 26);
                     label.backgroundColor = [DefaultsHandler getColorOrderLevel:[self getGradeOrderlevelString:[strArr objectAtIndex:0]]];
+                    label.font = [UIFont systemFontOfSize:16];
                     label.text = [NSString stringWithFormat:@"%@-",[self getSimplelevelString:[strArr objectAtIndex:0]]];
                     
                     UILabel *right_label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(label.frame), CGRectGetMinY(label.frame), CGRectGetWidth(label.frame), CGRectGetHeight(label.frame))];
                     right_label.backgroundColor = [DefaultsHandler getColorOrderLevel:[self getGradeOrderlevelString:[strArr objectAtIndex:1]]];
+                    right_label.font = [UIFont systemFontOfSize:16];
                     right_label.textAlignment = NSTextAlignmentCenter;
                     right_label.text = [NSString stringWithFormat:@"%@",[self getSimplelevelString:[strArr objectAtIndex:1]]];
                     right_label.textColor = [UIColor whiteColor];
@@ -90,21 +94,14 @@
                 NSRange range = [dataString rangeOfString:@" "];
                 NSMutableAttributedString *s = [[NSMutableAttributedString alloc]initWithString:dataString];
                 [s addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]} range:NSMakeRange(range.location+range.length, dataString.length - range.location-range.length)];
-                [s addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]} range:NSMakeRange(0, range.location)];
+                [s addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor whiteColor]} range:NSMakeRange(0, range.location)];
                 label.attributedText = s;
             }
-            //NSLog(@"-------j:%d-----text:%@",j,[data objectAtIndex:j]);
-//            NSString *text = [data objectAtIndex:j];
-//            if ([text isEqual:[NSNull null]]) {
-//                text = @"";
-//                NSLog(@"---eee-");
-//            }
-            
             [dayView addSubview:label];
         }
         UIView *seprateView = [[UIView alloc]initWithFrame:CGRectMake(dayView.bounds.size.width-0.5, 0, 0.5, dayView.bounds.size.height)];
         seprateView.backgroundColor = [UIColor whiteColor];
-        [dayView addSubview:seprateView];
+        //[dayView addSubview:seprateView];
         [self.weatherContentView addSubview:dayView];
         self.weatherContentView.delegate = self;
     }
@@ -160,8 +157,10 @@
     [self.levelBtn setImage:model.levelImage forState:UIControlStateNormal];
     NSString *btnTitle = [[DefaultsHandler getDescriptionOrderLevel:model.aqiLevel]objectForKey:@"AQIState"];
     [self.levelBtn setTitle:btnTitle forState:UIControlStateNormal];
-    self.primaryParameterlbl.text = model.primaryParameter;
+    self.primaryParameterlbl.text = [model.primaryParameter uppercaseString];
     self.primaryValuelbl.text = model.PrimaryValue;
+    self.primaryParameterlbl.font = [UIFont systemFontOfSize:20];
+    self.primaryValuelbl.font = [UIFont systemFontOfSize:20];
     self.aqiValuelbl.text = model.aqiValue;
     self.actorImageView.image = model.actorImage;
     UIView *ctView = self.dataContentView;
@@ -171,22 +170,30 @@
         if (self.constraint == nil) {
             self.constraint = [NSLayoutConstraint constraintWithItem:ctView.superview attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:ctView attribute:NSLayoutAttributeBottom multiplier:1 constant:10];
         }
+        if (self.topConstraint == nil) {
+            self.topConstraint = [NSLayoutConstraint constraintWithItem:ctView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeHeight multiplier:0.5 constant:0];
+        }
         
         [self.contentView addConstraint:self.constraint];
+        [self.contentView addConstraint:self.topConstraint];
         [self.contentView updateConstraintsIfNeeded];
+        for (UIView *view in self.weatherContentView.subviews) {
+            [view removeFromSuperview];
+        }
         return ;
     }else{
-//        self.weatherContentView.hidden = NO;
-//        UIView *weaView = self.weatherContentView;
-//        NSMutableArray *constraints = [NSMutableArray array];
-//        [constraints addObject:[NSLayoutConstraint constraintWithItem:weaView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:ctView attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-//        [constraints addObject:[NSLayoutConstraint constraintWithItem:weaView.superview attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:weaView attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-//        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[weaView(137)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(weaView)]];
-//        [self.contentView addConstraints:constraints];
         [self.contentView removeConstraint:self.constraint];
+        [self.contentView removeConstraint:self.topConstraint];
         [self.contentView updateConstraintsIfNeeded];
     }
-    [self initialScrollContentViewWithData:(model.forecast)];
+    //[self initialScrollContentViewWithData:(model.forecast)];
+    [self performSelector:@selector(testMethod) withObject:nil afterDelay:0.2];
+}
+
+- (void)testMethod
+{
+    [self initialScrollContentViewWithData:(self.model.forecast)];
+    [self.weatherContentView layoutSubviews];
 }
 
 - (NSArray *)forecastItemDataConvert:(NSDictionary *)itemDic

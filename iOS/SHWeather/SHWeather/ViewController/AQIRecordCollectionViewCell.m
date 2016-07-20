@@ -48,6 +48,8 @@
     //
 //    [self initNotReallyData];
 //    self.yValueMax = random()%50+240;
+    [self.barChartView removeFromSuperview];
+    self.barChartView = nil;
     
     if (!self.barChartView) {
         self.barChartView = [[ZQBarChartView alloc]initWithFrame:self.chartViewContent.bounds yData:self.yValues yMax:self.yValueMax yDic:self.yDic yLevels:self.yLevels xLabels:self.xLabels];
@@ -55,16 +57,17 @@
         self.barChartView.userInteractionEnabled = YES;
         self.barChartView.pageCount = 4;
         [self.chartViewContent addSubview:self.barChartView];
-    }else
-    {
-        self.barChartView.yValues = self.yValues;
-        self.barChartView.yDic = self.yDic;
-        self.barChartView.xLabels = self.xLabels;
-        self.barChartView.yLevels = self.yLevels;
-        self.barChartView.yValueMax = self.yValueMax;
-        [self.barChartView initialXLabels];
-        [self.barChartView setNeedsDisplay];
     }
+//    else
+//    {
+//        self.barChartView.yValues = self.yValues;
+//        self.barChartView.yDic = self.yDic;
+//        self.barChartView.xLabels = self.xLabels;
+//        self.barChartView.yLevels = self.yLevels;
+//        self.barChartView.yValueMax = self.yValueMax;
+//        [self.barChartView initialXLabels];
+//        [self.barChartView setNeedsDisplay];
+//    }
 }
 
 -(void)initialDayDataWithArray:(NSArray *)data
@@ -77,11 +80,17 @@
     for (int i=0; i<data.count; i++) {
         NSDictionary *itemDic = [data objectAtIndex:i];
         
-        [self.yValues addObject:[itemDic objectForKey:@"Aqi"]];
+        NSString *aqiString = [itemDic objectForKey:@"Aqi"];
+        float curValue = [aqiString floatValue];
+        if (curValue<0) {
+            curValue = 0;
+            aqiString = @"0";
+        }
+        [self.yValues addObject:aqiString];
         [self.yDic setObject:[itemDic objectForKey:@"Aqi"] forKey:[itemDic objectForKey:@"Day"]];
         [self.xLabels addObject:[itemDic objectForKey:@"Day"]];
         [self.yLevels addObject:[itemDic objectForKey:@"Level"]];
-        float curValue = [[itemDic objectForKey:@"Aqi"]floatValue];
+        
         self.yValueMax = self.yValueMax>curValue?self.yValueMax:curValue;
     }
 }

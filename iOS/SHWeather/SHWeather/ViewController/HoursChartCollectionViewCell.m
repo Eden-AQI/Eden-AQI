@@ -23,6 +23,7 @@
 @property (nonatomic) float yValueMax;
 @property(nonatomic, strong)NSMutableArray *yValues;
 @property(nonatomic, strong)NSMutableArray *xLabels;
+@property(nonatomic, strong)NSMutableArray *yPositionArray;
 @property(nonatomic, strong)NSMutableDictionary *yDic;
 
 @property (strong, nonatomic) NSString *currentParameter;
@@ -57,6 +58,7 @@
     if (!self.lineChartView) {
         self.lineChartView = [[ZQLineChartView alloc]initWithFrame:self.scrollContentView.bounds type:day yData:self.yValues yDic:self.yDic yMax:self.yValueMax xLabels:self.xLabels];
         self.lineChartView.delegate = self;
+        self.lineChartView.yPositionAry = self.yPositionArray;
         self.lineChartView.contentOffset=CGPointMake(0, 0);
         self.lineChartView.showPoint = YES;
         self.lineChartView.pageCount = 4;
@@ -65,6 +67,7 @@
     }else{
         self.lineChartView.yValues = self.yValues;
         self.lineChartView.yDic = self.yDic;
+        self.lineChartView.yPositionAry = self.yPositionArray;
         self.lineChartView.yValueMax = self.yValueMax;
         self.lineChartView.xLabels = self.xLabels;
         self.lineChartView.startTime = [NSDate date];
@@ -83,6 +86,7 @@
     for (int i=0; i<self.model.factors.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         CGFloat width = self.factorsContentView.bounds.size.width/self.model.factors.count;
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.frame = CGRectMake(width*i, 0, width, self.factorsContentView.bounds.size.height);
         btn.tag = 10+i;
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -164,10 +168,14 @@
     self.yValues = [NSMutableArray arrayWithCapacity:10];
     self.yDic = [NSMutableDictionary dictionaryWithCapacity:10];
     self.xLabels = [NSMutableArray arrayWithCapacity:24];
+    self.yPositionArray = [NSMutableArray arrayWithCapacity:24];
     self.yValueMax = 0.0;
     for (int i=0; i<array.count; i++) {
         NSDictionary *itemDic = [array objectAtIndex:i];
-        [self.yValues addObject:[itemDic objectForKey:yKey]];
+        if ([[itemDic objectForKey:yKey] floatValue]>=0) {
+            [self.yValues addObject:[itemDic objectForKey:yKey]];
+            [self.yPositionArray addObject:[NSString stringWithFormat:@"%d",i]];
+        }
         [self.yDic setObject:[itemDic objectForKey:yKey] forKey:[itemDic objectForKey:@"Time"]];
         float curValue = [[itemDic objectForKey:yKey]floatValue];
         self.yValueMax = self.yValueMax>curValue?self.yValueMax:curValue;

@@ -29,6 +29,7 @@
     self.view.backgroundColor = [UIColor clearColor];
     
     self.siteTableView.userInteractionEnabled = YES;
+    self.siteTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(locationWithNotification:) name:LOCATION_NOTI object:nil];
 //    self.siteTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

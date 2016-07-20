@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eden.Domain", "Eden.Data.Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eden.DataMapping", "Eden.Data.Mapping\Eden.DataMapping.csproj", "{79785562-260D-4371-A0EC-AFF98A2CB963}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eden.Web.Console", "Eden.Web.Console\Eden.Web.Console.csproj", "{18366020-D02C-450D-B7CD-53012B7B0EE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eden.Web.Console", "Eden.Web.Property\Eden.Web.Console.csproj", "{18366020-D02C-450D-B7CD-53012B7B0EE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

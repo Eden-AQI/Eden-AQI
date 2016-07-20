@@ -227,3 +227,4 @@ D:\Projects\SEMC\src\Server\Eden.Web.Property\bin\zh-Hans\Microsoft.Owin.Securit
 D:\Projects\SEMC\src\Server\Eden.Web.Property\obj\Release\Eden.Web.Console.csprojResolveAssemblyReference.cache
 D:\Projects\SEMC\src\Server\Eden.Web.Property\obj\Release\Eden.Web.Console.dll
 D:\Projects\SEMC\src\Server\Eden.Web.Property\obj\Release\Eden.Web.Console.pdb
+D:\Projects\SEMC\src\Server\Eden.Web.Property\bin\cn.jpush.api.dll

@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ISettingService.cs" />
     <Compile Include="Customers\IDeviceService.cs" />
+    <Compile Include="INotifyService.cs" />
     <Compile Include="Metadata\IAqiGradeService.cs" />
     <Compile Include="Data\IAqiManager.cs" />
     <Compile Include="Metadata\ISiteService.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="IWorkContext.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Push\IPushService.cs" />
     <Compile Include="Tasks\IScheduleTaskService.cs" />
     <Compile Include="Tasks\ITask.cs" />
   </ItemGroup>

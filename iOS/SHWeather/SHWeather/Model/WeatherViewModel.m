@@ -17,7 +17,11 @@
 //    model.updateHourTime = []
     model.aqiLevel = [data objectForKey:@"AqiLevel"];
 //    NSLog(@"-----Aqi:%@",[data objectForKey:@"Aqi"]);
-    model.aqiValue = [NSString stringWithFormat:@"%@",[data objectForKey:@"Aqi"]];
+    NSString *aqiStr = [NSString stringWithFormat:@"%@",[data objectForKey:@"Aqi"]];
+    if ([aqiStr isEqualToString:@"(null)"]) {
+        aqiStr = @"";
+    }
+    model.aqiValue = aqiStr;
     model.primaryParameter = [data objectForKey:@"PrimaryParameter"];
     model.PrimaryValue = [data objectForKey:@"PrimaryValue"];
     model.forecast = [data objectForKey:@"Forecast"];

@@ -163,4 +163,11 @@
     NSDictionary *itemDic = [defaults.gradeInfo objectForKey:[NSNumber numberWithInt:levelString.intValue]];
     return itemDic;
 }
+
++ (NSString *)getLevelNameOrderLevel:(NSString *)levelString
+{
+    NSDictionary *dic = [DefaultsHandler getDescriptionOrderLevel:levelString];
+    return  [dic objectForKey:@"AQIState"];
+}
+
 @end

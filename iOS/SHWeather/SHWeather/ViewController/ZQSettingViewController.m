@@ -80,10 +80,10 @@
         self.blackBtn.frame = self.view.bounds;
         [self.blackBtn addTarget:self action:@selector(dissapperContentView) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.blackBtn];
-        VersionView *versionView = [VersionView createViewWithType:type];
+        VersionView *versionView = [VersionView createViewWithType:type andData:nil];
         versionView.frame = CGRectMake(self.view.bounds.size.width/2-143, 180, 286, 290);
         if ([type isEqualToString:@"levelInfo"]) {
-            versionView.frame = CGRectMake(self.view.bounds.size.width/2-143, 30, 286, self.view.frame.size.height - 30);
+            versionView.frame = CGRectMake(self.view.bounds.size.width/2-143, 30, 286, self.view.frame.size.height - 79);
         }
         [self.blackBtn addSubview:versionView];
     }

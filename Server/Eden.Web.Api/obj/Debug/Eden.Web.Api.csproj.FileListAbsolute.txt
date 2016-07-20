@@ -346,3 +346,5 @@ D:\Projects\SEMC\src\Server\Eden.Web.Api\bin\zh-Hans\System.Web.Http.Owin.resour
 D:\Projects\SEMC\src\Server\Eden.Web.Api\obj\Debug\Eden.Web.Api.csprojResolveAssemblyReference.cache
 D:\Projects\SEMC\src\Server\Eden.Web.Api\obj\Debug\Eden.Web.Api.dll
 D:\Projects\SEMC\src\Server\Eden.Web.Api\obj\Debug\Eden.Web.Api.pdb
+D:\Projects\SEMC\src\Server\Eden.Web.Api\bin\Owin.dll
+D:\Projects\SEMC\src\Server\Eden.Web.Api\bin\cn.jpush.api.dll

@@ -17,6 +17,8 @@
 #import "ZQAQIDetailViewController.h"
 #import "NSString+Util.h"
 #import "SiteModel.h"
+#import "TNBlockAlertController.h"
+#import "VersionView.h"
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
@@ -28,9 +30,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addItem;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *shareBtn;
-@property (weak, nonatomic) IBOutlet UICollectionView *customCollectionView;
+//@property (weak, nonatomic) IBOutlet UICollectionView *customCollectionView;
 @property (strong, nonatomic) UICollectionViewFlowLayout *flowlayout;
 @property (strong, nonatomic) NSDictionary *weatherData;
+@property (strong, nonatomic) NSMutableArray *notiArray;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollContentView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) UIVisualEffectView *effectview;
@@ -40,6 +43,13 @@
 @property (strong, nonatomic) NSString *currentSiteId;
 @property (nonatomic) NSInteger pageSign;
 @property (nonatomic) BOOL viewWillFirstAppear;
+
+@property (nonatomic) BOOL signAlert;
+
+@property (strong, nonatomic) UIButton *blackBtn;
+@property (nonatomic) NSInteger notiIndex;
+@property (nonatomic, strong) NSDictionary *infoDic;
+
 @end
 
 @implementation ZQWeatherViewController
@@ -48,7 +58,8 @@
     [super viewDidLoad];
     self.citiesArray = [[NSMutableArray alloc]initWithArray:[DefaultsHandler searchDataForKey:FOLLOWCITIES]];
     
-    [self loadRealTimeData];
+    self.scrollContentView.contentSize = CGSizeMake(self.scrollContentView.frame.size.width*self.citiesArray.count, self.scrollContentView.frame.size.height);
+//    [self loadRealTimeData];
     
     self.cellArray = @[[AQICollectionViewCell new],[DetailCollectionViewCell new],[HoursChartCollectionViewCell new],[AQIRecordCollectionViewCell new]];
     
@@ -58,7 +69,7 @@
     [self.flowlayout setSectionInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     
     //index = 0
-    [self initialCollectionView:self.customCollectionView];
+//    [self initialCollectionView:self.customCollectionView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeCurrentSiteWithNoti:) name:CHANGESITE_NOTI object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(insertNewCityWithNoti:) name:INSERTSITE_NOTI object:nil];
@@ -73,6 +84,27 @@
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     app.revealSideViewController.tapInteractionsWhenOpened = PPRevealSideInteractionNone;
     //    NSLog(@"ZQWeatherViewController viewWillAppear");
+    
+    if (self.viewWillFirstAppear == NO) {
+        self.notiIndex = 0;
+        
+        self.notiArray = [NSMutableArray arrayWithCapacity:10];
+        NSString *api = [Global api:[NSString stringWithFormat:@"Metadata/Version"]];
+        AFHTTPRequestOperationManager *request = [Global createRequestWithType:Xml];
+        [request GET:api parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //NSLog(@"---url:%@ responseObject:%@",operation.request.URL.absoluteString,responseObject);
+            self.infoDic = (NSDictionary *)responseObject;
+            if([self checkIfHasNewVersion])
+            {
+                [self.notiArray addObject:self.infoDic];
+                [self loadNotification];
+            }else{
+                [self loadNotification];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self loadNotification];
+        }];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -82,7 +114,7 @@
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         
         self.effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-        self.effectview.alpha = 0.2;
+        self.effectview.alpha = 0;
         self.effectview.frame = self.bgImageView.bounds;
         
         [self.bgImageView addSubview:self.effectview];
@@ -91,6 +123,73 @@
     self.viewWillFirstAppear = YES;
 }
 
+- (BOOL)checkIfHasNewVersion
+{
+    BOOL hasNewVersion = NO;
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *currentVersion = [infoDict objectForKey:@"CFBundleVersion"];
+    if ([currentVersion floatValue] != [[self.infoDic objectForKey:@"VersionCode"] floatValue]) {
+        hasNewVersion = YES;
+    }
+    return hasNewVersion;
+}
+
+- (void)loadNotification
+{
+    //http://aqi.wuhooooo.com/api/Aqi/GetNotifyList
+    NSString *api = [Global api:@"Aqi/GetNotifyList"];
+    AFHTTPRequestOperationManager *request = [Global createRequest];
+    [request GET:api parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.notiArray addObjectsFromArray:responseObject];
+        if (self.notiArray.count>0) {
+        [self showNotification];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (!self.signAlert) {
+            TNBlockAlertController *alert = [[TNBlockAlertController alloc]initWithTitle:@"提示" message:@"数据加载失败" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherActions:@[@"确定"] AlertStyle:OSPAlertView];
+            [alert setBlockForCancel:^{
+                self.signAlert = NO;
+            }];
+            self.signAlert = YES;
+        }
+        self.weatherData = nil;
+        [self reloadData];
+    }];
+}
+
+- (void)showNotification
+{
+    if (self.notiIndex<self.notiArray.count) {
+        NSDictionary *notiDic = [self.notiArray objectAtIndex:self.notiIndex];
+        if ([notiDic isEqual:self.infoDic]) {
+            [self checkVersionWithType:@"version" andData:nil];
+        }else{
+            [self checkVersionWithType:@"notiType" andData:notiDic];
+        }
+    }
+}
+
+- (void)checkVersionWithType:(NSString *)type andData:(NSDictionary *)notiDic
+{
+    if (self.blackBtn == nil) {
+        self.blackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.blackBtn.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        self.blackBtn.frame = self.view.bounds;
+        [self.blackBtn addTarget:self action:@selector(dissapperContentView) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.blackBtn];
+        VersionView *versionView = [VersionView createViewWithType:type andData:notiDic];
+        versionView.frame = CGRectMake(self.view.bounds.size.width/2-143, 180, 286, 290);
+        [self.blackBtn addSubview:versionView];
+    }
+    self.notiIndex++;
+}
+
+- (void)dissapperContentView
+{
+    [self.blackBtn removeFromSuperview];
+    self.blackBtn = nil;
+    [self performSelector:@selector(showNotification) withObject:nil afterDelay:0.3];
+}
 //
 - (void)initialScrollContentView
 {
@@ -99,28 +198,31 @@
     for (UICollectionView *view in self.scrollContentView.subviews) {
         UICollectionView *collectionView = (UICollectionView *)view;
         NSLog(@"----pageCount:%ld",(long)self.pageControl.currentPage);
-        if (collectionView.tag != 10) {
-            [collectionView removeFromSuperview];
-        }
+        [collectionView removeFromSuperview];
+//        if (collectionView.tag != 10) {
+//            [collectionView removeFromSuperview];
+//        }
     }
     
+    for (int i=0; i<self.citiesArray.count; i++) {
+        UICollectionView *otherCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(i*self.scrollContentView.frame.size.width, 0,self.scrollContentView.frame.size.width, self.scrollContentView.frame.size.height) collectionViewLayout:self.flowlayout];
+        otherCollectionView.tag = 10+i;
+        otherCollectionView.backgroundColor = [UIColor clearColor];
+        otherCollectionView.delegate = self;
+        otherCollectionView.dataSource = self;
+        [self initialCollectionView:otherCollectionView];
+        [self.scrollContentView addSubview:otherCollectionView];
+    }
     if (self.citiesArray.count>1) {
         self.pageControl.hidden = NO;
-        for (int i=1; i<self.citiesArray.count; i++) {
-            UICollectionView *otherCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(i*self.scrollContentView.frame.size.width, 0,self.scrollContentView.frame.size.width, self.scrollContentView.frame.size.height) collectionViewLayout:self.flowlayout];
-            otherCollectionView.tag = 10+i;
-            otherCollectionView.backgroundColor = [UIColor clearColor];
-            otherCollectionView.delegate = self;
-            otherCollectionView.dataSource = self;
-            [self initialCollectionView:otherCollectionView];
-            [self.scrollContentView addSubview:otherCollectionView];
-        }
     }else{
         self.pageControl.hidden = YES;
         self.pageControl.currentPage = 0;
     }
     self.scrollContentView.contentSize = CGSizeMake(self.scrollContentView.frame.size.width*self.citiesArray.count, self.scrollContentView.frame.size.height);
     self.scrollContentView.pagingEnabled = YES;
+    [self.view layoutIfNeeded];
+    
     [self loadRealTimeData];
     //[[self getCurrentSelectedCollectionView].mj_header beginRefreshing];
 
@@ -166,7 +268,13 @@
         
         [self reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [[[UIAlertView alloc] initWithTitle:@"提示" message:@"数据加载失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil] show];
+        if (!self.signAlert) {
+            TNBlockAlertController *alert = [[TNBlockAlertController alloc]initWithTitle:@"提示" message:@"数据加载失败" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherActions:@[@"确定"] AlertStyle:OSPAlertView];
+            [alert setBlockForCancel:^{
+                self.signAlert = NO;
+            }];
+            self.signAlert = YES;
+        }
         self.weatherData = nil;
         [self reloadData];
     }];
@@ -389,7 +497,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([scrollView isKindOfClass:[UICollectionView class]]) {
-        self.effectview.alpha = 0.2+(scrollView.contentOffset.y/scrollView.contentSize.height)*0.6;
+        self.effectview.alpha = (scrollView.contentOffset.y/scrollView.contentSize.height)*0.5;
         return;
     }
 }
@@ -408,6 +516,8 @@
         app.revealSideViewController.panInteractionsWhenClosed = PPRevealSideInteractionContentView;
     }
     if (self.pageSign != self.pageControl.currentPage) {
+//        scrollView.contentOffset = CGPointMake(0, 0);
+//        self.effectview.alpha = 0.2;
         [[self getCurrentSelectedCollectionView].mj_header beginRefreshing];
         NSLog(@"2222");
     }
@@ -504,10 +614,10 @@
 //        self.scrollContentView.contentOffset = CGPointMake(self.scrollContentView.frame.size.width*self.pageControl.currentPage, 0);
 //        return;
 //    }
-    if (self.citiesArray.count == 1) {
-        self.pageControl.numberOfPages = self.citiesArray.count;
-        self.pageControl.currentPage = 0;
-    }
+//    if (self.citiesArray.count == 1) {
+//        self.pageControl.numberOfPages = self.citiesArray.count;
+//        self.pageControl.currentPage = 0;
+//    }
     [self initialScrollContentView];
 }
 

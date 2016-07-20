@@ -17,7 +17,7 @@
     <AssemblyName>Eden.Web.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -185,6 +185,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Attributes\GloabalErrorAttribute.cs" />
+    <Compile Include="Attributes\LogFilterAttribute.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\AqiController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
@@ -195,7 +196,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GlobalExceptionFilter.cs" />
     <Compile Include="Infrastructure\JsonStringActoinResult.cs" />
     <Compile Include="Infrastructure\MapTools.cs" />
     <Compile Include="Models\AqiBindingModel.cs" />
@@ -272,6 +272,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Share\Index.cshtml" />
+    <Content Include="Views\Share\Downlaod.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Providers\" />
@@ -349,7 +350,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55202</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Eden.Web.Api</IISUrl>
+          <IISUrl>http://localhost:55202/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
